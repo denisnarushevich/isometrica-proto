@@ -1,12 +1,6 @@
-define(['simplex', 'sprites', 'world', 'objects'], function(){
+define(['simplex', 'sprites', 'objects'], function(){
 
-  g.Tile = function(x, y){
-    this.x = x;
-    this.y = y;
-    this.z = this.isWater() ? g.world.waterLevel : this.getGridPoints()[0];
-  }
-
-  g.Tile.prototype = {
+  return {
     x: 0,
     y: 0,
     z: 0,
@@ -146,5 +140,4 @@ define(['simplex', 'sprites', 'world', 'objects'], function(){
       return this;
     }
   }
-return g.Tile;
 });
