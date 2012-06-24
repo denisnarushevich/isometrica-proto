@@ -1,5 +1,6 @@
 define(['gridPoint'], function(gridPoint){
   return {
+    spacing: [45, 45, 8],
     length: 0,
     gridPoints: [],
     getGridPoint: function(x, y){

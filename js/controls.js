@@ -43,7 +43,7 @@ define(['jquery'], function(){
       ( currentAt[0] - controls.mouseAtWhenPressed[0] ) / controls.tileSideLen * controls.sensitivity,
       ( currentAt[1] - controls.mouseAtWhenPressed[1] ) / controls.tileSideLen * controls.sensitivity
       ];
-		
+      
       g.scene.setAt([
         controls.mapAtWhenPressed[0] - scrolledFor[0],
         controls.mapAtWhenPressed[1] - scrolledFor[1]
