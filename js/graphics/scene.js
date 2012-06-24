@@ -1,6 +1,18 @@
 define(['world', 'config'], function(){
 
   return g.scene ? g.scene : g.scene = {
+    coordinatesTransform: function(x, y, z){
+      x = (x - g.scene.at[0]) * g.world.grid.spacing[0];
+      y = (y - g.scene.at[1]) * g.world.grid.spacing[1];
+      z *= g.world.grid.spacing[2];
+      
+      var transformed = [
+      Math.ceil( x * Math.cos( Math.PI / -4 ) - y * Math.sin( Math.PI / -4 ) + g.scene.size[0] / 2),
+      Math.ceil( - ( x * Math.sin( Math.PI / -4 ) + y * Math.cos( Math.PI / -4 ) ) / 2 - z + g.scene.size[1] / 2),
+      ];
+      
+      return transformed;
+    },
     at: [0, 0],
     size: [0, 0],
     tiles: {
@@ -72,10 +84,10 @@ define(['world', 'config'], function(){
       },
       getTileOffset: function(x, y, z){
         var tileSpriteSize = g.config.tileSpriteSize;
-        return [
-        Math.round(( (x - g.scene.at[0]) * tileSpriteSize[0] + (y - g.scene.at[1]) * tileSpriteSize[0] + g.scene.size[0] - tileSpriteSize[0] ) / 2), //xPixel = dX + dY + centeringOnScreen - spriteHalfWidth
-        Math.round(( (x - g.scene.at[0]) * tileSpriteSize[0] / 2 - (y - g.scene.at[1]) * tileSpriteSize[0] / 2 + g.scene.size[1] - (tileSpriteSize[1] + 1) ) / 2  - tileSpriteSize[2] * z) //yPixel = dX - dY + dZ + centeringBy0 - elevationSpace&halfHeight - elevation
-        ];
+        var screenOffset = g.scene.coordinatesTransform(x, y, z);
+        screenOffset[0] -= tileSpriteSize[0] / 2;
+        screenOffset[1] -= (tileSpriteSize[1] + 1) / 2;
+        return screenOffset;
       }
     },
     objects: {
@@ -130,10 +142,10 @@ define(['world', 'config'], function(){
         g.render.drawSprites('tiles', item.sprites, item.offset[0], item.offset[1]);
       }
 		
-      	g.render.clearLayer('objects');
-      		while(item = this.objects.updatedItems.pop()){
-      			g.render.drawSprites('objects', item.sprites, item.offset[0], item.offset[1]);
-      		}
+      g.render.clearLayer('objects');
+      while(item = this.objects.updatedItems.pop()){
+        g.render.drawSprites('objects', item.sprites, item.offset[0], item.offset[1]);
+      }
 		
       g.render.renderLayers();
     }
