@@ -1,128 +1,29 @@
-define(['world', 'config'], function(){
+define(['world', 'graphics/scene/tiles', 'graphics/scene/objects'], function(world, tiles, objects){
 
   return g.scene ? g.scene : g.scene = {
-    coordinatesTransform: function(x, y, z){
-      x = (x - g.scene.at[0]) * g.world.grid.spacing[0];
-      y = (y - g.scene.at[1]) * g.world.grid.spacing[1];
-      z *= g.world.grid.spacing[2];
-      
-      var transformed = [
-      Math.ceil( x * Math.cos( Math.PI / -4 ) - y * Math.sin( Math.PI / -4 ) + g.scene.size[0] / 2),
-      Math.ceil( - ( x * Math.sin( Math.PI / -4 ) + y * Math.cos( Math.PI / -4 ) ) / 2 - z + g.scene.size[1] / 2),
-      ];
-      
-      return transformed;
-    },
     at: [0, 0],
     size: [0, 0],
-    tiles: {
-      items: [],
-      updatedItems: [],
-      fill: function(){
-        var tile, offset, scene = g.scene, tileSpriteSize = g.config.tileSpriteSize, world = g.world, at = [Math.floor(scene.at[0]), Math.floor(scene.at[1])];
-			
-        this.items = [];
-			
-        var depthHash = {}, depth;
-			
-        for(var end, level = 0; !end; level++){
-          end = true;
-          for(var x = at[0] - level; x <= at[0] + level; x++){
-            for(var y = at[1] - level; y <= at[1] + level; y++){
-              if ( (x > at[0] - level && x < at[0] + level) && (y > at[1] - level && y < at[1] + level) ) continue; //skpping tiles of previous levels
-						
-              tile = world.getTile(x, y);
-						
-              offset = this.getTileOffset(x, y, tile.z);
-
-              //check rect intersection of tile image and window
-              if (offset[0] > scene.size[0] || offset[0]+tileSpriteSize[0] < 0 || offset[1] > scene.size[1] || offset[1]+tileSpriteSize[1] < 0) continue;
-
-              this.items.push({
-                object: tile,
-                offset: offset,
-                sprites: tile.getSprites()
-              });
-
-              end = false;
-            }
-          }
-        }
-		
-        //sorting by depth, where depth is y screen offset coordinate.
-        this.items.sort(function(item1, item2){
-          return item1.offset[1] > item2.offset[1] ? -1 : 1;
-        });
-
-        this.updatedItems = this.items.slice(); //copying array.
-      },
-      update: function(){
-        for(var key in this.items){
-          var item = this.items[key];
-
-          if(item.object.updated){
-            this.updatedItems.push(item);
-          }
-        }
-      },
-      getPart: function(x0, y0, x1, y1){
-        if (x0 == 0 && y0 == 0 && x1 == g.scene.size[0] && y1 == g.scene.size[1]) return this.items;
-
-        var tileSpriteSize = g.config.tileSpriteSize;
-        var items = [];
-        for(var key in this.items){
-          var item = this.items[key];
-          var offsetX = item.offset[0];
-          var offsetY = item.offset[1];
-
-          //check rect intersection of tile image and drawPart
-          if (offsetX > x1 || (offsetX+tileSpriteSize[0]) < x0 || offsetY > y1 || (offsetY+tileSpriteSize[1]) < y0) continue;
-
-          items.push(item);
-        }
-        return items;
-      },
-      getTileOffset: function(x, y, z){
-        var tileSpriteSize = g.config.tileSpriteSize;
-        var screenOffset = g.scene.coordinatesTransform(x, y, z);
-        screenOffset[0] -= tileSpriteSize[0] / 2;
-        screenOffset[1] -= (tileSpriteSize[1] + 1) / 2;
-        return screenOffset;
-      }
-    },
-    objects: {
-      items: [],
-      updatedItems: [],
-      fill: function(){
-        this.items = [];
-        var tiles = g.scene.tiles.items;
-      
-        for(var key in tiles){
-          var tile = tiles[key].object;
-          var items = tile.getObjects();
-          var offset = tiles[key].offset.slice();
-        
-          for(var index in items){
-            var item = items[index];
-          
-            this.items.push({
-              object: item,
-              offset: offset,
-              sprites: [item.getSprite()]
-            });          
-          }
-        }
-
-        this.updatedItems = this.items.slice(); //copying array.
-      }
-    },
+    tiles: tiles,
+    objects: objects,
     init: function(width, height){
       this.size = [width, height];
-		
-      g.render.createLayer('tiles', this.size);
-      g.render.createLayer('objects', this.size);
+      
+      this.tiles.init();
+      this.objects.init();
 		
       this.fill();
+    },
+    coordinatesTransform: function(x, y, z){
+      var angle = Math.PI / -4;
+      
+      x = (x - this.at[0]) * g.world.grid.spacing[0];
+      y = (y - this.at[1]) * g.world.grid.spacing[1];
+      z *= g.world.grid.spacing[2];
+      
+      return [
+        1 + x * Math.cos(angle) - y * Math.sin(angle) + this.size[0] / 2 | 0,
+        1 - ( x * Math.sin(angle) + y * Math.cos(angle) - this.size[1] ) / 2 - z | 0
+      ];
     },
     fill: function(){
       this.tiles.fill();
@@ -136,16 +37,8 @@ define(['world', 'config'], function(){
       this.at = at;
     },
     drawScene: function(){
-      var item;
-      while(item = this.tiles.updatedItems.pop()){
-        //item = this.tiles.updatedItems.pop()
-        g.render.drawSprites('tiles', item.sprites, item.offset[0], item.offset[1]);
-      }
-		
-      g.render.clearLayer('objects');
-      while(item = this.objects.updatedItems.pop()){
-        g.render.drawSprites('objects', item.sprites, item.offset[0], item.offset[1]);
-      }
+      this.tiles.drawLayer();
+      this.objects.drawLayer();
 		
       g.render.renderLayers();
     }

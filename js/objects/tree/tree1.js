@@ -1,7 +1,10 @@
 define(['objects/tree'], function(tree){
-  tree1 = Object.create(tree);
-
-  tree1.setName('tree1');
+  var tree1 = Object.create(tree);
+  tree1.init = function(){
+    tree.init.call(this); //parent init
+    this.name = 'tree1';
+    return this;
+  }
   
   return tree1;
 });

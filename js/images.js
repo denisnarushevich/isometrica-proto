@@ -1,5 +1,5 @@
 define(function(){
-  return g.sprites ? g.sprites : g.sprites = {
+  return g.images ? g.images : g.images = {
     urns: [
     'terrain/grass/2101.png',
     'terrain/grass/2111.png',
@@ -59,7 +59,7 @@ define(function(){
     'terrain/snow/2333.png',
     'terrain/snow/2343.png',		
     'terrain/water/2222.png',
-    'terrain/water/depthmask.png',
+    'terrain/deepwater/2222.png',
     'terrain/sand/2101.png',
     'terrain/sand/2111.png',
     'terrain/sand/2112.png',
@@ -106,22 +106,22 @@ define(function(){
     'objects/tree/tree6.png',
     'objects/tree/tree7.png'
     ],
-    dirUrl: 'sprites/',
+    dirUrl: 'images/',
     hash: {},
     loadCount: 0,
     /**
-	 * preloads all sprite for browser to cache them in his internal cache
+	 * preloads all image for browser to cache them in his internal cache
 	 */
     load: function(onEachLoad){
       var name = this.urns[this.loadCount];
-      var sprite = new Image();
-      this.hash[name.split('.')[0]] = sprite;
-      sprite.onload = function(){
-        g.sprites.loadCount++;				
+      var image = new Image();
+      this.hash[name.split('.')[0]] = image;
+      image.onload = function(){
+        g.images.loadCount++;				
         if (onEachLoad) onEachLoad();
-        if (!g.sprites.loaded()) g.sprites.load(onEachLoad);
+        if (!g.images.loaded()) g.images.load(onEachLoad);
       };
-      sprite.src = this.dirUrl + name; //add path to textures dir
+      image.src = this.dirUrl + name; //add path to textures dir
       return;
     },
     /**
@@ -137,13 +137,11 @@ define(function(){
     loadProgress: function(){
       return this.loadCount / this.urns.length;
     },
-    getSprite: function(urn){
+    getImage: function(urn){
+      //console.log(arguments.callee.caller.toString());
       if (this.hash[urn])
-        return {
-          image: this.hash[urn],
-          opacity: 1
-        }
-      else throw 'Error: There is no such sprite "'+urn;
+        return this.hash[urn];
+      else throw 'Error: There is no such image "'+urn;
     }
   }
 });

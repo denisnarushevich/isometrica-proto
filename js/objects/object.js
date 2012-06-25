@@ -1,14 +1,22 @@
-define(function(){
+define(['sprite', 'images'], function(sprite){
   return object = {
     x: null,
     y: null,
+    z: null,
     name: null,
     type: null,
+    sprite: null,
+    init: function(){
+      return this;
+    },
     getX: function(){
       return this.x;
     },
     getY: function(){
       return this.y;
+    },
+    getZ: function(){
+      return this.z;
     },
     getName: function(){
       return this.name;
@@ -20,7 +28,17 @@ define(function(){
       return g.world.getTile(this.x | 0, this.y | 0);
     },
     getSprite: function(){
-      return g.sprites.getSprite('objects/'+this.type+'/'+this.name);
+      if(this.sprite) return this.sprite;
+      
+      this.sprite = Object.create(sprite).setObject(this);
+      this.sprite.getImages = function(){
+        if(this.images) return this.images;
+        sprite.getImages.call(this);
+        this.images.push(g.images.getImage('objects/'+this.getObject().getType()+'/'+this.getObject().getName()));
+        return this.images;
+      }
+      
+      return this.sprite;
     },
     setX: function(x){
       this.x = x;
@@ -30,9 +48,14 @@ define(function(){
       this.y = y;
       return this;
     },
-    setXY: function(xy){
-      this.x = xy[0];
-      this.y = xy[1];
+    setZ: function(z){
+      this.z = z;
+      return this;
+    },
+    setCoordinates: function(xyz){
+      this.x = xyz[0];
+      this.y = xyz[1];
+      this.z = xyz[2];
       return this;
     },
     setName: function(name){

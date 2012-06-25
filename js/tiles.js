@@ -6,8 +6,8 @@ define(['tile'], function(tile){
       if (this.hash[x] && this.hash[x][y]) return this.hash[x][y];
       if (!this.hash[x]) this.hash[x] = [];
 		
-      var t = this.hash[x][y] = Object.create(tile).setX(x).setY(y);
-      t.getZ();//dummy
+      var t = this.hash[x][y] = Object.create(tile).init(x, y);
+
       this.tiles.push(t);
 		
       //delete old tile

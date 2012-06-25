@@ -1,4 +1,4 @@
-define(['jquery'], function(){
+define(['jquery', 'config'], function(){
 
   return g.controls ? g.controls : g.controls = {
     mouseAtWhenPressed: [0, 0],

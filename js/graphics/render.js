@@ -19,11 +19,13 @@ define(['jquery'], function($){
     clearLayer: function(name){
       this.layers[name].clearRect(0, 0, this.layers[name].canvas.width, this.layers[name].canvas.height);
     },
-    drawSprites: function(layer, sprites, screenX, screenY){
+    drawSprite: function(layer, sprite){
       var ctx = this.layers[layer];
-      for(var i in sprites){
-        if($.browser.webkit) ctx.setAlpha(sprites[i].opacity);
-        ctx.drawImage(sprites[i].image, screenX, screenY);
+      var images = sprite.getImages();
+      
+      for(var i in images){
+        //if($.browser.webkit) ctx.setAlpha(sprites[i].opacity);
+        ctx.drawImage(images[i], sprite.getOffset()[0], sprite.getOffset()[1]);
       }
     },
     renderLayers: function(){
