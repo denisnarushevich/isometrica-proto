@@ -1,4 +1,4 @@
-define(['simplex', 'sprites', 'objects'], function(){
+define(['simplex', 'images', 'sprite', 'objects'], function(simple, sprites, sprite, objects){
 
   return {
     x: 0,
@@ -10,6 +10,12 @@ define(['simplex', 'sprites', 'objects'], function(){
     shore: null,
     water: null,
     objects: null,
+    init: function(x, y){
+      this.x = x;
+      this.y = y;
+      this.z = this.isWater() ? g.world.waterLevel : this.getGridPoints()[0];
+      return this;
+    },
     getX: function(){
       return this.x
     },
@@ -17,18 +23,17 @@ define(['simplex', 'sprites', 'objects'], function(){
       return this.y;
     },
     getZ: function(){
-      if (this.z) return this.z;
-      return this.z = this.isWater() ? g.world.waterLevel : this.getGridPoints()[0];
+      return this.z;
     },
     getGridPoints: function(){
       if (this.gridPoints) return this.gridPoints;
 		
       //gridpoints start count from tiles left (West corner);
       return this.gridPoints = [ 
-      Math.floor(g.world.getGridPoint(this.x, this.y)),
-      Math.floor(g.world.getGridPoint(this.x, this.y + 1)),
-      Math.floor(g.world.getGridPoint(this.x + 1, this.y + 1)),
-      Math.floor(g.world.getGridPoint(this.x + 1, this.y))
+      Math.floor(g.world.grid.getGridPoint(this.x, this.y).getZ()),
+      Math.floor(g.world.grid.getGridPoint(this.x, this.y + 1).getZ()),
+      Math.floor(g.world.grid.getGridPoint(this.x + 1, this.y + 1).getZ()),
+      Math.floor(g.world.grid.getGridPoint(this.x + 1, this.y).getZ())
       ];
     },
     getSlopeId: function(){
@@ -56,7 +61,10 @@ define(['simplex', 'sprites', 'objects'], function(){
       return this.water = (gridPoints[0] <= wLevel && gridPoints[1] <= wLevel && gridPoints[2] <= wLevel && gridPoints[3] <= wLevel);
     },
     getTerrain: function(){
-      if (this.isWater()) return this.terrain = 'water';
+      if (this.isWater()) {
+        if(this.getGridPoints()[0] >= -1) return this.terrain = 'water';
+        else return this.terrain = 'deepwater';
+      }
       else{
         var sand = 0, x = this.x, y = this.y;
 
@@ -94,37 +102,25 @@ define(['simplex', 'sprites', 'objects'], function(){
 		
       tree += Simplex.noise2d(x, y);
 		
-      if(tree > 0 && !this.isWater() && this.getTerrain() == 'grass' && this.getSlopeId() == 2222){
+      if(tree > 0 && !this.isWater() && this.getTerrain() == 'grass' && !this.isShore()){
         //var obj = g.objects.createTree('tree'+((tree * 7 + 1)  | 0));
         var obj = g.objects.createTree('tree1');
-        obj.setXY([this.x, this.y]);
+        obj.setCoordinates([this.getX(), this.getY(), this.getZ()]);
 			
         return [obj];
       }
       return [];
     },
-    getSprites: function(){
-      if (this.sprites) return this.sprites;
-		
-      if(this.isWater()){
-        var sprites = [
-        g.sprites.getSprite('terrain/water/depthmask'),
-        g.sprites.getSprite('terrain/'+this.getTerrain()+'/'+this.getSlopeId())
-        ];
-			
-        sprites[1].opacity = 1 + this.getGridPoints()[0] / 32;//32 is maxDepth*2
-			
-        return this.sprites = sprites;
+    getSprite: function(){
+      if( this.sprite ) return this.sprite;
+
+      this.sprite = Object.create(sprite).setSize([64, 47]).setOrigin([0, 24]).setObject(this);
+      
+      this.sprite.getImages = function(){
+
       }
-		
-      if(this.isShore()){
-        return this.sprites = [
-        g.sprites.getSprite('terrain/'+this.getTerrain()+'/'+this.getSlopeId()),
-        g.sprites.getSprite('terrain/shore/'+this.getSlopeId())
-        ];
-      }
-		
-      return this.sprites = [g.sprites.getSprite('terrain/'+this.getTerrain()+'/'+this.getSlopeId())];
+      
+      return this.sprite;
     },
     setX: function(x){
       this.x = x;

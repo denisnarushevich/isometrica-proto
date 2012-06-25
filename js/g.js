@@ -1,11 +1,14 @@
-define(['sprites', 'controls', 'graphics'], function(){
+define(['images', 'controls', 'graphics'], function(images){
   g.init = function(){
-    this.sprites.load(function(){
-      if(g.sprites.loaded()){
+    console.log('Loading...');
+    images.load(function(){
+      if(g.images.loaded()){
         g.controls.init();
         g.graphics.init();
 				
         g.loop();
+      }else{
+        console.log(Math.round(g.images.loadProgress() * 100) + '%');
       }
     });
   };

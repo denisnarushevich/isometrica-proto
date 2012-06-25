@@ -7,7 +7,7 @@ define([
       'tree1': tree1
     },
     createTree: function(name){
-      return Object.create(this.tree[name]);
+      return Object.create(this.tree[name]).init();
     }
   }
 });
