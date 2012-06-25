@@ -4,9 +4,9 @@ define(function(){
     size: null,
     origin: null,
     images: null,
-    init: function(size, offset){
+    init: function(size, origin){
       this.size = size;
-      this.offset = offset;
+      this.origin = origin;
       return this;
     },
     setOffset: function(offset){
@@ -26,6 +26,9 @@ define(function(){
       return this;
     },
     getOffset: function(){
+      return this.offset;
+    },
+    getOriginOffset: function(){
       return [
         this.offset[0] - this.origin[0],
         this.offset[1] - this.origin[1]

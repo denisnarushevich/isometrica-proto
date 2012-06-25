@@ -1,4 +1,4 @@
-define(['world'], function(world){
+define(['world', 'graphics/scene/objectSprite'], function(world, objectSprite){
   return {
     items: [],
     updatedItems: [],
@@ -10,24 +10,24 @@ define(['world'], function(world){
       var tiles = g.scene.tiles.items;
       
       for(var key in tiles){
-        var tile = tiles[key];
+        var tile = tiles[key].getTile();
         var items = tile.getObjects();
         //var offset = tiles[key].offset.slice();
         
         for(var index in items){
           var object = items[index];
-          object.sprite.setOffset(g.scene.coordinatesTransform(object.getX(), object.getY(), object.getZ()));
-          this.items.push(object);          
+          var sprite = object.getSprite().setObject(object).setOffset(g.scene.coordinatesTransform(object.getX(), object.getY(), object.getZ()));
+          this.items.push(sprite);          
         }
       }
 
       this.updatedItems = this.items.slice(); //copying array.
     },
     drawLayer: function(){
-      var item;
+      var sprite;
       g.render.clearLayer('objects');
-      while(item = this.updatedItems.pop()){
-        g.render.drawSprite('objects', item.sprite);
+      while(sprite = this.updatedItems.pop()){
+        g.render.drawSprite('objects', sprite);
       }
     }
   }

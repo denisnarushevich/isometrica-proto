@@ -1,4 +1,4 @@
-define(['sprite', 'images'], function(sprite){
+define(function(sprite){
   return object = {
     x: null,
     y: null,
@@ -28,17 +28,7 @@ define(['sprite', 'images'], function(sprite){
       return g.world.getTile(this.x | 0, this.y | 0);
     },
     getSprite: function(){
-      if(this.sprite) return this.sprite;
-      
-      this.sprite = Object.create(sprite).setObject(this);
-      this.sprite.getImages = function(){
-        if(this.images) return this.images;
-        sprite.getImages.call(this);
-        this.images.push(g.images.getImage('objects/'+this.getObject().getType()+'/'+this.getObject().getName()));
-        return this.images;
-      }
-      
-      return this.sprite;
+      return this.sprite();
     },
     setX: function(x){
       this.x = x;

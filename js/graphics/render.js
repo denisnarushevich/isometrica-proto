@@ -25,7 +25,7 @@ define(['jquery'], function($){
       
       for(var i in images){
         //if($.browser.webkit) ctx.setAlpha(sprites[i].opacity);
-        ctx.drawImage(images[i], sprite.getOffset()[0], sprite.getOffset()[1]);
+        ctx.drawImage(images[i], sprite.getOriginOffset()[0], sprite.getOriginOffset()[1]);
       }
     },
     renderLayers: function(){
