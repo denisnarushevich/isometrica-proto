@@ -1,15 +1,14 @@
-define(['simplex', 'images', 'sprite', 'objects'], function(simple, sprites, sprite, objects){
-
+define(['simplex', 'objects', 'graphics/scene/tileSprite'], function(simplex, objects, tileSprite){
   return {
     x: 0,
     y: 0,
     z: 0,
     gridPoints: null,
     slopeId: null,
-    sprite: null,
     shore: null,
     water: null,
     objects: null,
+    sprite: null,
     init: function(x, y){
       this.x = x;
       this.y = y;
@@ -112,15 +111,8 @@ define(['simplex', 'images', 'sprite', 'objects'], function(simple, sprites, spr
       return [];
     },
     getSprite: function(){
-      if( this.sprite ) return this.sprite;
-
-      this.sprite = Object.create(sprite).setSize([64, 47]).setOrigin([0, 24]).setObject(this);
-      
-      this.sprite.getImages = function(){
-
-      }
-      
-      return this.sprite;
+      if ( this.sprite ) return this.sprite;
+      return this.sprite = Object.create(tileSprite).setTile(this);
     },
     setX: function(x){
       this.x = x;

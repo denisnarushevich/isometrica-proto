@@ -1,4 +1,4 @@
-define(['sprite'], function(sprite){
+define(['graphics/scene/sprite'], function(sprite){
   var tileSprite = Object.create(sprite).init([64, 47], [0, 24]);
   
   tileSprite.getTile = function(){
@@ -23,5 +23,6 @@ define(['sprite'], function(sprite){
     return this.images;
   }
   
+  return tileSprite;
 });
 

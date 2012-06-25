@@ -17,13 +17,13 @@ define(['world', 'graphics/scene/tileSprite'], function(world, tileSprite){
             if ( (x > at[0] - level && x < at[0] + level) && (y > at[1] - level && y < at[1] + level) ) continue; //skpping tiles of previous levels
             
             var tile = world.tiles.getTile(x, y);
-            var tileSprite = Object.create(tileSprite).setTile(tile).setOffset(g.scene.coordinatesTransform(x, y, tile.getZ()));
+            var sprite = tile.getSprite().setOffset(g.scene.coordinatesTransform(x, y, tile.getZ()));
+            offset = sprite.getOriginOffset();
             
-            offset = tile.sprite.getOffset();
             //check rect intersection of tile image and window
-           if (offset[0] > scene.size[0] || offset[0]+tile.sprite.size[0] < 0 || offset[1] > scene.size[1] || offset[1]+tile.sprite.size[1] < 0) continue;
+            if (offset[0] > scene.size[0] || offset[0]+sprite.size[0] < 0 || offset[1] > scene.size[1] || offset[1]+sprite.size[1] < 0) continue;
 
-            this.items.push(tile);
+            this.items.push(sprite);
 
             end = false;
           }
@@ -32,7 +32,7 @@ define(['world', 'graphics/scene/tileSprite'], function(world, tileSprite){
 		
       //sorting by depth, where depth is y screen offset coordinate.
       this.items.sort(function(item1, item2){
-        return item1.getSprite().getOffset()[1] > item2.getSprite().getOffset()[1] ? -1 : 1;
+        return item1.getOriginOffset()[1] > item2.getOriginOffset()[1] ? -1 : 1;
       });
 
       this.updatedItems = this.items.slice(); //copying array.
@@ -72,9 +72,9 @@ define(['world', 'graphics/scene/tileSprite'], function(world, tileSprite){
       return screenOffset;
     },*/
     drawLayer: function(){
-      var item;
-      while(item = this.updatedItems.pop()){
-        g.render.drawSprite('tiles', item.sprite);
+      var sprite;
+      while(sprite = this.updatedItems.pop()){
+        g.render.drawSprite('tiles', sprite);
       }
     }
   }

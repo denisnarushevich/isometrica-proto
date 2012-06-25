@@ -1,5 +1,5 @@
-define(['sprite'], function(sprite){
-  var objectSprite = Object.create(sprite).init([64, 64], [34, 53]);
+define(['graphics/scene/sprite'], function(sprite){
+  var objectSprite = Object.create(sprite);
   
   objectSprite.getObject = function(){
     return this.object;
@@ -20,5 +20,6 @@ define(['sprite'], function(sprite){
     return this.images;
   }
   
+  return objectSprite;
 });
 
