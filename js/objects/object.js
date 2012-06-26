@@ -28,7 +28,7 @@ define(function(sprite){
       return g.world.getTile(this.x | 0, this.y | 0);
     },
     getSprite: function(){
-      return this.sprite();
+      return this.sprite;
     },
     setX: function(x){
       this.x = x;

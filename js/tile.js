@@ -104,8 +104,7 @@ define(['simplex', 'objects', 'graphics/scene/tileSprite'], function(simplex, ob
       if(tree > 0 && !this.isWater() && this.getTerrain() == 'grass' && !this.isShore()){
         //var obj = g.objects.createTree('tree'+((tree * 7 + 1)  | 0));
         var obj = g.objects.createTree('tree1');
-        obj.setCoordinates([this.getX(), this.getY(), this.getZ()]);
-			
+        obj.setCoordinates([this.getX() + Math.sin(new Date().getTime()/1000 + (0.25-Math.random()*0.5) )  , this.getY() + Math.sin(new Date().getTime()/500), this.getZ()]);
         return [obj];
       }
       return [];

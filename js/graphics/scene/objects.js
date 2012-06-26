@@ -6,28 +6,27 @@ define(['world', 'graphics/scene/objectSprite'], function(world, objectSprite){
       g.render.createLayer('objects', this.size);
     },
     fill: function(){
+      var scene = g.scene, tiles = scene.tiles.items;
+      
       this.items = [];
-      var tiles = g.scene.tiles.items;
       
       for(var key in tiles){
-        var tile = tiles[key].getTile();
-        var items = tile.getObjects();
-        //var offset = tiles[key].offset.slice();
+        var tile = tiles[key];
+        var objects = tile.getObjects();
         
-        for(var index in items){
-          var object = items[index];
-          var sprite = object.getSprite().setObject(object).setOffset(g.scene.coordinatesTransform(object.getX(), object.getY(), object.getZ()));
-          this.items.push(sprite);          
+        for(var index in objects){
+          var object = objects[index];
+          var sprite = object.getSprite().setOffset(scene.coordinatesTransform(object.getX(), object.getY(), object.getZ()));
+          this.items.push(object);          
         }
       }
-
       this.updatedItems = this.items.slice(); //copying array.
     },
     drawLayer: function(){
       var sprite;
       g.render.clearLayer('objects');
       while(sprite = this.updatedItems.pop()){
-        g.render.drawSprite('objects', sprite);
+        g.render.drawSprite('objects', sprite.getSprite());
       }
     }
   }
