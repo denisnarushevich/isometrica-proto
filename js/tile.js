@@ -29,10 +29,10 @@ define(['simplex', 'objects', 'graphics/scene/tileSprite'], function(simplex, ob
 		
       //gridpoints start count from tiles left (West corner);
       return this.gridPoints = [ 
-      Math.floor(g.world.grid.getGridPoint(this.x, this.y).getZ()),
-      Math.floor(g.world.grid.getGridPoint(this.x, this.y + 1).getZ()),
-      Math.floor(g.world.grid.getGridPoint(this.x + 1, this.y + 1).getZ()),
-      Math.floor(g.world.grid.getGridPoint(this.x + 1, this.y).getZ())
+      g.world.grid.getGridPoint(this.x, this.y).getZ(),
+      g.world.grid.getGridPoint(this.x, this.y + 1).getZ(),
+      g.world.grid.getGridPoint(this.x + 1, this.y + 1).getZ(),
+      g.world.grid.getGridPoint(this.x + 1, this.y).getZ()
       ];
     },
     getSlopeId: function(){
@@ -104,7 +104,8 @@ define(['simplex', 'objects', 'graphics/scene/tileSprite'], function(simplex, ob
       if(tree > 0 && !this.isWater() && this.getTerrain() == 'grass' && !this.isShore()){
         //var obj = g.objects.createTree('tree'+((tree * 7 + 1)  | 0));
         var obj = g.objects.createTree('tree1');
-        obj.setCoordinates([this.getX() + Math.sin(new Date().getTime()/1000 + (0.25-Math.random()*0.5) )  , this.getY() + Math.sin(new Date().getTime()/500), this.getZ()]);
+        //obj.setCoordinates([this.getX() + Math.sin(new Date().getTime()/1000 + (0.25-Math.random()*0.5) )  , this.getY() + Math.sin(new Date().getTime()/500)]);
+        obj.setCoordinates([this.getX()  , this.getY() + Math.sin(new Date().getTime()/500)]);
         return [obj];
       }
       return [];

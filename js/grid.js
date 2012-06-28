@@ -20,7 +20,7 @@ define(['gridPoint'], function(gridPoint){
       this.length++;
       
       //return new gridpoint, cache it and initialise with X & Y
-      return this.gridPoints[x][y] = Object.create(gridPoint).setX(x).setY(y);
+      return this.gridPoints[x][y] = Object.create(gridPoint).init(x, y);
     },
     getDiagonalSpacing: function(){
       if(this.diagonalSpacing) return this.diagonalSpacing;
