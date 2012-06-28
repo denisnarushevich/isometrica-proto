@@ -40,17 +40,19 @@ define(['simplex'], function(Simplex){
        var p2 = grid.getGridPoint(p[1][0], p[1][1]).getZ();
        var p3 = grid.getGridPoint(p[2][0], p[2][1]).getZ();
        var p4 = grid.getGridPoint(p[3][0], p[3][1]).getZ();
-       
-       var xf = x % 1;
-       var yf = y % 1;
+ 
+       var xf = Math.abs(x % 1);
+       var yf = Math.abs(y % 1);
        
        var i, i1,i2; //linear interpol
        
-       i1 = p1 * (1-xf) + p3 * xf;
+       i1 = p1 * (1-xf) + p3 * xf;1
        i2 = p2 * (1-xf) + p4 * xf;
-       if()
-       i = i1 * (1-yf) + i2 * yf;
-       if(v)console.log(yf,i1,i2,i,p1,p2,p3,p4,xf);
+      
+      if(y<0)
+         i = i2 * (1-yf) + i1 * yf; 
+       else
+          i = i1 * (1-yf) + i2 * yf; 
        
        return i;
       } else {

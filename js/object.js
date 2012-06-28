@@ -16,8 +16,8 @@ define(function(sprite){
       return this.y;
     },
     getZ: function(){
-      return g.world.grid.getGridPoint(this.x, this.y).getZ();
-      return this.z;
+      if ( this.z ) return this.z;
+      return this.z = g.world.grid.getGridPoint(this.x, this.y).getZ();
     },
     getName: function(){
       return this.name;
@@ -39,14 +39,9 @@ define(function(sprite){
       this.y = y;
       return this;
     },
-    setZ: function(z){
-      this.z = z;
-      return this;
-    },
-    setCoordinates: function(xyz){
-      this.x = xyz[0];
-      this.y = xyz[1];
-      //this.z = xyz[2];
+    setXY: function(xy){
+      this.x = xy[0];
+      this.y = xy[1];
       return this;
     },
     setName: function(name){

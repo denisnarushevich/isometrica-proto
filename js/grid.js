@@ -4,7 +4,7 @@ define(['gridPoint'], function(gridPoint){
     diagonalSpacing: null,
     length: 0,
     gridPoints: [],
-    getGridPoint: function(x, y){
+    getGridPoint: function(x, y){      
       //lazy cache limiter
       if ( this.length > 20000 ) {
         this.gridPoints = [];
