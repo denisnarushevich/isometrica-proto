@@ -1,6 +1,6 @@
 define(['images', 'controls', 'graphics'], function(images){
   g.init = function(){
-    console.log('Loading...');
+    //console.log('Loading...');
     images.load(function(){
       if(g.images.loaded()){
         g.controls.init();
@@ -8,7 +8,7 @@ define(['images', 'controls', 'graphics'], function(images){
 				
         g.loop();
       }else{
-        console.log(Math.round(g.images.loadProgress() * 100) + '%');
+        //console.log(Math.round(g.images.loadProgress() * 100) + '%');
       }
     });
   };

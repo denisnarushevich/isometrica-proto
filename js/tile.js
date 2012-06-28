@@ -102,13 +102,10 @@ define(['simplex', 'objects', 'graphics/scene/tileSprite'], function(simplex, ob
       tree += Simplex.noise2d(x, y);
 		
       if(tree > 0 && !this.isWater() && this.getTerrain() == 'grass' && !this.isShore()){
-        //var obj = g.objects.createTree('tree'+((tree * 7 + 1)  | 0));
-        var obj = g.objects.createTree('tree1');
-        //obj.setCoordinates([this.getX() + Math.sin(new Date().getTime()/1000 + (0.25-Math.random()*0.5) )  , this.getY() + Math.sin(new Date().getTime()/500)]);
-        obj.setCoordinates([this.getX()  , this.getY() + Math.sin(new Date().getTime()/500)]);
-        return [obj];
+        var obj = g.objects.createTree('tree1').setXY([this.getX()+1/2  , this.getY() + 1/2]);
+        return this.objects = [obj];
       }
-      return [];
+      return this.objects = [];
     },
     getSprite: function(){
       if ( this.sprite ) return this.sprite;
