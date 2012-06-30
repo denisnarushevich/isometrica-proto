@@ -1,13 +1,13 @@
-define(['world', 'graphics/scene/objectSprite'], function(world, objectSprite){
+define(['world', 'sprites/objectSprite'], function(world, objectSprite){
   return {
     items: [],
     vehicles: [],
     updatedItems: [],
     init: function(){
-      g.render.createLayer('objects', this.size);
+      g.graphics.render.createLayer('objects', this.size);
     },
     fill: function(){
-      var scene = g.scene, tiles = scene.tiles.items;
+      var scene = g.graphics.scene, tiles = scene.tiles.items;
       
       this.items = [];
       
@@ -32,15 +32,10 @@ define(['world', 'graphics/scene/objectSprite'], function(world, objectSprite){
     },
     drawLayer: function(){
       var sprite;
-      g.render.clearLayer('objects');
+      g.graphics.render.clearLayer('objects');
       while(sprite = this.updatedItems.pop()){
-        g.render.drawSprite('objects', sprite.getSprite());
+        g.graphics.render.drawSprite('objects', sprite.getSprite());
       }
-    },
-    spawnCar: function(x,y){
-      var car = g.objects.createVehicle().setXY([x,y]);
-      this.vehicles.push(car);
-      return car
     }
   }
 });

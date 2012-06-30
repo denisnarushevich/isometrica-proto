@@ -1,12 +1,12 @@
-define(['world', 'graphics/scene/tileSprite'], function(world, tileSprite){
+define(['world', 'sprites/tileSprite'], function(world, tileSprite){
   return {
     items: [],
     updatedItems: [],
     init: function(){
-      g.render.createLayer('tiles', this.size);
+      g.graphics.render.createLayer('tiles', this.size);
     },
     fill: function(){
-      var size = g.scene.size, scene = g.scene, tiles = g.world.tiles, at = [scene.at[0] | 0, scene.at[1] |0];
+      var scene = g.graphics.scene, size = scene.size, tiles = g.world.tiles, at = [scene.at[0] | 0, scene.at[1] |0];
       
       this.items = [];
 			
@@ -67,7 +67,7 @@ define(['world', 'graphics/scene/tileSprite'], function(world, tileSprite){
     drawLayer: function(){
       var tile;
       while(tile = this.updatedItems.pop()){
-        g.render.drawSprite('tiles', tile.getSprite());
+        g.graphics.render.drawSprite('tiles', tile.getSprite());
       }
     }
   }

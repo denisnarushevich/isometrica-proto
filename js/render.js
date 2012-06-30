@@ -1,6 +1,5 @@
-define(['jquery'], function($){
-
-  return g.render ? g.render : g.render = {
+define(function(){
+  return {
     layers: {},
     screen: null,
     init: function(width, height){

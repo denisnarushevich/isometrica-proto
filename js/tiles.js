@@ -1,4 +1,4 @@
-define(['tile'], function(tile){
+define(['tiles/tile'], function(tile){
   return {
     tiles: [],
     hash: [],

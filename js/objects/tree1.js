@@ -1,4 +1,4 @@
-define(['objects/tree'], function(tree){
+define(['./tree'], function(tree){
   var tree1 = Object.create(tree);
   tree1.init = function(){
     tree.init.call(this); //parent init

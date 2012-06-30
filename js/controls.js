@@ -1,4 +1,4 @@
-define(['jquery', 'config'], function(){
+define(['jquery'], function(){
 
   return g.controls ? g.controls : g.controls = {
     mouseAtWhenPressed: [0, 0],
@@ -7,11 +7,11 @@ define(['jquery', 'config'], function(){
     tileSideLen: null,
     init: function(){
       $(window).bind('mousedown', g.controls.downHandler);
-      this.tileSideLen = this.transformMousePosition(g.config.tileSpriteSize[0], 0)[0]; //actually I don't know exactly(mathematically) why it works', but if tile image is in right proportions, the its ok.
+      this.tileSideLen = this.transformMousePosition(64, 0)[0]; //actually I don't know exactly(mathematically) why it works', but if tile image is in right proportions, the its ok.
     },
     downHandler: function(event){
       g.controls.mouseAtWhenPressed = g.controls.transformMousePosition(event.pageX, event.pageY)
-      g.controls.mapAtWhenPressed = g.scene.at;
+      g.controls.mapAtWhenPressed = g.graphics.scene.at;
 		
       $(window).bind('mousemove', g.controls.moveHandler);
       $(window).bind('mouseup', g.controls.upHandler);
@@ -44,7 +44,7 @@ define(['jquery', 'config'], function(){
       ( currentAt[1] - controls.mouseAtWhenPressed[1] ) / controls.tileSideLen * controls.sensitivity
       ];
       
-      g.scene.setAt([
+      g.graphics.scene.setAt([
         controls.mapAtWhenPressed[0] - scrolledFor[0],
         controls.mapAtWhenPressed[1] - scrolledFor[1]
         ]);

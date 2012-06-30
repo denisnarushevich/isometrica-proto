@@ -1,10 +1,10 @@
-define(['world', 'graphics/scene/tiles', 'graphics/scene/objects'], function(world, tiles, objects){
+define(['layers/tileLayer', 'layers/objectLayer'], function(tileLayer, objectLayer){
 
-  return g.scene ? g.scene : g.scene = {
+  return {
     at: [0, 0],
     size: [0, 0],
-    tiles: tiles,
-    objects: objects,
+    tiles: tileLayer,
+    objects: objectLayer,
     init: function(width, height){
       this.size = [width, height];
       
@@ -40,7 +40,7 @@ define(['world', 'graphics/scene/tiles', 'graphics/scene/objects'], function(wor
       this.tiles.drawLayer();
       this.objects.drawLayer();
 		
-      g.render.renderLayers();
+      g.graphics.render.renderLayers();
     }
   }
 });

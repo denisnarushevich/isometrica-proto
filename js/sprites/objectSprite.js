@@ -1,4 +1,4 @@
-define(['graphics/scene/sprite'], function(sprite){
+define(['./sprite'], function(sprite){
   var objectSprite = Object.create(sprite);
   
   objectSprite.getObject = function(){

@@ -1,4 +1,4 @@
-define(['simplex', 'objects', 'graphics/scene/tileSprite'], function(simplex, objects, tileSprite){
+define(['simplex', 'objects', 'sprites/tileSprite'], function(simplex, objects, tileSprite){
   return {
     x: 0,
     y: 0,
@@ -102,7 +102,7 @@ define(['simplex', 'objects', 'graphics/scene/tileSprite'], function(simplex, ob
       tree += Simplex.noise2d(x, y);
 		
       if(tree > 0 && !this.isWater() && this.getTerrain() == 'grass' && !this.isShore()){
-        var obj = g.objects.createTree('tree1').setXY([this.getX()+1/2  , this.getY() + 1/2]);
+        var obj = objects.create('tree1').setXY([this.getX()+1/2  , this.getY() + 1/2]);
         return this.objects = [obj];
       }
       return this.objects = [];
