@@ -1,20 +1,20 @@
-define(['object', 'graphics/scene/vehicleSprite'], function(object, vehicleSprite){
+define(['./object', 'sprites/vehicleSprite'], function(object, vehicleSprite){
   var vehicle = Object.create(object);
   
-  vehicle.type = 'vehicle';
-  vehicle.name = 'test';
-  
-  vehicle.speed = 0.5; //tiles in second
-  vehicle.direction = 1;
-  vehicle.destination = null;
-  vehicle.time = null;
-  
   vehicle.init = function(){
-    this.sprite = Object.create(vehicleSprite).setObject(this);
     object.init.call(this);
+    this.sprite = Object.create(vehicleSprite).setObject(this);
+    vehicle.type = 'vehicle';
+
+  
+    vehicle.speed = 0.5; //tiles in second
+    vehicle.direction = 1;
+    vehicle.destination = null;
+    vehicle.time = null;
+    
     return this;
   }
-  
+  /*
   vehicle.getZ = function(){
     return g.world.grid.getGridPoint(this.x, this.y).getZ();
   };
@@ -32,7 +32,7 @@ define(['object', 'graphics/scene/vehicleSprite'], function(object, vehicleSprit
     var passed = dTime * this.speed;
     
   }
-  
+  */
   return vehicle;
   
 });

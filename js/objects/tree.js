@@ -1,4 +1,4 @@
-define(['object', 'graphics/scene/treeSprite'], function(object, treeSprite){
+define(['./object', 'sprites/treeSprite'], function(object, treeSprite){
   Tree = Object.create(object);
 
   Tree.init = function(){

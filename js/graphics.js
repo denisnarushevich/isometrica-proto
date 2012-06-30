@@ -1,4 +1,4 @@
-define(['graphics/scene', 'graphics/render'], function(scene, render){
+define(['scene', 'render'], function(scene, render){
 
   return g.graphics ? g.graphics : g.graphics = {
     scene: scene,

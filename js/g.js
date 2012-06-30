@@ -1,4 +1,4 @@
-define(['images', 'controls', 'graphics'], function(images){
+define(['controls', 'graphics', 'images'], function(controls, graphics, images){
   g.init = function(){
     //console.log('Loading...');
     images.load(function(){
@@ -14,8 +14,8 @@ define(['images', 'controls', 'graphics'], function(images){
   };
     
   g.loop = function(){
-    g.scene.update();
-    g.scene.drawScene();
+    g.graphics.scene.update();
+    g.graphics.scene.drawScene();
 		
     window.requestAnimFrame(function(){ //at moment of testing this was a bit slower then setInterval, but hope requestAnimation will get optimized in future
       g.loop();

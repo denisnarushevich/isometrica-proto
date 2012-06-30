@@ -105,7 +105,7 @@ define(function(){
     'objects/tree/tree5.png',
     'objects/tree/tree6.png',
     'objects/tree/tree7.png',
-    'objects/vehicle/test.png'
+    'objects/car1/car1.png'
     ],
     dirUrl: 'images/',
     hash: {},
