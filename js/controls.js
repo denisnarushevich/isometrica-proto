@@ -11,7 +11,7 @@ define(['jquery'], function(){
     },
     downHandler: function(event){
       g.controls.mouseAtWhenPressed = g.controls.transformMousePosition(event.pageX, event.pageY)
-      g.controls.mapAtWhenPressed = g.graphics.scene.at;
+      g.controls.mapAtWhenPressed = [g.logic.player.position.getX(), g.logic.player.position.getY()];
 		
       $(window).bind('mousemove', g.controls.moveHandler);
       $(window).bind('mouseup', g.controls.upHandler);
@@ -44,10 +44,10 @@ define(['jquery'], function(){
       ( currentAt[1] - controls.mouseAtWhenPressed[1] ) / controls.tileSideLen * controls.sensitivity
       ];
       
-      g.graphics.scene.setAt([
-        controls.mapAtWhenPressed[0] - scrolledFor[0],
-        controls.mapAtWhenPressed[1] - scrolledFor[1]
-        ]);
+      g.logic.player.position.setCoordinates({
+        x: controls.mapAtWhenPressed[0] - scrolledFor[0],
+        y: controls.mapAtWhenPressed[1] - scrolledFor[1]
+      });
     },
     /**
 	 * it takes mouse coordinates and rotates them by -45 degree, then dividing x coordinate by 2.

@@ -1,8 +1,15 @@
-define(['tiles', 'grid'], function(tiles, grid){
-
-  return g.world ? g.world : g.world = {
+define(['grid', 'tiles', 'objects'], function(grid, tiles, objects){
+  return {
     waterLevel: 0,
     tiles: tiles,
-    grid: grid
+    grid: grid,
+    init: function(){
+      tiles.init();
+      grid.init();
+    },
+    update: function(){
+      this.tiles.update();
+      //this.objects.update();
+    }
   }
 });

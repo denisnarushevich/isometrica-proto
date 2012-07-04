@@ -15,10 +15,10 @@ define(['./sprite'], function(sprite){
     
     sprite.getImages.call(this);
     
-    this.images.push(g.images.getImage('terrain/'+this.getTile().getTerrain()+'/'+this.getTile().getSlopeId()));
+    this.images.push(g.resources.getImage('terrain/'+this.getTile().getTerrain()+'/'+this.getTile().getSlopeId()));
       
     if(this.getTile().isShore())
-      this.images.push(g.images.getImage('terrain/shore/'+this.getTile().getSlopeId()));
+      this.images.push(g.resources.getImage('terrain/shore/'+this.getTile().getSlopeId()));
         
     return this.images;
   }

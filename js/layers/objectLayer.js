@@ -16,7 +16,7 @@ define(['world', 'sprites/objectSprite'], function(world, objectSprite){
         var objects = tile.getObjects();
         
         for(var index in objects){
-          var object = objects[index];
+          var object = objects[index].update();
           var sprite = object.getSprite().setOffset(scene.coordinatesTransform(object.getX(), object.getY(), object.getZ()));
           this.items.push(object);          
         }

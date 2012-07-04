@@ -1,5 +1,5 @@
 define(function(){
-  return g.images ? g.images : g.images = {
+  return {
     urns: [
     'terrain/grass/2101.png',
     'terrain/grass/2111.png',
@@ -105,7 +105,7 @@ define(function(){
     'objects/tree/tree5.png',
     'objects/tree/tree6.png',
     'objects/tree/tree7.png',
-    'objects/car1/car1.png'
+    'objects/vehicle/car1.png'
     ],
     dirUrl: 'images/',
     hash: {},
@@ -114,13 +114,14 @@ define(function(){
 	 * preloads all image for browser to cache them in his internal cache
 	 */
     load: function(onEachLoad){
+      var images = this;
       var name = this.urns[this.loadCount];
       var image = new Image();
       this.hash[name.split('.')[0]] = image;
       image.onload = function(){
-        g.images.loadCount++;				
+        images.loadCount++;				
         if (onEachLoad) onEachLoad();
-        if (!g.images.loaded()) g.images.load(onEachLoad);
+        if (!images.loaded()) images.load(onEachLoad);
       };
       image.src = this.dirUrl + name; //add path to textures dir
       return;

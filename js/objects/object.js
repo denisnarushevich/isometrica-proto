@@ -1,56 +1,47 @@
-define(function(sprite){
-  return object = {
-    x: null,
-    y: null,
-    z: null,
-    name: null,
-    type: null,
-    sprite: null,
-    init: function(){
-      return this;
-    },
-    getX: function(){
-      return this.x;
-    },
-    getY: function(){
-      return this.y;
-    },
-    getZ: function(){
-      if ( this.z ) return this.z;
-      return this.z = g.world.grid.getGridPoint(this.x, this.y).getZ();
-    },
-    getName: function(){
-      return this.name;
-    },
-    getType: function(){
-      return this.type;
-    },
-    getTile: function(){
-      return g.world.getTile(this.x | 0, this.y | 0);
-    },
-    getSprite: function(){
-      return this.sprite;
-    },
-    setX: function(x){
-      this.x = x;
-      return this;
-    },
-    setY: function(y){
-      this.y = y;
-      return this;
-    },
-    setXY: function(xy){
-      this.x = xy[0];
-      this.y = xy[1];
-      return this;
-    },
-    setName: function(name){
-      this.name = name;
-      return this;
-    },
-    setType: function(typeName){
-      this.type = typeName;
-      return this;
-    }
+define(['point'], function(point){
+  var object = Object.create(point);
+
+  object.init = function(){
+    this.name = null;
+    this.type = null;
+    this.sprite = null;
+    return this
   }
+  
+  object.getZ = function(){
+    if ( this.z ) return this.z;
+    return this.z = g.logic.world.grid.getPoint(this.getX(), this.getY()).getZ();
+  };
+  
+  object.getName = function(){
+    return this.name;
+  };
+  
+  object.getType = function(){
+    return this.type;
+  };
+  
+  object.getTile = function(){
+    return g.world.tiles.getTile(this.x | 0, this.y | 0);
+  };
+  
+  object.getSprite = function(){
+    return this.sprite;
+  };
+  
+  object.setName = function(name){
+    this.name = name;
+    return this;
+  };
+  
+  object.setType = function(typeName){
+    this.type = typeName;
+    return this;
+  };
+  
+  object.update = function(){
+    return this;
+  }
+  
+  return object;
 });
