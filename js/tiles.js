@@ -31,7 +31,7 @@ define(['tiles/tile'], function(tile){
       this.tiles.push(t);
 		
       //delete old tile
-      if (this.tiles.length > 128000000){ //12800 = (radius*2)^2*2
+      if (this.tiles.length > 128000){ //12800 = (radius*2)^2*2
         //deleting references
         var deleteTile = this.tiles.shift();
         delete this.hash[deleteTile.getX()][deleteTile.getY()];

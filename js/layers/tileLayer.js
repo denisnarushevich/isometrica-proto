@@ -1,9 +1,9 @@
-define(['world', 'sprites/tileSprite'], function(world, tileSprite){
+define(['world'], function(world){
   return {
     items: [],
     updatedItems: [],
     init: function(scene){
-      g.graphics.renderer.createLayer('tiles', this.size);
+      g.graphics.renderer.createLayer('tiles');
       this.scene = scene;
       return this;
     },
@@ -22,12 +22,10 @@ define(['world', 'sprites/tileSprite'], function(world, tileSprite){
             var sprite = tile.getSprite().setOffset(g.graphics.coordinatesTransform(x, y, tile.getZ()));
             var offset = sprite.getOriginOffset();
             
-            //console.log(tile, sprite); 
-            //if(x>3) throw 1;
             //check rect intersection of tile image and window
             if (offset[0] > size[0] || offset[0]+sprite.size[0] < 0 || offset[1] > size[1] || offset[1]+sprite.size[1] < 0) continue;
 
-            this.items.push(tile);
+            this.items.push(sprite);
 
             end = false;
           }
@@ -36,7 +34,7 @@ define(['world', 'sprites/tileSprite'], function(world, tileSprite){
 	
       //sorting by depth, where depth is y screen offset coordinate.
       this.items.sort(function(item1, item2){
-        return item1.getSprite().getOriginOffset()[1] > item2.getSprite().getOriginOffset()[1] ? -1 : 1;
+        return item1.getOriginOffset()[1] > item2.getOriginOffset()[1] ? -1 : 1;
       });
 
       this.updatedItems = this.items.slice(); //copying array.
@@ -71,7 +69,7 @@ define(['world', 'sprites/tileSprite'], function(world, tileSprite){
     drawLayer: function(){
       var tile;
       while(tile = this.updatedItems.pop()){
-        g.graphics.renderer.drawSprite('tiles', tile.getSprite());
+        g.graphics.renderer.drawSprite('tiles', tile);
       }
     }
   }

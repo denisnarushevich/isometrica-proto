@@ -45,7 +45,7 @@ define(['./object', 'sprites/vehicleSprite'], function(object, vehicleSprite){
   }
 
   vehicle.getZ = function(){
-    return g.world.grid.getGridPoint(this.getX(), this.getY()).getZ();
+    return g.logic.world.grid.getPoint(this.getX(), this.getY()).getZ();
   };
 
   return vehicle;
