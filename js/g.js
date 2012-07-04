@@ -1,21 +1,21 @@
-define(['controls', 'graphics', 'images'], function(controls, graphics, images){
+define(['controls', 'graphics', 'logic', 'resources'], function(controls, graphics, logic, resources){
   g.init = function(){
-    //console.log('Loading...');
-    images.load(function(){
-      if(g.images.loaded()){
-        g.controls.init();
-        g.graphics.init();
-				
-        g.loop();
-      }else{
-        //console.log(Math.round(g.images.loadProgress() * 100) + '%');
-      }
+    resources.load(function(progress){
+      console.log(Math.round(progress * 100) + '%');
+    }, function(){
+      console.log('100%');
+      
+      logic.init();
+      graphics.init();
+      controls.init();
+      
+      g.loop();
     });
   };
     
   g.loop = function(){
-    g.graphics.scene.update();
-    g.graphics.scene.drawScene();
+    logic.update();
+    graphics.drawFrame();
 		
     window.requestAnimFrame(function(){ //at moment of testing this was a bit slower then setInterval, but hope requestAnimation will get optimized in future
       g.loop();

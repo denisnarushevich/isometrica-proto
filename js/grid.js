@@ -1,10 +1,13 @@
 define(['gridPoint'], function(gridPoint){
   return {
     spacing: [45, 45, 8],
-    diagonalSpacing: null,
+    //diagonalSpacing: null,
     length: 0,
     gridPoints: [],
-    getGridPoint: function(x, y){      
+    init: function(){
+      
+    },
+    getPoint: function(x, y){      
       //lazy cache limiter
       if ( this.length > 20000 ) {
         this.gridPoints = [];
@@ -19,13 +22,22 @@ define(['gridPoint'], function(gridPoint){
       
       this.length++;
       
-      //return new gridpoint, cache it and initialise with X & Y
-      return this.gridPoints[x][y] = Object.create(gridPoint).init(x, y);
-    },
-    getDiagonalSpacing: function(){
-      if(this.diagonalSpacing) return this.diagonalSpacing;
-      return this.diagonalSpacing = Math.sqrt ( this.spacing[0] * this.spacing[0] + this.spacing[1] * this.spacing[1] );
+      //get and init gridpoint
+      var gp = Object.create(gridPoint).setCoordinates({
+        x: x, 
+        y: y
+      });
+
+      //return gp and cache it if its not inter-point. (with fractal part in the number)
+      if ( !(x % 1) || !(y % 1) )   
+        this.gridPoints[x][y] = gp
+
+      return gp;
     }
+  //    getDiagonalSpacing: function(){
+  //      if(this.diagonalSpacing) return this.diagonalSpacing;
+  //      return this.diagonalSpacing = Math.sqrt ( this.spacing[0] * this.spacing[0] + this.spacing[1] * this.spacing[1] );
+  //    }
   }
 });
 
