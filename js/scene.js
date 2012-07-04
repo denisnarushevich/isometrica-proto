@@ -10,7 +10,7 @@ define(['layers/tileLayer', 'layers/objectLayer'], function(tileLayer, objectLay
       
       this.layers = [
         Object.create(tileLayer).init(this),
-        //Object.create(objectLayer).init(this),
+        Object.create(objectLayer).init(this),
       ];
 		
       this.fill();

@@ -22,7 +22,7 @@ define(['point'], function(point){
   };
   
   object.getTile = function(){
-    return g.world.tiles.getTile(this.x | 0, this.y | 0);
+    return g.logic.world.tiles.getTile(this.x | 0, this.y | 0);
   };
   
   object.getSprite = function(){

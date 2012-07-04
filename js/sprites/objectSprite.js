@@ -15,7 +15,7 @@ define(['./sprite'], function(sprite){
     
     sprite.getImages.call(this);
     
-    this.images.push(g.images.getImage('objects/'+this.getObject().getType()+'/'+this.getObject().getName()));
+    this.images.push(g.resources.getImage('objects/'+this.getObject().getType()+'/'+this.getObject().getName()));
 
     return this.images;
   }
