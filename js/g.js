@@ -17,7 +17,7 @@ define(['controls', 'graphics', 'logic', 'resources'], function(controls, graphi
     logic.update();
     graphics.drawFrame();
 		
-    window.requestAnimFrame(function(){ //at moment of testing this was a bit slower then setInterval, but hope requestAnimation will get optimized in future
+    window.requestAnimFrame(function(){
       g.loop();
     });
   }

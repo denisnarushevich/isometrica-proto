@@ -14,7 +14,7 @@ define(['tiles/tile'], function(tile){
       //update tiles in some radius around player, cause we can't update whole world.
       var playerPos = g.logic.player.getPosition().getCoordinates();
       
-      var radius = 40, a = Math.floor(playerPos.x - radius), b = Math.floor(playerPos.x + radius), c = Math.floor(playerPos.y - radius), d = Math.floor(playerPos.y + radius); 
+      var radius = 50, a = Math.floor(playerPos.x - radius), b = Math.floor(playerPos.x + radius), c = Math.floor(playerPos.y - radius), d = Math.floor(playerPos.y + radius); 
       
       for(var x = a; x < b; x++){
         for(var y = c; y < d; y++){
@@ -31,7 +31,7 @@ define(['tiles/tile'], function(tile){
       this.tiles.push(t);
 		
       //delete old tile
-      if (this.tiles.length > 128000){ //12800 = (radius*2)^2*2
+      if (this.tiles.length > 20000){ //20000 = (radius*2)^2*2
         //deleting references
         var deleteTile = this.tiles.shift();
         delete this.hash[deleteTile.getX()][deleteTile.getY()];
