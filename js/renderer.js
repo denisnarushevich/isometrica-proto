@@ -2,10 +2,10 @@ define(function(){
   return {
     layers: {},
     screen: null,
-    init: function(width, height){
+    init: function(size){
       //define main canvas
       if (!this.screen) this.screen = document.body.appendChild(document.createElement('canvas')).getContext('2d');
-      this.setSize(width, height);
+      this.setSize(size);
       this.screen.canvas.style.cssText = 'width: 100%; height: 100%;';
     },
     createLayer: function(name){
@@ -31,14 +31,14 @@ define(function(){
         this.screen.drawImage(this.layers[key].canvas, 0, 0);
       }
     },
-    setSize: function(width, height){
-      this.screen.canvas.width = width;
-      this.screen.canvas.height = height;
+    setSize: function(size){
+      this.screen.canvas.width = size[0];
+      this.screen.canvas.height = size[1];
       
       for(var key in this.layers){
         var layer = this.layers[key];
-        layer.canvas.width = width;
-        layer.canvas.height = height;
+        layer.canvas.width = size[0];
+        layer.canvas.height = size[1];
       }
       
       return this;
