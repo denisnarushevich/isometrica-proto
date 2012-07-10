@@ -4,24 +4,38 @@ define(['scene', 'renderer'], function(scene, renderer){
     scene: scene,
     renderer: renderer,
     init: function(){
-      var width = window.innerWidth;
-      var height = window.innerHeight;
+      var size = [window.innerWidth, window.innerHeight];
       
-      this.renderer.init(width, height);
-      this.scene.init(width, height);
+      this.renderer.init(size);
+
+      this.renderer.createLayer('tiles');
+      this.renderer.createLayer('objects');
+      
+      this.scene.init(size, g.logic.player.getPosition());
 		
       //on window resize, we update size of canvases
       window.onresize = function(){
-        g.graphics.resize(window.innerWidth, window.innerHeight);
+        g.graphics.resize([window.innerWidth, window.innerHeight]);
       }
     },
-    resize: function(width, height){
-      this.renderer.setSize(width, height);
-      this.scene.setSize(width, height);
+    resize: function(size){
+      this.renderer.setSize(size);
+      this.scene.setSize(size);
     },
     drawFrame: function(){
-      scene.fill();
-      scene.drawScene();
+      var tiles = this.scene.getTiles();
+      var objects = this.scene.getObjects();
+      
+      while(tiles.length){
+        this.renderer.drawSprite('tiles', tiles.pop());
+      }
+      
+      renderer.clearLayer('objects');
+      
+      while(objects.length){
+        this.renderer.drawSprite('objects', objects.pop());
+      }
+      
       renderer.renderLayers();
     },
     coordinatesTransform: function(x, y, z){
