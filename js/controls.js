@@ -44,10 +44,7 @@ define(['jquery'], function(){
       ( currentAt[1] - controls.mouseAtWhenPressed[1] ) / controls.tileSideLen * controls.sensitivity
       ];
       
-      g.logic.player.position.setCoordinates({
-        x: controls.mapAtWhenPressed[0] - scrolledFor[0],
-        y: controls.mapAtWhenPressed[1] - scrolledFor[1]
-      });
+      g.logic.player.position.setX(controls.mapAtWhenPressed[0] - scrolledFor[0]).setY(controls.mapAtWhenPressed[1] - scrolledFor[1]);
     },
     /**
 	 * it takes mouse coordinates and rotates them by -45 degree, then dividing x coordinate by 2.
