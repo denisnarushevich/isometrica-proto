@@ -1,8 +1,8 @@
-define(['point'], function(point){
+define(['vector2'], function(point){
   return {
     position: null,
     init: function(){
-      this.position = Object.create(point).setCoordinates({x: 270, y: 1000});
+      this.position = Object.create(point).setX(270).setY(1000);
     },
     getPosition: function(){
       return this.position;

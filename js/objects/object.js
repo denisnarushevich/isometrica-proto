@@ -1,4 +1,4 @@
-define(['point'], function(point){
+define(['vector3'], function(point){
   var object = Object.create(point);
 
   object.init = function(){

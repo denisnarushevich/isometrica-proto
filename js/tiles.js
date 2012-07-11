@@ -12,9 +12,9 @@ define(['tiles/tile'], function(tile){
       //console.log('Logic updated.');
       
       //update tiles in some radius around player, cause we can't update whole world.
-      var playerPos = g.logic.player.getPosition().getCoordinates();
+      var playerPos = g.logic.player.getPosition();
       
-      var radius = 50, a = Math.floor(playerPos.x - radius), b = Math.floor(playerPos.x + radius), c = Math.floor(playerPos.y - radius), d = Math.floor(playerPos.y + radius); 
+      var radius = 50, a = Math.floor(playerPos.getX() - radius), b = Math.floor(playerPos.getX() + radius), c = Math.floor(playerPos.getY() - radius), d = Math.floor(playerPos.getY() + radius); 
       
       for(var x = a; x < b; x++){
         for(var y = c; y < d; y++){

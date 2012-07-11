@@ -1,4 +1,4 @@
-define(['point', 'simplex'], function(point, Simplex){
+define(['vector3', 'simplex'], function(point, Simplex){
   var gridPoint = Object.create(point);
     
   //get point of grid, with set height. slopes of terrain shouldnt exceed 45 degrees.

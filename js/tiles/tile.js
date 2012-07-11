@@ -1,8 +1,8 @@
-define(['point', 'simplex', 'objects', 'sprites/tileSprite'], function(point, simplex, objects, tileSprite){
+define(['vector3', 'simplex', 'objects', 'sprites/tileSprite'], function(point, simplex, objects, tileSprite){
   var tile = Object.create(point);
   
   tile.init = function(x, y){
-    this.setCoordinates({x: x, y: y});
+    this.setX(x).setY(y);
     this.objects = [];
     this.sprite = Object.create(tileSprite).setTile(this);
       
@@ -120,7 +120,7 @@ define(['point', 'simplex', 'objects', 'sprites/tileSprite'], function(point, si
     tree += Simplex.noise2d(x, y);
 		
     if(tree > 0 && !this.isWater() && this.getTerrain() == 'grass' && !this.isShore()){
-      var obj = objects.create('tree1').setCoordinates(this.getCoordinates());
+      var obj = objects.create('tree1').setX(this.getX()).setY(this.getY());
       this.objects.push(obj);
     }
     return this.objects;
