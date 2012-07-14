@@ -1,14 +1,12 @@
-define(['vector3', 'simplex', 'objects', 'sprites/tileSprite'], function(point, simplex, objects, tileSprite){
-  var tile = Object.create(point);
+define(['simplex', 'objects', 'sprites/tileSprite'], function(simplex, objects, tileSprite){
+  var tile = Object.create();
   
   tile.init = function(gridPoints){
-    this.objects = [];
-    this.sprite = Object.create(tileSprite).setTile(this);
+    this.objects = []; ///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! after finishing post, please,set this to null and change getObject func.
+    this.sprite = Object.create(tileSprite).setModel(this);
       
-    this.gridPoints= gridPoints;
-    this.slopeId= null;
-    this.shore= null;
-    this.water= null;
+    this.gridPoints = gridPoints;
+    this.slopeId = null;
     this.terrain = null;
       
     this.type = null;
@@ -42,17 +40,7 @@ define(['vector3', 'simplex', 'objects', 'sprites/tileSprite'], function(point, 
   tile.getTerrain = function(){
     if ( this.terrain ) return this.terrain;
     
-    var terrain;
-    
-    if ( this.isWater() ) {
-      if ( this.getGridPoints()[0].getW() == 1 ) terrain = 'water';
-      else terrain = 'deepwater';
-    } else {
-      //terrain = (['grass', 'oldgrass'])[Math.round(Math.random())];
-      terrain = 'grass';
-    }
-    
-    return this.terrain = terrain;
+    return this.terrain = 'grass';
     /*else{
       var sand = 0, x = this.x, y = this.y;
 
