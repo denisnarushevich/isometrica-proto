@@ -1,4 +1,4 @@
-define(['tiles/tile'], function(tile){
+define(['tiles/tile', 'tiles/road', 'tiles/shore', 'tiles/water'], function(tile, road, shore, water){
   return {
     tiles: [],
     hash: [],
@@ -37,21 +37,23 @@ define(['tiles/tile'], function(tile){
       grid.getPoint(x + 1, y)
     ];
     
+    var type;
+    
     if(gridPoints[0].getW() && gridPoints[1].getW() && gridPoints[2].getW() && gridPoints[3].getW()){
-      var a = water;
+      type = water;
     }else if(gridPoints[0].getW() || gridPoints[1].getW() || gridPoints[2].getW() || gridPoints[3].getW()){
-      var a = shore;
+      type = shore;
     }else if(false){
-      var a = road;
+      type = road;
     }else{
-      var a = plain;
+      type = tile;
     }
       
       if (!this.hash[x]) this.hash[x] = [];
       
       
       
-      var t = this.hash[x][y] = Object.create(a).init(gridPoints);
+      var t = this.hash[x][y] = Object.create(type).init(gridPoints);
       
       this.tiles.push(t);
 		

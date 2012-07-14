@@ -4,11 +4,7 @@ define(function(){
     size: null,
     origin: null,
     images: null,
-    init: function(size, origin){
-      this.size = size;
-      this.origin = origin;
-      return this;
-    },
+    model: null,
     setOffset: function(offset){
       this.offset = offset;
       return this;
@@ -21,8 +17,8 @@ define(function(){
       this.origin = origin;
       return this;
     },
-    setObject: function(object){
-      this.object = object;
+    setModel: function(model){
+      this.model = model;
       return this;
     },
     getOffset: function(){
@@ -44,8 +40,8 @@ define(function(){
       if(!this.images)this.images = [];
       return this.images;
     },
-    getObject: function(){
-      return this.object;
+    getModel: function(){
+      return this.model;
     }
   }
 });
