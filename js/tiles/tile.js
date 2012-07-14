@@ -1,16 +1,17 @@
 define(['vector3', 'simplex', 'objects', 'sprites/tileSprite'], function(point, simplex, objects, tileSprite){
   var tile = Object.create(point);
   
-  tile.init = function(x, y){
-    this.setX(x).setY(y);
+  tile.init = function(gridPoints){
     this.objects = [];
     this.sprite = Object.create(tileSprite).setTile(this);
       
-    this.gridPoints= null;
+    this.gridPoints= gridPoints;
     this.slopeId= null;
     this.shore= null;
     this.water= null;
     this.terrain = null;
+      
+    this.type = null;
       
     return this;
   };
@@ -23,48 +24,19 @@ define(['vector3', 'simplex', 'objects', 'sprites/tileSprite'], function(point, 
     return this;
   };
   
-  tile.getZ = function(){
-    return this.isWater() ? g.logic.world.waterLevel : this.getGridPoints()[0].getZ();
+  tile.getGridPoints = function(){
+    return this.gridPoints;
   };
   
-  tile.getGridPoints = function(){
-    if (this.gridPoints) return this.gridPoints;
-		
-    var grid = g.logic.world.grid, x = this.getX(), y = this.getY();
-    
-    //gridpoints start count from tiles left (West corner);
-    return this.gridPoints = [ 
-      grid.getPoint(x, y),
-      grid.getPoint(x, y + 1),
-      grid.getPoint(x + 1, y + 1),
-      grid.getPoint(x + 1, y)
-    ];
-  };
+  tile.getPosition = function(){
+    return this.getGridPoints()[0];
+  }
   
   tile.getSlopeId = function(){
-    if (this.slopeId) return this.slopeId;
-		
-    if (this.isWater()) return this.slopeId = 2222;
+    if ( this.slopeId ) return this.slopeId;
 		
     var gridPoints = this.getGridPoints();
     return this.slopeId = 2000 + (gridPoints[1].getZ() - gridPoints[0].getZ() + 2) * 100 + (gridPoints[2].getZ() - gridPoints[0].getZ() + 2) * 10 + (gridPoints[3].getZ() - gridPoints[0].getZ() + 2);
-  };
-  
-  tile.isShore = function(){
-    if (this.shore != null) return this.shore;
-		
-    var wLevel = g.logic.world.waterLevel;
-    var gridPoints = this.getGridPoints();
-		
-    return this.shore = ( !this.isWater() && (gridPoints[0].getZ() == wLevel || gridPoints[1].getZ() == wLevel || gridPoints[2].getZ() == wLevel || gridPoints[3].getZ() == wLevel) );
-  };
-  
-  tile.isWater = function(){
-    if ( this.water ) return this.water;
-		
-    var gridPoints = this.getGridPoints();
-		
-    return this.water = ( ( gridPoints[0].getZ() + gridPoints[1].getZ() + gridPoints[2].getZ() + gridPoints[3].getZ() ) / 4 <= g.logic.world.waterLevel );
   };
   
   tile.getTerrain = function(){
@@ -73,7 +45,7 @@ define(['vector3', 'simplex', 'objects', 'sprites/tileSprite'], function(point, 
     var terrain;
     
     if ( this.isWater() ) {
-      if ( this.getGridPoints()[0].getZ() >= -1 ) terrain = 'water';
+      if ( this.getGridPoints()[0].getW() == 1 ) terrain = 'water';
       else terrain = 'deepwater';
     } else {
       //terrain = (['grass', 'oldgrass'])[Math.round(Math.random())];
@@ -148,7 +120,7 @@ define(['vector3', 'simplex', 'objects', 'sprites/tileSprite'], function(point, 
   };
   
   tile.spawnObject = function(name){
-    var object = objects.create(name).setCoordinates(this.getCoordinates());
+    var object = objects.create(name).setX(this.getX()).setY(this.getY()).setZ(this.getZ());
     this.objects.push(object);
     return object;
   };

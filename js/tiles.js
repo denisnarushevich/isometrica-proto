@@ -23,10 +23,35 @@ define(['tiles/tile'], function(tile){
       }
     },
     getTile: function(x, y){
+      //look up in cache, and return if already cached
       if (this.hash[x] && this.hash[x][y]) return this.hash[x][y];
+      
+      //get type of requested tile
+    var grid = g.logic.world.grid;
+    
+    //gridpoints start count from tiles left (West corner);
+    var gridPoints = [ 
+      grid.getPoint(x, y),
+      grid.getPoint(x, y + 1),
+      grid.getPoint(x + 1, y + 1),
+      grid.getPoint(x + 1, y)
+    ];
+    
+    if(gridPoints[0].getW() && gridPoints[1].getW() && gridPoints[2].getW() && gridPoints[3].getW()){
+      var a = water;
+    }else if(gridPoints[0].getW() || gridPoints[1].getW() || gridPoints[2].getW() || gridPoints[3].getW()){
+      var a = shore;
+    }else if(false){
+      var a = road;
+    }else{
+      var a = plain;
+    }
+      
       if (!this.hash[x]) this.hash[x] = [];
       
-      var t = this.hash[x][y] = Object.create(tile).init(x, y);
+      
+      
+      var t = this.hash[x][y] = Object.create(a).init(gridPoints);
       
       this.tiles.push(t);
 		
