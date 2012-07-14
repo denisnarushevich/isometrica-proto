@@ -16,7 +16,7 @@ define(function(){
             if ( x > at[0] - level && x < at[0] + level && y > at[1] - level && y < at[1] + level ) continue; //skiping tiles of previous levels
             
             var tile = tiles.getTile(x, y);
-            var sprite = tile.getSprite().setOffset(g.graphics.coordinatesTransform(x, y, tile.getZ()));
+            var sprite = tile.getSprite().setOffset(g.graphics.coordinatesTransform(x, y, tile.getPosition().getZ()));
             var offset = sprite.getOriginOffset();
             
             //check rect intersection of tile image and window
@@ -39,7 +39,7 @@ define(function(){
       this.objects = [];
       
       for(var i in this.tiles){
-        var tile = this.tiles[i].getTile();
+        var tile = this.tiles[i].getModel();
         var objects = tile.getObjects();
             
         for(var key in objects){

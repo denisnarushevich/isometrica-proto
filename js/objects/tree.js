@@ -4,7 +4,7 @@ define(['./object', 'sprites/treeSprite'], function(object, treeSprite){
   Tree.init = function(){
     object.init.call(this); //parent init()
     this.type = 'tree';
-    this.sprite = Object.create(treeSprite).setObject(this);
+    this.sprite = Object.create(treeSprite).setModel(this);
     return this;
   }
   
