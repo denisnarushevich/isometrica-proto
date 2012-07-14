@@ -4,14 +4,17 @@ define(['./tile'], function(tile){
   water.init = function(gridPoints){
     tile.init.call(this, gridPoints);
     this.type = 'water';
+    this.slopeId = 2222;
     return this;
   };
   
   water.getTerrain = function(){
     if ( this.terrain ) return this.terrain;
     
-    if ( this.getPosition().getW() == 1 ) return this.terrain = 'water';
+    if ( this.getPosition().getW() == 1 ) this.terrain = 'water';
     else this.terrain = 'deepwater';
+    
+    return this.terrain;
   };
   
   return water;
