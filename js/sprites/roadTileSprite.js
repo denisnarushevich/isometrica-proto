@@ -6,7 +6,7 @@ define(['./tileSprite'], function(tileSprite){
     
     tileSprite.getImages.call(this);
     
-    this.images.push(g.resources.getImage('terrain/road/'+this.getModel().getSlopeId()));
+    this.images.push(g.resources.getImage('terrain/road/'+this.getModel().getShape()+this.getModel().getPlacing()));
         
     return this.images;
   }

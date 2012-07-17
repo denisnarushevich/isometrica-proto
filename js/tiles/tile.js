@@ -48,6 +48,10 @@ define(['simplex', 'objects', 'sprites/tileSprite'], function(simplex, objects, 
     return this.terrain;
   };
   
+  tile.getType = function(){
+    return this.type;
+  };
+  
   tile.getPosition = function(){
     return this.gridPoints[0];
   };
