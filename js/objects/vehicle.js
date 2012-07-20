@@ -1,4 +1,4 @@
-define(['./object', 'sprites/vehicleSprite'], function(object, vehicleSprite){
+define(['./positionable', 'sprites/vehicleSprite', 'pathFinder'], function(object, vehicleSprite){
   var vehicle = Object.create(object);
   
   vehicle.init = function(){

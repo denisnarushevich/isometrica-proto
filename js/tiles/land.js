@@ -16,11 +16,16 @@ define(['./tile', 'objects'], function(tile, objects){
     var tree = 0, x = this.getPosition().getX(), y = this.getPosition().getY();
 		
     tree += Simplex.noise2d(x, y);
-		
     if(tree > 0 && this.getTerrain() == 'grass'){
-      var obj = objects.create('tree1').setX(x).setY(y);
+      var obj = Object.create(([objects.tree1, objects.tree2])[Math.floor(Simplex.noise2d(y*2, x*2)+1)]).init(this);
+      obj.getSubPosition().setX(1/2+Simplex.noise2d(y/2, x/2)/4).setY(1/2+Simplex.noise2d(x/2, y/2)/4);
       this.objects.push(obj);
     }
+    
+        //for testing purposes only, delete it
+    if(this.getPosition().getX()== 247 && this.getPosition().getY() == 1020)this.objects=[Object.create(objects.house1).init(this)];
+    if(this.getPosition().getX()== 247 && this.getPosition().getY() == 1021)this.objects=[Object.create(objects.house2).init(this)];
+    if(this.getPosition().getX()== 247 && this.getPosition().getY() == 1022)this.objects=[Object.create(objects.house1).init(this)];
     
     return this.objects;
   };
