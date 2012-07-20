@@ -1,20 +1,26 @@
-define(['vector3'], function(point){
-  var object = Object.create(point);
-
-  object.init = function(){
-    this.name = null;
-    this.type = null;
-    this.sprite = null;
-    return this
-  }
-  
-  object.getZ = function(){
-    if ( this.z ) return this.z;
-    return this.z = g.logic.world.grid.getPoint(this.getX(), this.getY()).getZ();
+define(['grid'], function(grid){
+  var object = {
+    name: null,
+    sprite: null,
+    type: null,
+    tile: null
   };
+
+  object.init = function(tile){
+    this.tile = tile;
+    return this;
+  }
   
   object.getName = function(){
     return this.name;
+  };
+  
+  object.getPosition = function(){
+    return this.tile.getPosition();
+  };
+  
+  object.getSprite = function(){
+    return this.sprite;
   };
   
   object.getType = function(){
@@ -22,11 +28,7 @@ define(['vector3'], function(point){
   };
   
   object.getTile = function(){
-    return g.logic.world.tiles.getTile(this.x | 0, this.y | 0);
-  };
-  
-  object.getSprite = function(){
-    return this.sprite;
+    return this.tile;
   };
   
   object.setName = function(name){
@@ -36,6 +38,11 @@ define(['vector3'], function(point){
   
   object.setType = function(typeName){
     this.type = typeName;
+    return this;
+  };
+  
+  object.setTile = function(tile){
+    this.tile = tile;
     return this;
   };
   

@@ -133,7 +133,7 @@ define(['tiles/land', 'tiles/road', 'tiles/shore', 'tiles/water', 'grid', 'remot
 		
       return t;
     },
-    deteleTile: function(tile){
+    deleteTile: function(tile){
       delete this.hash[tile.getPosition().getX()][tile.getPosition().getY()];
     }
 //    replaceTile: function(tile1, tile2){

@@ -41,10 +41,10 @@ define(function(){
       for(var i in this.tiles){
         var tile = this.tiles[i].getModel();
         var objects = tile.getObjects();
-            
         for(var key in objects){
           var object = objects[key];
-          var sprite = object.getSprite().setOffset(g.graphics.coordinatesTransform(object.getX(), object.getY(), object.getZ()));
+          var sprite = object.getSprite().setOffset(g.graphics.coordinatesTransform(object.getPosition().getX(), object.getPosition().getY(), object.getPosition().getZ()));
+          //console.log(sprite);throw 1;
           this.objects.push(sprite);
         }
       };

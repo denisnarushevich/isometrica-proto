@@ -1,15 +1,16 @@
 define([
   'objects/tree1',
-  'objects/car1'
-], function(tree1, car){
+  'objects/tree2',
+  'objects/car1',
+  'objects/house1',
+  'objects/house2'
+], function(tree1, tree2, car, house1, house2){
   
   return {
-    objects: {
       'tree1': tree1,
-      'car1': car
-    },
-    create: function(name){
-      return Object.create(this.objects[name]).init();
-    }
-  }
+      'tree2': tree2,
+      'car1': car,
+      house1: house1,
+      house2: house2
+  };
 });

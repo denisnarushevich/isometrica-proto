@@ -1,12 +1,19 @@
-define(['./object', 'sprites/treeSprite'], function(object, treeSprite){
-  Tree = Object.create(object);
+define(['./positionable', 'sprites/treeSprite'], function(object, treeSprite){
+  var tree = Object.create(object);
 
-  Tree.init = function(){
-    object.init.call(this); //parent init()
+  this.position = null;
+
+  tree.init = function(tile){
+    object.init.call(this, tile); //parent init()
     this.type = 'tree';
     this.sprite = Object.create(treeSprite).setModel(this);
     return this;
   }
   
-  return Tree;
+  tree.getPosition = function(){
+    if ( this.position ) return this.position;
+    return this.position = object.getPosition.call(this);
+  };
+  
+  return tree;
 });
