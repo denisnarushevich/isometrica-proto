@@ -77,6 +77,11 @@ define(['vector3', 'simplex'], function(point, Simplex){
     var z0 = this.getZ0();
     return this.z = z0 <= g.logic.world.waterLevel ? g.logic.world.waterLevel : z0;
   }
+  
+//  gridPoint.setX = gridPoint.setY = gridPoint.setZ = gridPoint.normalize = function(){
+//    console.log(arguments.callee.caller.toString());
+//    throw "Can't change gridpoint intance values";
+//  }
 
   return gridPoint;
 });

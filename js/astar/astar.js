@@ -1,33 +1,24 @@
 define(['./binaryHeap'], function(BinaryHeap){
   return {
+    node: function(x, y){
+      this.x = x;
+      this.y = y;
+      this.f = 0;
+      this.g = 0;
+      this.h = 0;
+      this.visited = false;
+      this.closed = false;
+      this.parent = false;
+    },
     getNode: function(x, y){
-      if (this.nodes[x] && this.nodes[x][y])
-        return this.nodes[x][y];
-      
-      if (!this.nodes[x])
-        this.nodes[x] = [];
-      
-      var that = this;
-      
-      return this.nodes[x][y] = {
-        x: x,
-        y: y,
-        f: 0,
-        g: 0,
-        h: 0,
-        cost: 1,
-        visited: false,
-        closed: false,
-        parent: null,
-        isWall: function(){
-          return that.isWall(x, y);
-        }
-      };
+      if (this.nodes[x] && this.nodes[x][y]) return this.nodes[x][y];
+      if (!this.nodes[x]) this.nodes[x] = [];
+      return this.nodes[x][y] = new this.node(x, y);
     },
-    isWall: function(x, y){
-      return false;
-    },
-    search: function(x1, y1, x2, y2) {
+    search: function(x1, y1, x2, y2, isWallFunction, costFunction) {
+      isWallFunction = isWallFunction || function(){return false};
+      costFunction = costFunction || function(){return 1};
+      
       this.nodes = [];
       
       var openHeap = new BinaryHeap(function(node) { 
@@ -61,14 +52,14 @@ define(['./binaryHeap'], function(BinaryHeap){
         for(var i=0, il = neighbors.length; i < il; i++) {
           var neighbor = neighbors[i];
 
-          if(neighbor.closed || neighbor.isWall()) {
+          if(neighbor.closed || isWallFunction(neighbor)) {
             // Not a valid node to process, skip to next neighbor.
             continue;
           }
 
           // The g score is the shortest distance from start to current node.
           // We need to check if the path we have arrived at this neighbor is the shortest one we have seen yet.
-          var gScore = currentNode.g + neighbor.cost;
+          var gScore = currentNode.g + costFunction(neighbor);
           var beenVisited = neighbor.visited;
 
           if(!beenVisited || gScore < neighbor.g) {

@@ -12,6 +12,13 @@ define(['vector2'], function(vector){
     return this;
   }
   
+  vector3.normalize = function(){
+    this.y = this.y / Math.abs(this.y);
+    this.x = this.x / Math.abs(this.x);
+    this.z = this.z / Math.abs(this.z);
+    return this;
+  }
+  
   return vector3;
 });
 

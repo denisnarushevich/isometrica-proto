@@ -1,16 +1,17 @@
 define(['astar/astar'], function(astar){
   var pathFinder = Object.create(astar);
   
-  pathFinder.isWall = function(x, y){
-    var t = g.logic.world.tiles.getTile(x, y);
-    return t.getType() != 'road';
-  };
-  
-  pathFinder.find = function(sourceTile, destinationTile){
-    var nodes = astar.search.call(this, sourceTile.getPosition().getX(), sourceTile.getPosition().getY(), destinationTile.getPosition().getX(), destinationTile.getPosition().getY());
+  pathFinder.findPath = function(sourceTile, destinationTile, isWall){
+    var tiles = g.logic.world.tiles;
+    var nodes = astar.search.call(this, sourceTile.getPosition().getX(), sourceTile.getPosition().getY(), destinationTile.getPosition().getX(), destinationTile.getPosition().getY(), function(node){
+      return isWall(tiles.getTile(node.x, node.y));
+    }, function(node){
+      return tiles.getTile(node.x, node.y).getSlopeId() == 2222 ? 1 : 2;
+    });
+    
     var path = [];
     for(var i in nodes){
-      path.push(g.logic.world.tiles.getTile(nodes[i].x, nodes[i].y));
+      path.push(tiles.getTile(nodes[i].x, nodes[i].y));
     }
     return path;
   };
