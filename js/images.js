@@ -1,6 +1,7 @@
 define(function(){
   return {
     urns: [
+    /* TILES */
     'terrain/grass/2101.png',
     'terrain/grass/2111.png',
     'terrain/grass/2112.png',
@@ -113,6 +114,8 @@ define(function(){
     'terrain/road/elevation2.png',
     'terrain/road/elevation3.png',
     'terrain/road/elevation4.png',
+    
+    /* BUILDINGS */
     'objects/tree/tree1.png',
     'objects/tree/tree2.png',
     'objects/tree/tree3.png',
@@ -120,9 +123,17 @@ define(function(){
     'objects/tree/tree5.png',
     'objects/tree/tree6.png',
     'objects/tree/tree7.png',
-    'objects/vehicle/car1.png',
     'objects/building/house1.png',
-    'objects/building/house2.png'
+    'objects/building/house2.png',
+    'objects/building/houses1.png',
+    'objects/building/houses2.png',
+    'objects/building/flats1.png',
+    'objects/building/flats2.png',
+    'objects/building/offices1.png',
+    'objects/building/offices2.png',
+    
+    /* VEHICLES */
+    'objects/vehicle/car1.png',
     ],
     dirUrl: 'images/',
     hash: {},

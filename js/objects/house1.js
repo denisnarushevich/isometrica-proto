@@ -1,7 +1,7 @@
-define(['./building'], function(building){
-  var house1 = Object.create(building);
+define(['./building'], function(parent){
+  var house1 = Object.create(parent);
   house1.init = function(tile){
-    building.init.call(this, tile); //parent init
+    parent.init.call(this, tile); //parent init
     this.name = 'house1';
     return this;
   }
