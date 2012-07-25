@@ -2,6 +2,7 @@ define(['tiles/land', 'tiles/road', 'tiles/shore', 'tiles/water', 'grid', 'remot
   return {
     tiles: [],
     hash: [],
+    roads: [],
     init: function(){
     //this.t = new Date().getTime();
     
@@ -65,6 +66,7 @@ define(['tiles/land', 'tiles/road', 'tiles/shore', 'tiles/water', 'grid', 'remot
       this.testTileSet[249][1029] = {type: 'road'};
       this.testTileSet[249][1023] = {type: 'road'};
       this.testTileSet[249][1026] = {type: 'road'};
+      this.testTileSet[249][1020] = {type: 'road'};
       this.testTileSet[250] = [];
       this.testTileSet[250][1029] = {type: 'road'};
       this.testTileSet[250][1028] = {type: 'road'};
@@ -73,7 +75,76 @@ define(['tiles/land', 'tiles/road', 'tiles/shore', 'tiles/water', 'grid', 'remot
       this.testTileSet[250][1025] = {type: 'road'};
       this.testTileSet[250][1024] = {type: 'road'};
       this.testTileSet[250][1023] = {type: 'road'};
+      this.testTileSet[250][1020] = {type: 'road'};
       
+      this.testTileSet[251] = [];
+      this.testTileSet[251][1029] = {type: 'road'};
+      this.testTileSet[251][1026] = {type: 'road'};
+      this.testTileSet[251][1023] = {type: 'road'};
+      this.testTileSet[251][1020] = {type: 'road'};
+      this.testTileSet[252] = [];
+      this.testTileSet[252][1029] = {type: 'road'};
+      this.testTileSet[252][1026] = {type: 'road'};
+      this.testTileSet[252][1023] = {type: 'road'};
+      this.testTileSet[252][1020] = {type: 'road'};
+      this.testTileSet[253] = [];
+      this.testTileSet[253][1029] = {type: 'road'};
+      this.testTileSet[253][1026] = {type: 'road'};
+      this.testTileSet[253][1023] = {type: 'road'};
+      this.testTileSet[253][1020] = {type: 'road'};
+      this.testTileSet[254] = [];
+      this.testTileSet[254][1029] = {type: 'road'};
+      this.testTileSet[254][1026] = {type: 'road'};
+      this.testTileSet[254][1023] = {type: 'road'};
+      this.testTileSet[254][1020] = {type: 'road'};
+      this.testTileSet[255] = [];
+      this.testTileSet[255][1029] = {type: 'road'};
+      this.testTileSet[255][1026] = {type: 'road'};
+      this.testTileSet[255][1023] = {type: 'road'};
+      this.testTileSet[255][1020] = {type: 'road'};
+      this.testTileSet[256] = [];
+      this.testTileSet[256][1029] = {type: 'road'};
+      this.testTileSet[256][1028] = {type: 'road'};
+      this.testTileSet[256][1027] = {type: 'road'};
+      this.testTileSet[256][1026] = {type: 'road'};
+      this.testTileSet[256][1025] = {type: 'road'};
+      this.testTileSet[256][1024] = {type: 'road'};
+      this.testTileSet[256][1023] = {type: 'road'};
+      this.testTileSet[256][1022] = {type: 'road'};
+      this.testTileSet[256][1021] = {type: 'road'};
+      this.testTileSet[256][1020] = {type: 'road'};
+      this.testTileSet[257] = [];
+      this.testTileSet[257][1029] = {type: 'road'};
+      this.testTileSet[257][1024] = {type: 'road'};
+      this.testTileSet[257][1020] = {type: 'road'};
+      this.testTileSet[258] = [];
+      this.testTileSet[258][1029] = {type: 'road'};
+      this.testTileSet[258][1024] = {type: 'road'};
+      this.testTileSet[258][1025] = {type: 'road'};
+      this.testTileSet[258][1020] = {type: 'road'};
+      this.testTileSet[259] = [];
+      this.testTileSet[259][1029] = {type: 'road'};
+      this.testTileSet[259][1025] = {type: 'road'};
+      this.testTileSet[259][1020] = {type: 'road'};
+      this.testTileSet[260] = [];
+      this.testTileSet[260][1029] = {type: 'road'};
+      this.testTileSet[260][1025] = {type: 'road'};
+      this.testTileSet[260][1020] = {type: 'road'};
+      this.testTileSet[261] = [];
+      this.testTileSet[261][1029] = {type: 'road'};
+      this.testTileSet[261][1025] = {type: 'road'};
+      this.testTileSet[261][1020] = {type: 'road'};
+      this.testTileSet[262] = [];
+      this.testTileSet[262][1029] = {type: 'road'};
+      this.testTileSet[262][1028] = {type: 'road'};
+      this.testTileSet[262][1027] = {type: 'road'};
+      this.testTileSet[262][1026] = {type: 'road'};
+      this.testTileSet[262][1025] = {type: 'road'};
+      this.testTileSet[262][1024] = {type: 'road'};
+      this.testTileSet[262][1023] = {type: 'road'};
+      this.testTileSet[262][1022] = {type: 'road'};
+      this.testTileSet[262][1021] = {type: 'road'};
+      this.testTileSet[262][1020] = {type: 'road'};
     },
     update: function(){
       //      var now = new Date().getTime();
@@ -116,6 +187,7 @@ define(['tiles/land', 'tiles/road', 'tiles/shore', 'tiles/water', 'grid', 'remot
         t = Object.create(shore).init(gridPoints);
       }else if( this.testTileSet[x] && this.testTileSet[x][y]){
         t = Object.create(road).init(gridPoints);
+        this.roads.push(t);
       }else{
         t = Object.create(land).init(gridPoints);
       }

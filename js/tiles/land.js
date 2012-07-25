@@ -26,6 +26,11 @@ define(['./tile', 'objects'], function(tile, objects){
     if(this.getPosition().getX()== 247 && this.getPosition().getY() == 1020)this.objects=[Object.create(objects.house1).init(this)];
     if(this.getPosition().getX()== 247 && this.getPosition().getY() == 1021)this.objects=[Object.create(objects.house2).init(this)];
     if(this.getPosition().getX()== 247 && this.getPosition().getY() == 1022)this.objects=[Object.create(objects.house1).init(this)];
+    if(this.getPosition().getX()== 263 && this.getPosition().getY() == 1028)this.objects=[Object.create(objects.house1).init(this)];
+    if(this.getPosition().getX()== 263 && this.getPosition().getY() == 1026)this.objects=[Object.create(objects.house2).init(this)];
+    if(this.getPosition().getX()== 263 && this.getPosition().getY() == 1025)this.objects=[Object.create(objects.house1).init(this)];
+    if(this.getPosition().getX()== 263 && this.getPosition().getY() == 1024)this.objects=[Object.create(objects.house1).init(this)];
+    if(this.getPosition().getX()== 263 && this.getPosition().getY() == 1022)this.objects=[Object.create(objects.house1).init(this)];
     
     return this.objects;
   };
