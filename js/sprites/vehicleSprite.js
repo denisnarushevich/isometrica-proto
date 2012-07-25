@@ -1,3 +1,3 @@
 define(['./objectSprite'], function(objectSprite){
-  return Object.create(objectSprite).setSize([64, 64]).setOrigin([34, 53]);
+  return Object.create(objectSprite).setSize([16, 16]).setOrigin([8, 10]);
 });

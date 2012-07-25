@@ -51,7 +51,7 @@ define(function(){
       
       //sorting by depth, where depth is y screen offset coordinate.
       this.objects.sort(function(obj1, obj2){
-        return obj1.getOriginOffset()[1] > obj2.getOriginOffset()[1] ? -1 : 1;
+        return obj1.getOffset()[1] > obj2.getOffset()[1] ? -1 : 1;
       });
       
       return this.objects;

@@ -72,5 +72,12 @@ define(['./land', 'sprites/roadTileSprite'], function(tile, sprite){
     }
   };
 
+  road.update = function(){
+    tile.update.call(this);
+    
+    if ( Math.random() < 1/1000 ) 
+      this.spawnObject('car1').travelTo(g.logic.world.tiles.roads[Math.floor(Math.random()*g.logic.world.tiles.roads.length)]);
+  };
+
   return road;
 });

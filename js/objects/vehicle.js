@@ -6,7 +6,7 @@ define(['./positionable', 'sprites/vehicleSprite', 'pathFinder', 'vector2'], fun
     this.type = 'vehicle';
     this.sprite = Object.create(sprite).setModel(this);
     
-    vehicle.direction = Object.create(vector2);
+    vehicle.direction = Object.create(vector2).setX(1).setY(0)
     vehicle.speed = 2; //tiles in second
     vehicle.path = [];
     vehicle.updatedAt = null;
@@ -25,13 +25,32 @@ define(['./positionable', 'sprites/vehicleSprite', 'pathFinder', 'vector2'], fun
     if ( this.updatedAt ) {
       var now = new Date().getTime()/1000; //seconds, milliseconds
       var deltaTime = now - this.updatedAt;
-      //this.updatedAt = now;
 
       var distance = deltaTime * this.getSpeed();
+        
+      var next = this.getPath()[ Math.floor(distance+1) ];
+      
+      if ( !next ) {
+        this.getTile().removeObject(this);
+        return;
+      }
+      
+      var current = this.getPath()[ Math.floor(distance) ];
+      
+      this.getDirection().setX(next.getPosition().getX() - current.getPosition().getX());
+      this.getDirection().setY(next.getPosition().getY() - current.getPosition().getY());
+      this.getDirection().normalize();
+      
+      this.getSubPosition().setX(this.getDirection().getX() * distance%1);
+      this.getSubPosition().setY(this.getDirection().getY() * distance%1);
+      
+      this.align();
+    if ( this.getDirection().getX() )
+      this.subPosition.setX(this.getSubPosition().getX() + 1/2);
+    else
+      this.subPosition.setY(this.getSubPosition().getY() + 1/2);
 
-      if ( distance >= this.getPath().length ) return;
-
-      var pathTile = this.getPath()[ Math.floor(distance) ];
+      var pathTile = current;
       this.setTile(pathTile);
     }
     return parent.update.call(this);
@@ -39,36 +58,23 @@ define(['./positionable', 'sprites/vehicleSprite', 'pathFinder', 'vector2'], fun
   
   vehicle.getDirection = function(){
     return this.direction;
-    
-    if ( this.getPath().length ) {
-      var dst = this.getPath()[0].getPosition();
-      var src = this.getTile().getPosition();
-      
-      this.direction.setX(dst.getX() - src.getX());
-      this.direction.setY(dst.getY() - src.getY());
-      
-      this.direction.normalize();
-      
-      return this.direction;
-    } else
-      return this.direction.setX(1).setY(0);
   };
   
   vehicle.getSubPosition = function(){
     return this.subPosition;
-    
+  };
+  
+  vehicle.align = function(){
     if ( this.getDirection().getX() )
       if ( this.getDirection().getX() == 1 )
-        this.subPosition.setY(0.31);
+        this.subPosition.setY(0.33);
       else
-        this.subPosition.setY(0.62);
+        this.subPosition.setY(0.66);
     else
       if ( this.getDirection().getY() == 1 )
-        this.subPosition.setX(0.31);
+        this.subPosition.setX(0.66);
       else
-        this.subPosition.setX(0.62);
-    
-    return this.subPosition;
+        this.subPosition.setX(0.33);    
   };
   
   vehicle.getSpeed = function(){
