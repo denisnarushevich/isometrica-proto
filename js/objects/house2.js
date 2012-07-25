@@ -1,9 +1,8 @@
-define(['./building', 'sprites/house2Sprite'], function(building, sprite){
-  var house2 = Object.create(building);
+define(['./building'], function(parent){
+  var house2 = Object.create(parent);
   house2.init = function(tile){
-    building.init.call(this, tile); //parent init
+    parent.init.call(this, tile); //parent init
     this.name = 'house2';
-    this.sprite = Object.create(sprite).setModel(this);
     return this;
   }
   
