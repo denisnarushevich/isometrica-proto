@@ -77,8 +77,8 @@ define(['simplex', 'objects', 'sprites/tileSprite'], function(simplex, objects, 
     return this;
   };
   
-  tile.spawnObject = function(name){
-    var object = objects.create(name).setX(this.getX()).setY(this.getY()).setZ(this.getZ());
+  tile.spawnObject = function(prototypeName){
+    var object = Object.create(objects[prototypeName]).init(this);
     this.objects.push(object);
     return object;
   };

@@ -1,51 +1,89 @@
-define(['./positionable', 'sprites/vehicleSprite', 'pathFinder'], function(object, vehicleSprite){
-  var vehicle = Object.create(object);
+define(['./positionable', 'sprites/vehicleSprite', 'pathFinder', 'vector2'], function(parent, sprite, pathFinder, vector2){
+  var vehicle = Object.create(parent);
   
-  vehicle.init = function(){
-    object.init.call(this);
+  vehicle.init = function(tile){
+    parent.init.call(this, tile);
     this.type = 'vehicle';
-    this.sprite = Object.create(vehicleSprite).setObject(this);
-
-  
-    vehicle.speed = 2; //tiles in second
-    vehicle.startingPoint = [0, 0]
-    vehicle.destinationPoint = [0, 0];
-    vehicle.dispatch = 0;
+    this.sprite = Object.create(sprite).setModel(this);
     
+    vehicle.direction = Object.create(vector2);
+    vehicle.speed = 2; //tiles in second
+    vehicle.path = [];
+    vehicle.updatedAt = null;
+      
     return this;
-  }
+  };
   
-  vehicle.roam = function(){
-    this.startingPoint = [this.getX(), this.getY()];
-    this.destinationPoint = ([[1,0], [-1,0], [0,1], [0,-1]])[Math.floor(Math.random()*4)];
-    //this.destinationPoint[0] += Math.floor(this.getX());
-    //this.destinationPoint[1] += Math.floor(this.getY());
-    this.dispatch = new Date().getTime()/1000;
-    return this
-  },
+  vehicle.travelTo = function(destinationTile){
+    this.path = pathFinder.findPath(this.getTile(), destinationTile, function(tile){
+      return tile.getType() != 'road';
+    });
+    this.updatedAt = new Date().getTime()/1000;
+  };
   
   vehicle.update = function(){
-    var now = new Date().getTime()/1000;
-    var traveled = (now - this.dispatch) * this.speed;
-    var traveled2 = (traveled >= 1 ? 1 : traveled);
-    
-    var oldTile = this.getTile();
-    
-    this.setX(this.startingPoint[0] + this.destinationPoint[0] * traveled2);
-    this.setY(this.startingPoint[1] + this.destinationPoint[1] * traveled2);
-    
-    if(oldTile.getX() != this.getTile().getX() || oldTile.getY() != this.getTile().getY()){
-      oldTile.removeObject(this);
-      this.getTile().addObject(this);
-    }
-    
-    if ( traveled2 >= 1) this.roam();
-    
-    return object.update.call(this);
-  }
+    if ( this.updatedAt ) {
+      var now = new Date().getTime()/1000; //seconds, milliseconds
+      var deltaTime = now - this.updatedAt;
+      //this.updatedAt = now;
 
-  vehicle.getZ = function(){
-    return g.logic.world.grid.getPoint(this.getX(), this.getY()).getZ();
+      var distance = deltaTime * this.getSpeed();
+
+      if ( distance >= this.getPath().length ) return;
+
+      var pathTile = this.getPath()[ Math.floor(distance) ];
+      this.setTile(pathTile);
+    }
+    return parent.update.call(this);
+  };
+  
+  vehicle.getDirection = function(){
+    return this.direction;
+    
+    if ( this.getPath().length ) {
+      var dst = this.getPath()[0].getPosition();
+      var src = this.getTile().getPosition();
+      
+      this.direction.setX(dst.getX() - src.getX());
+      this.direction.setY(dst.getY() - src.getY());
+      
+      this.direction.normalize();
+      
+      return this.direction;
+    } else
+      return this.direction.setX(1).setY(0);
+  };
+  
+  vehicle.getSubPosition = function(){
+    return this.subPosition;
+    
+    if ( this.getDirection().getX() )
+      if ( this.getDirection().getX() == 1 )
+        this.subPosition.setY(0.31);
+      else
+        this.subPosition.setY(0.62);
+    else
+      if ( this.getDirection().getY() == 1 )
+        this.subPosition.setX(0.31);
+      else
+        this.subPosition.setX(0.62);
+    
+    return this.subPosition;
+  };
+  
+  vehicle.getSpeed = function(){
+    return this.speed;
+  };
+  
+  vehicle.getPath = function(){
+    return this.path;
+  };
+  
+  vehicle.setTile = function(tile){
+    this.getTile().removeObject(this);
+    this.tile = tile;
+    tile.addObject(this);
+    return this;
   };
 
   return vehicle;

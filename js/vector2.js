@@ -22,5 +22,11 @@ define(function(){
     return this;
   }
   
+  vector2.normalize = function(){
+    this.y = this.y / Math.abs(this.y);
+    this.x = this.x / Math.abs(this.x);
+    return this;
+  }
+  
   return vector2;
 });

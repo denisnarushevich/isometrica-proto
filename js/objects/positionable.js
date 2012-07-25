@@ -2,7 +2,6 @@ define(['./object', 'vector2', 'grid'], function(object, vector2, grid){
   var pos = Object.create(object);
   
   pos.subPosition = null;
-  pos.position = null;
   
   pos.init = function(tile){
     object.init.call(this, tile); //parent init()

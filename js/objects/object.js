@@ -1,4 +1,4 @@
-define(['grid'], function(grid){
+define(function(){
   var object = {
     name: null,
     sprite: null,
