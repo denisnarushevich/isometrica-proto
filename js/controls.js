@@ -1,5 +1,5 @@
 define(['jquery'], function(){
-
+/**/
   return g.controls ? g.controls : g.controls = {
     mouseAtWhenPressed: [0, 0],
     mapAtWhenPressed: [0, 0],
