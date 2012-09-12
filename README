@@ -1,4 +1,4 @@
-About
+*About*
 
 This is browser game, or its engine, which making is inspired from TTD, OpenTTD and SimCity.
 Currently there is no strict game direction or scenario, basicaly this is *unlimited* procedurally generated world,
@@ -16,7 +16,7 @@ Currently game is in very early stages, and I'm looking for contributors, or, if
 
 
 
-Technologies used
+*Technologies used*
 
 On client side currently it is just native JS, plus requireJS for dependency management and Jquery - just for event model using on user interactions.
 I'm trying to avoid using any libraries, cause its decreasing overall performance.
@@ -25,7 +25,7 @@ On server side, currently there is nothing, but I think it will be Node.js or Py
 
 
 
-Performance
+*Performance*
 
 Currently, best performance can be expierenced on machines that supports webgl for canvas rendering, but classical cpu rendered is good too.
 In perspective, there is idea to rewrite whole code on CoffeScript, cause it can lead to higher perfromance.
@@ -33,13 +33,14 @@ Rewriting on CoffeeScript requires a lot of work, so I'm looking anyone to fork 
 
 
 
-Licensing
+*Licensing*
 
 Licensed under GPL.
 
 
 
-Interesting & usefull resources:
+*Interesting & usefull resources*
+
 IMPROVING HTML5 CANVAS PERFORMANCE http://www.html5rocks.com/en/tutorials/canvas/performance/
 Optimising HTML5 Canvas games http://nicolahibbert.com/optimising-html5-canvas-games/
 HTML5 Games 0.2: Integers are Your Friends http://developers.facebook.com/blog/post/460/
