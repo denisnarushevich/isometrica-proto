@@ -1,8 +1,4 @@
-Isometrica
-==========
-
 About
------
 
 This is browser game, or its engine, which making is inspired from TTD, OpenTTD and SimCity.
 Currently there is no strict game direction or scenario, basicaly this is *unlimited* procedurally generated world,
@@ -18,23 +14,25 @@ such connection and resource exchange should generate route where AI driven vehi
 
 Currently game is in very early stages, and I'm looking for contributors, or, if I'm lucky enough, gamedesigners.
 
+
+
 Technologies used
------------------
 
 On client side currently it is just native JS, plus requireJS for dependency management and Jquery - just for event model using on user interactions.
 I'm trying to avoid using any libraries, cause its decreasing overall performance.
 
 On server side, currently there is nothing, but I think it will be Node.js or Python (because it can work with JS web worker socket).
 
+
+
 Performance
------------
 
 Currently, best performance can be expierenced on machines that supports webgl for canvas rendering, but classical cpu rendered is good too.
 In perspective, there is idea to rewrite whole code on CoffeScript, cause it can lead to higher perfromance.
 Rewriting on CoffeeScript requires a lot of work, so I'm looking anyone to fork and rewrite! ;)
 
 
+
 Licensing
----------
 
 Licensed under GPL.
