@@ -13,12 +13,31 @@ define(['controls', 'graphics', 'logic', 'resources'], function(controls, graphi
     });
   };
     
+//  g.loop = function(){
+//    g.loop1();
+//    g.loop2();
+//  }
+
   g.loop = function(){
     logic.update();
     graphics.drawFrame();
-		
+	
     window.requestAnimFrame(function(){
       g.loop();
     });
+  }
+
+  g.loop1 = function(){
+    logic.update();
+    window.requestAnimFrame(function(){
+      g.loop1();
+    }); 
+  }
+  
+  g.loop2 = function(){
+    graphics.drawFrame();
+    window.requestAnimFrame(function(){
+      g.loop2();
+    }); 
   }
 });
