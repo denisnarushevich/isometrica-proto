@@ -3,24 +3,24 @@ define(['scene', 'renderer'], function(scene, renderer){
   return g.graphics ? g.graphics : g.graphics = {
     scene: scene,
     renderer: renderer,
-    init: function(){
-      var size = [window.innerWidth, window.innerHeight];
+    init: function(rootNode){
+      var viewport = $('#viewport', rootNode)[0];
       
-      this.renderer.init(size);
+      this.renderer.init(viewport);
 
       this.renderer.createLayer('tiles');
       this.renderer.createLayer('objects');
       
-      this.scene.init(size, g.logic.player.getPosition());
+      this.scene.init(viewport, g.logic.player.getPosition());
 		
       //on window resize, we update size of canvases
       window.onresize = function(){
-        g.graphics.resize([window.innerWidth, window.innerHeight]);
+        g.graphics.resize();
       }
     },
-    resize: function(size){
-      this.renderer.setSize(size);
-      this.scene.setSize(size);
+    resize: function(){
+      this.renderer.updateSize();
+      this.scene.updateSize();
     },
     drawFrame: function(){
       var tiles = this.scene.getTiles();
