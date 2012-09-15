@@ -3,8 +3,9 @@ define(['images'], function(images){
     images: images,
     load: function(progressHandler, callback){
       images.load(function(){
-        if ( !images.loaded() ) progressHandler(images.loadProgress());
-        else callback();
+        progressHandler(images.loadProgress(), images.currentLoadingName());
+        
+        if ( images.loaded() ) callback();
       });
     },
     getImage: function(urn){

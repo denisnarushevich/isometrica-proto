@@ -1,8 +1,9 @@
 define(function(){
   return {
-    init: function(size, at){
-      this.size = size;
+    init: function(viewport, at){
+      this.viewport = viewport;
       this.at = at;
+      this.updateSize();
     },
     getTiles: function(){
       this.tiles = [];
@@ -56,9 +57,8 @@ define(function(){
       
       return this.objects;
     },
-    setSize: function(size){
-      this.size = size;
-      return this;
+    updateSize: function(){
+        this.size = [this.viewport.clientWidth, this.viewport.clientHeight];
     }
   }
 });

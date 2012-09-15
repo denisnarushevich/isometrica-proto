@@ -29,8 +29,12 @@ window.requestAnimFrame = (function(){
   };
 })();
 
-require(['g'], function(){
-  g.init();
+require(['loader', 'g'], function(loader, g){
+    var root = document.body;
+    loader.init(root);
+    loader.loadResources(function(){
+      g.init(root);
+    });
 });
 
 

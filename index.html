@@ -14,22 +14,51 @@
         height: 100%;
         overflow: hidden;
       }
+      
 
-      #debug {
-        position: absolute;
-        z-index: 99999;
-        left: 20px;
-        bottom: 20px;
-        width: 400px;
-        padding: 10px;
-        background-color: #ddd;
-        font-size: 18px;
-        line-height: 1.5;
-        font-family: calibri;
+      
+      #loader {
+          height: 100%;
+          position: relative;
+      }
+      
+      #loader > div {
+          position: absolute;
+          bottom: 0px;
+          left: 0px;
+          width: 100%;
+      }
+      
+      #loader div > .progressBar {
+          margin: 16px;
+          background: #ccc;
+      }
+      
+      #loader div > .progressBar > .bar {
+          height: 32px;
+          background: #4f9f57;
+      }
+      
+      #loader div > .progressBar > .text {
+          padding: 8px;
+          color: #fff;
+          font-size: 16px;
+          line-height: 16px;
+          height: 16px;
+          font-family: calibri;
+          margin-top: -32px;
+      }
+      
+      
+      #game #viewport {
+          height: 100%;
+      }
+      
+      #game #viewport canvas {
+        display: block;
       }
     </style>
   </head>
   <body>
-    <div id="debug"> </div>
   </body>
 </html>

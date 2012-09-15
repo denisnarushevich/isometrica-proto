@@ -159,13 +159,13 @@ define(function(){
 	 * @return boolean
 	 */
     loaded: function(){
-      if(this.loadCount == this.urns.length){
-        return true;
-      }
-      return false;
+      return this.loadProgress() == 1;
     },
     loadProgress: function(){
       return this.loadCount / this.urns.length;
+    },
+    currentLoadingName: function(){
+        return this.loaded() ? 'done' : this.urns[this.loadCount];
     },
     getImage: function(urn){
       //console.log(arguments.callee.caller.toString());
