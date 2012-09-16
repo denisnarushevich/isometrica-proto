@@ -30,11 +30,13 @@ window.requestAnimFrame = (function(){
 })();
 
 require(['loader', 'g'], function(loader, g){
+  $(function(){ //waiting for DOM to be ready.
     var root = document.body;
     loader.init(root);
     loader.loadResources(function(){
       g.init(root);
     });
+  });
 });
 
 
