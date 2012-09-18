@@ -1,4 +1,4 @@
-define(['views/loaderView'], function(view){
+define(['./views/loaderView'], function(view){
   return {
     init: function(rootNode, resources){
       this.resources = resources;

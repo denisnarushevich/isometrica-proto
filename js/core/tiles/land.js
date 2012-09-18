@@ -1,4 +1,4 @@
-define(['./tile', 'objects'], function(tile, objects){
+define(['./tile', '../objects', 'lib/simplex/simplex'], function(tile, objects, Simplex){
   var land = Object.create(tile);
   
   land.init = function(gridPoints, tiles){

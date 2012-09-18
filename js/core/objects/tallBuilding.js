@@ -1,4 +1,4 @@
-define(['./object', 'sprites/tallBuildingSprite'], function(parent, sprite){
+define(['./object', '../sprites/tallBuildingSprite'], function(parent, sprite){
   var building = Object.create(parent);
 
   building.init = function(tile){

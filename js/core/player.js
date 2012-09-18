@@ -1,4 +1,4 @@
-define(['vector2'], function(point){
+define(['./vector2'], function(point){
   return {
     position: null,
     init: function(){

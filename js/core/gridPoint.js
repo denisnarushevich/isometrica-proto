@@ -1,4 +1,4 @@
-define(['vector3', 'simplex'], function(point, Simplex){
+define(['./vector3', 'lib/simplex/simplex'], function(point, Simplex){
   var gridPoint = Object.create(point);
   
   gridPoint.grid = null;

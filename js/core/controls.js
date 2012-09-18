@@ -1,4 +1,4 @@
-define(['jquery', 'logic'], function($, logic){
+define(['jquery', './logic'], function($, logic){
   var controls = {
     mouseAtWhenPressed: [0, 0],
     mapAtWhenPressed: [0, 0],

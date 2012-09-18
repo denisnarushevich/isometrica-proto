@@ -1,4 +1,4 @@
-define(['grid', 'tiles', 'objects'], function(grid, tiles, objects){
+define(['./grid', './tiles', './objects'], function(grid, tiles, objects){
   return {
     tiles: tiles,
     grid: grid,

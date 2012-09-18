@@ -1,6 +1,6 @@
 define(function(){
 
-  return Simplex = {
+  return {
     grad: [[1, 1, 0], [-1, 1, 0], [1, -1, 0], [-1, -1, 0], [1, 0, 1], [-1, 0, 1], [1, 0, -1], [-1, 0, -1], [0, 1, 1], [0, -1, 1], [0, 1, -1], [0, -1, -1]],
 	
     //this should be same on the server ;]

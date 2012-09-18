@@ -1,4 +1,4 @@
-define(['gridPoint'], function(gridPoint){
+define(['./gridPoint'], function(gridPoint){
   return {
     waterLevel: 0,
     spacing: [45, 45, 8],

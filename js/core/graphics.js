@@ -1,4 +1,4 @@
-define(['scene', 'renderer', 'logic'], function(scene, renderer, logic){
+define(['./scene', './renderer', './logic'], function(scene, renderer, logic){
   
   var graphics = {};
   

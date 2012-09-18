@@ -1,4 +1,4 @@
-define(['./land', 'sprites/shoreTileSprite'], function(tile, sprite){
+define(['./land', '../sprites/shoreTileSprite'], function(tile, sprite){
   var shore = Object.create(tile);
   
   shore.init = function(gridPoints, tiles){

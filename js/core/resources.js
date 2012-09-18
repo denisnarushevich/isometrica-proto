@@ -1,4 +1,4 @@
-define(['images'], function(images){
+define(['./images'], function(images){
   return {
     images: images,
     load: function(progressHandler, callback){
