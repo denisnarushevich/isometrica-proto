@@ -1,6 +1,5 @@
 define(['grid', 'tiles', 'objects'], function(grid, tiles, objects){
   return {
-    waterLevel: 0,
     tiles: tiles,
     grid: grid,
     init: function(){

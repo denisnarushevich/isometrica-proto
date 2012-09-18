@@ -1,8 +1,8 @@
 define(['./tile'], function(tile){
   var water = Object.create(tile);
   
-  water.init = function(gridPoints){
-    tile.init.call(this, gridPoints);
+  water.init = function(gridPoints, tiles){
+    tile.init.call(this, gridPoints, tiles);
     this.type = 'water';
     this.slopeId = 2222;
     return this;

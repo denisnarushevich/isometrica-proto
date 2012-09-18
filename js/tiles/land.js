@@ -1,8 +1,8 @@
 define(['./tile', 'objects'], function(tile, objects){
   var land = Object.create(tile);
   
-  land.init = function(gridPoints){
-    tile.init.call(this, gridPoints);
+  land.init = function(gridPoints, tiles){
+    tile.init.call(this, gridPoints, tiles);
     this.type = 'land';
     return this;
   };  

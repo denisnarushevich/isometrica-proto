@@ -1,11 +1,12 @@
-define(['views/loaderView', 'resources'], function(view, resources){
+define(['views/loaderView'], function(view){
   return {
-    init: function(rootNode){
+    init: function(rootNode, resources){
+      this.resources = resources;
       view.init();
       view.render(rootNode);
     },
     loadResources: function(callback){
-      resources.load(function(progress, name){
+      this.resources.load(function(progress, name){
         view.setProgress(progress);
         view.setText(name)
       }, function(){

@@ -1,4 +1,4 @@
-define(['./sprite'], function(sprite){
+define(['./sprite', '../resources'], function(sprite, resources){
   var objectSprite = Object.create(sprite);
   
   objectSprite.getImages = function(){
@@ -6,7 +6,7 @@ define(['./sprite'], function(sprite){
     
     sprite.getImages.call(this);
     
-    this.images.push(g.resources.getImage('objects/'+this.getModel().getType()+'/'+this.getModel().getName()));
+    this.images.push(resources.getImage('objects/'+this.getModel().getType()+'/'+this.getModel().getName()));
 
     return this.images;
   }

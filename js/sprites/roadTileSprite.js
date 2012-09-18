@@ -1,4 +1,4 @@
-define(['./tileSprite'], function(tileSprite){
+define(['./tileSprite', '../resources'], function(tileSprite, resources){
   var roadSprite = Object.create(tileSprite);
   
   roadSprite.getImages = function(){
@@ -6,7 +6,7 @@ define(['./tileSprite'], function(tileSprite){
     
     tileSprite.getImages.call(this);
     
-    this.images.push(g.resources.getImage('terrain/road/'+this.getModel().getShape()+this.getModel().getPlacing()));
+    this.images.push(resources.getImage('terrain/road/'+this.getModel().getShape()+this.getModel().getPlacing()));
         
     return this.images;
   }

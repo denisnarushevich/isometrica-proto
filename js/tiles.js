@@ -1,4 +1,4 @@
-define(['tiles/land', 'tiles/road', 'tiles/shore', 'tiles/water', 'grid', 'remote'], function(land, road, shore, water, grid, remote){
+define(['tiles/land', 'tiles/road', 'tiles/shore', 'tiles/water', 'grid', 'remote', 'player'], function(land, road, shore, water, grid, remote, player){
   return {
     tiles: [],
     hash: [],
@@ -153,7 +153,7 @@ define(['tiles/land', 'tiles/road', 'tiles/shore', 'tiles/water', 'grid', 'remot
       //console.log('Logic updated.');
       
       //update tiles in some radius around player, cause we can't update whole world.
-      var playerPos = g.logic.player.getPosition();
+      var playerPos = player.getPosition();
       
       var radius = 50, a = Math.floor(playerPos.getX() - radius), b = Math.floor(playerPos.getX() + radius), c = Math.floor(playerPos.getY() - radius), d = Math.floor(playerPos.getY() + radius); 
       
@@ -186,7 +186,7 @@ define(['tiles/land', 'tiles/road', 'tiles/shore', 'tiles/water', 'grid', 'remot
       }else if(gridPoints[0].getW() || gridPoints[1].getW() || gridPoints[2].getW() || gridPoints[3].getW()){
         t = Object.create(shore).init(gridPoints);
       }else if( this.testTileSet[x] && this.testTileSet[x][y]){
-        t = Object.create(road).init(gridPoints);
+        t = Object.create(road).init(gridPoints, this);
         this.roads.push(t);
       }else{
         t = Object.create(land).init(gridPoints);

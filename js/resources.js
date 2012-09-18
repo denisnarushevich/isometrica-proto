@@ -1,5 +1,5 @@
 define(['images'], function(images){
-  return g.resources ? g.resources : g.resources = {
+  return {
     images: images,
     load: function(progressHandler, callback){
       images.load(function(){

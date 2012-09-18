@@ -1,5 +1,6 @@
 define(['gridPoint'], function(gridPoint){
   return {
+    waterLevel: 0,
     spacing: [45, 45, 8],
     //diagonalSpacing: null,
     length: 0,
@@ -23,7 +24,7 @@ define(['gridPoint'], function(gridPoint){
       this.length++;
       
       //get and init gridpoint
-      var gp = Object.create(gridPoint).setX(x).setY(y);
+      var gp = Object.create(gridPoint).setGrid(this).setX(x).setY(y);
 
       //return gp and cache it if its not inter-point. (with fractal part in the number)
       if ( !(x % 1) || !(y % 1) )   
