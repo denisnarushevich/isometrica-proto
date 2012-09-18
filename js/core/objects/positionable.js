@@ -1,4 +1,4 @@
-define(['./object', 'vector2', 'grid'], function(object, vector2, grid){
+define(['./object', '../vector2', '../grid'], function(object, vector2, grid){
   var pos = Object.create(object);
   
   pos.subPosition = null;

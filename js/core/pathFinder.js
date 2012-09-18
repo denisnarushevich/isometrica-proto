@@ -1,4 +1,4 @@
-define(['astar/astar'], function(astar){
+define(['lib/astar/astar'], function(astar){
   var pathFinder = Object.create(astar);
   
   pathFinder.findPath = function(sourceTile, destinationTile, isWall){

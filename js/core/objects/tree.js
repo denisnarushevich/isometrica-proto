@@ -1,4 +1,4 @@
-define(['./positionable', 'sprites/treeSprite'], function(object, treeSprite){
+define(['./positionable', '../sprites/treeSprite'], function(object, treeSprite){
   var tree = Object.create(object);
 
   this.position = null;

@@ -1,4 +1,4 @@
-define(['world', 'player'], function(world, player){
+define(['./world', './player'], function(world, player){
   return {
     world: world,
     player: player,

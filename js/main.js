@@ -1,6 +1,8 @@
 require.config({
   paths: {
-    "jquery": "./jquery-1.7.1.min"
+    "jquery": "./lib/jquery/jquery-1.7.1.min",
+    'core': './core',
+    'lib': './lib'
   }
 });
 
@@ -27,7 +29,7 @@ window.requestAnimFrame = (function(){
   };
 })();
 
-require(['loader', 'g', 'views/gView'], function(loader, g, gView){
+require(['./loader', 'core/g', './views/gView'], function(loader, g, gView){
   $(function(){ //waiting for DOM to be ready.
     var root = document.body;
     loader.init(root, g.resources);

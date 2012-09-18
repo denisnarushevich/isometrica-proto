@@ -1,4 +1,4 @@
-define(['controls', 'graphics', 'logic', 'resources'], function(controls, graphics, logic, resources){
+define(['./controls', './graphics', './logic', './resources'], function(controls, graphics, logic, resources){
   var g = {
     resources: resources,
     logic: logic,

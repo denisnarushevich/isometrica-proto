@@ -1,4 +1,4 @@
-define(['tiles', 'grid'], function(tiles, grid){
+define(['./tiles', './grid'], function(tiles, grid){
   var scene = {};
   
   scene.init = function(viewport, at){
