@@ -4,8 +4,6 @@ require.config({
   }
 });
 
-g = {};
-
 //simple time testing		
 function test(subject,n){
   var t = new Date();
@@ -29,12 +27,13 @@ window.requestAnimFrame = (function(){
   };
 })();
 
-require(['loader', 'g'], function(loader, g){
+require(['loader', 'g', 'views/gView'], function(loader, g, gView){
   $(function(){ //waiting for DOM to be ready.
     var root = document.body;
-    loader.init(root);
+    loader.init(root, g.resources);
     loader.loadResources(function(){
-      g.init(root);
+      gView.render(root);
+      g.init(document.getElementById('viewport'));
     });
   });
 });

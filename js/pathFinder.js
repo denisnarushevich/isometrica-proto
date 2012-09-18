@@ -2,7 +2,7 @@ define(['astar/astar'], function(astar){
   var pathFinder = Object.create(astar);
   
   pathFinder.findPath = function(sourceTile, destinationTile, isWall){
-    var tiles = g.logic.world.tiles;
+    var tiles = sourceTile.tiles;
     var nodes = astar.search.call(this, sourceTile.getPosition().getX(), sourceTile.getPosition().getY(), destinationTile.getPosition().getX(), destinationTile.getPosition().getY(), function(node){
       return isWall(tiles.getTile(node.x, node.y));
     }, function(node){
@@ -16,5 +16,5 @@ define(['astar/astar'], function(astar){
     return path;
   };
   
-  return g.a = pathFinder;
+  return pathFinder;
 });

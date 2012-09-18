@@ -1,5 +1,6 @@
 define(['simplex', 'objects', 'sprites/tileSprite'], function(simplex, objects, tileSprite){
   var tile = {
+    tiles: null,
     gridPoints: null,
     objects: null,
     slopeId: null,
@@ -8,7 +9,8 @@ define(['simplex', 'objects', 'sprites/tileSprite'], function(simplex, objects, 
     type: null
   };
   
-  tile.init = function(gridPoints){
+  tile.init = function(gridPoints, tiles){
+    this.tiles = tiles;
     this.sprite = Object.create(tileSprite).setModel(this);
     this.gridPoints = gridPoints;      
     return this;

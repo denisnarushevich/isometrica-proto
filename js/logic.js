@@ -1,5 +1,5 @@
 define(['world', 'player'], function(world, player){
-  return g.logic ? g.logic : g.logic = {
+  return {
     world: world,
     player: player,
     init: function(){

@@ -1,11 +1,14 @@
-define(['controls', 'graphics', 'logic', 'views/gameView'], function(controls, graphics, logic, view){
-   
-  g.init = function(rootNode){
-      view.init();
-      view.render(rootNode);
-    
+define(['controls', 'graphics', 'logic', 'resources'], function(controls, graphics, logic, resources){
+  var g = {
+    resources: resources,
+    logic: logic,
+    graphics: graphics,
+    controls: controls
+  };
+  
+  g.init = function(viewportBox){
       logic.init();
-      graphics.init(rootNode);
+      graphics.init(viewportBox);
       controls.init();
 
       g.loop();

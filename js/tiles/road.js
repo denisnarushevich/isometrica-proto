@@ -1,8 +1,8 @@
 define(['./land', 'sprites/roadTileSprite'], function(tile, sprite){
   var road = Object.create(tile);
   
-  road.init = function(gridPoints){
-    tile.init.call(this, gridPoints);
+  road.init = function(gridPoints, tiles){
+    tile.init.call(this, gridPoints, tiles);
     this.type = 'road';
     this.sprite = Object.create(sprite).setModel(this);
     this.shape = 0;
@@ -19,10 +19,10 @@ define(['./land', 'sprites/roadTileSprite'], function(tile, sprite){
   road.getShape = function(){
     if ( this.shape ) return this.shape;
     
-    var a = g.logic.world.tiles.getTile(this.getPosition().getX() + 1, this.getPosition().getY()).getType() == 'road';
-    var b = g.logic.world.tiles.getTile(this.getPosition().getX(), this.getPosition().getY() + 1).getType() == 'road';
-    var c = g.logic.world.tiles.getTile(this.getPosition().getX() - 1, this.getPosition().getY()).getType() == 'road';
-    var d = g.logic.world.tiles.getTile(this.getPosition().getX(), this.getPosition().getY() - 1).getType() == 'road';
+    var a = this.tiles.getTile(this.getPosition().getX() + 1, this.getPosition().getY()).getType() == 'road';
+    var b = this.tiles.getTile(this.getPosition().getX(), this.getPosition().getY() + 1).getType() == 'road';
+    var c = this.tiles.getTile(this.getPosition().getX() - 1, this.getPosition().getY()).getType() == 'road';
+    var d = this.tiles.getTile(this.getPosition().getX(), this.getPosition().getY() - 1).getType() == 'road';
     
     
     
@@ -41,10 +41,10 @@ define(['./land', 'sprites/roadTileSprite'], function(tile, sprite){
   };
   
   road.getPlacing = function(){
-    var a = g.logic.world.tiles.getTile(this.getPosition().getX() + 1, this.getPosition().getY()).getType() == 'road';
-    var b = g.logic.world.tiles.getTile(this.getPosition().getX(), this.getPosition().getY() + 1).getType() == 'road';
-    var c = g.logic.world.tiles.getTile(this.getPosition().getX() - 1, this.getPosition().getY()).getType() == 'road';
-    var d = g.logic.world.tiles.getTile(this.getPosition().getX(), this.getPosition().getY() - 1).getType() == 'road';
+    var a = this.tiles.getTile(this.getPosition().getX() + 1, this.getPosition().getY()).getType() == 'road';
+    var b = this.tiles.getTile(this.getPosition().getX(), this.getPosition().getY() + 1).getType() == 'road';
+    var c = this.tiles.getTile(this.getPosition().getX() - 1, this.getPosition().getY()).getType() == 'road';
+    var d = this.tiles.getTile(this.getPosition().getX(), this.getPosition().getY() - 1).getType() == 'road';
     
     var shape = this.getShape();
     if ( shape == 'x' ) 
@@ -76,7 +76,7 @@ define(['./land', 'sprites/roadTileSprite'], function(tile, sprite){
     tile.update.call(this);
     
     if ( Math.random() < 1/1000 ) 
-      this.spawnObject('car1').travelTo(g.logic.world.tiles.roads[Math.floor(Math.random()*g.logic.world.tiles.roads.length)]);
+      this.spawnObject('car1').travelTo(this.tiles.roads[Math.floor(Math.random()*this.tiles.roads.length)]);
   };
 
   return road;

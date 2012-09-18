@@ -1,4 +1,4 @@
-define(['./sprite'], function(sprite){
+define(['./sprite', '../resources'], function(sprite, resources){
   var tileSprite = Object.create(sprite);
   
   tileSprite.size = [64, 47];
@@ -9,7 +9,7 @@ define(['./sprite'], function(sprite){
     
     sprite.getImages.call(this);
     
-    this.images.push(g.resources.getImage('terrain/'+this.getModel().getTerrain()+'/'+this.getModel().getSlopeId()));
+    this.images.push(resources.getImage('terrain/'+this.getModel().getTerrain()+'/'+this.getModel().getSlopeId()));
         
     return this.images;
   }

@@ -1,4 +1,4 @@
-define(['./positionable', 'sprites/vehicleSprite', 'pathFinder', 'vector2'], function(parent, sprite, pathFinder, vector2){
+define(['./positionable', 'sprites/vehicleSprite', 'pathFinder', 'vector2', 'tiles'], function(parent, sprite, pathFinder, vector2, tiles){
   var vehicle = Object.create(parent);
   
   vehicle.init = function(tile){
