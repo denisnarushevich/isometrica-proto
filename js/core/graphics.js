@@ -21,7 +21,7 @@ define(['./scene', './renderer', './logic'], function(scene, renderer, logic){
     scene.updateSize();
   };
     
-  graphics.drawFrame = function(){
+  graphics.renderFrame = function(){
     var tiles = scene.getTiles();
     var objects = scene.getObjects();
       
@@ -37,7 +37,15 @@ define(['./scene', './renderer', './logic'], function(scene, renderer, logic){
       
     renderer.renderLayers();
   };
-    
+  
+  
+  graphics.renderFrames = function(){
+    graphics.renderFrame();
+	
+    window.requestAnimFrame(function(){
+      graphics.renderFrames();
+    });
+  }
 
   
   return graphics;
