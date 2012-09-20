@@ -1,14 +1,24 @@
 define(['./world', './player'], function(world, player){
-  return {
+  var logic = {
     world: world,
-    player: player,
-    init: function(){
-      this.world.init();
-      this.player.init();
-    },
-    update: function(){
-      this.world.update();
-      
-    }
+    player: player
   };
+  
+  logic.init = function(){
+    this.world.init();
+    this.player.init();
+  };
+    
+    
+  logic.update = function(){
+    this.world.update();   
+  };
+    
+  logic.startUpdateLoop = function(){
+    setInterval(function(){
+      logic.update();
+    }, 1000/25);
+  };
+  
+  return logic;
 });
