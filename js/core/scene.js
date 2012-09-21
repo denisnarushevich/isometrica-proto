@@ -1,15 +1,18 @@
 define(['./tiles', './grid'], function(tiles, grid){
   var scene = {};
-  
+
   scene.init = function(viewport, at){
     this.viewport = viewport;
     this.at = at;
+    this.atStr = at.toString();
     this.updateSize();
   };
     
   scene.getTiles = function(){
+    if(this.atStr == this.at.toString() && this.tiles)return this.tiles; //if 'at' havent changed, then visible tiles is same.
+    this.atStr = this.at.toString();
     this.tiles = [];
-      
+    
     var at = [Math.floor(this.at.getX()), Math.floor(this.at.getY())];
       
     for(var end, level = 0; !end; level++){
@@ -19,8 +22,8 @@ define(['./tiles', './grid'], function(tiles, grid){
           if ( x > at[0] - level && x < at[0] + level && y > at[1] - level && y < at[1] + level ) continue; //skiping tiles of previous levels
             
           var tile = tiles.getTile(x, y);
-          var sprite = tile.getSprite().setOffset(this.coordinatesTransform(x, y, tile.getPosition().getZ()));
-          var offset = sprite.getOriginOffset();
+          var sprite = tile.getSprite().setOriginOffset(this.coordinatesTransform(x, y, tile.getPosition().getZ()));
+          var offset = sprite.getOffset();
             
           //check rect intersection of tile image and window
           if (offset[0] > this.size[0] || offset[0]+sprite.size[0] < 0 || offset[1] > this.size[1] || offset[1]+sprite.size[1] < 0) continue;
@@ -30,24 +33,21 @@ define(['./tiles', './grid'], function(tiles, grid){
         }
       }
     }
-	
-    //sorting by depth, where depth is y screen offset coordinate.
-    this.tiles.sort(function(tile1, tile2){
-      return tile1.getOriginOffset()[1] > tile2.getOriginOffset()[1] ? -1 : 1;
-    });
-      
+    
     return this.tiles;
   };
     
   scene.getObjects = function(){
     this.objects = [];
+    var tiles = this.tiles;
       
-    for(var i in this.tiles){
-      var tile = this.tiles[i].getModel();
+    for(var i = 0; tiles[i]; i++){
+      var tile = tiles[i].getModel();
       var objects = tile.getObjects();
-      for(var key in objects){
-        var object = objects[key];
-        var sprite = object.getSprite().setOffset(this.coordinatesTransform(object.getPosition().getX(), object.getPosition().getY(), object.getPosition().getZ()));
+      for(var j = 0; objects[j]; j++){
+        var object = objects[j];
+        var pos = object.getPosition();
+        var sprite = object.getSprite().setOriginOffset(this.coordinatesTransform(pos.getX(), pos.getY(), pos.getZ()));
         //console.log(sprite);throw 1;
         this.objects.push(sprite);
       }
@@ -55,13 +55,14 @@ define(['./tiles', './grid'], function(tiles, grid){
       
     //sorting by depth, where depth is y screen offset coordinate.
     this.objects.sort(function(obj1, obj2){
-      return obj1.getOffset()[1] > obj2.getOffset()[1] ? -1 : 1;
+      return obj1.getOriginOffset()[1] < obj2.getOriginOffset()[1] ? -1 : 1;
     });
       
     return this.objects;
   };
     
   scene.updateSize = function(){
+    this.tiles = null;
     this.size = [this.viewport.clientWidth, this.viewport.clientHeight];
   };
   

@@ -97,7 +97,7 @@ define(['jquery', './logic', './scene'], function($, logic, scene){
     var context = window.tmpctx ? window.tmpctx : window.tmpctx = canvas.getContext('2d');
     
     var sprite = tileSprite;
-    var offset = sprite.getOriginOffset();
+    var offset = sprite.getOffset();
     var size= sprite.getSize();
     
     //quick tile sprite bounding box hit test

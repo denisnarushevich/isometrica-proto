@@ -1,14 +1,10 @@
 define(function(){
   return {
-    offset: null,
+    originOffset: null,
     size: null,
     origin: null,
     images: null,
     model: null,
-    setOffset: function(offset){
-      this.offset = offset;
-      return this;
-    },
     setSize: function(size){
       this.size = size;
       return this;
@@ -21,13 +17,17 @@ define(function(){
       this.model = model;
       return this;
     },
-    getOffset: function(){
-      return this.offset;
+    setOriginOffset: function(offset){
+      this.originOffset = offset;
+      return this;
     },
     getOriginOffset: function(){
+      return this.originOffset;
+    },
+    getOffset: function(){
       return [
-        this.offset[0] - this.origin[0],
-        this.offset[1] - this.origin[1]
+        this.originOffset[0] - this.origin[0],
+        this.originOffset[1] - this.origin[1]
       ];
     },
     getSize: function(){
@@ -42,6 +42,24 @@ define(function(){
     },
     getModel: function(){
       return this.model;
+    },
+    
+    //test
+    getCanvas: function(){
+      if(this.canvas)return this.canvas;
+      var images = this.getImages();
+      var cnv = document.createElement('canvas');
+      cnv.width = this.getSize()[0];
+      cnv.height = this.getSize()[1];
+      var ctx = cnv.getContext('2d');
+      for(var i in images){
+        ctx.drawImage(images[i], 0, 0);
+      }
+      return this.canvas = cnv;
+    },
+    getPixels: function(){
+      if(this.pixelArray)return this.pixelArray;
+      return this.getCanvas().getContext('2d').getImageData(0,0,this.getSize()[0],this.getSize()[1]);
     }
   }
 });

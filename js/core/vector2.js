@@ -28,5 +28,16 @@ define(function(){
     return this;
   }
   
+  vector2.toArray = function(){
+    return [
+      this.y,
+      this.x
+    ];
+  }
+  
+  vector2.toString = function(){
+    return this.y+','+this.x;
+  }
+  
   return vector2;
 });
