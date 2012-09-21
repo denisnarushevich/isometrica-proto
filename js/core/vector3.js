@@ -19,6 +19,18 @@ define(['./vector2'], function(vector){
     return this;
   }
   
+  vector3.toArray = function(){
+    return [
+      this.y,
+      this.x,
+      this.z
+    ];
+  }
+  
+  vector3.toString = function(){
+    return this.y+','+this.x+','+this.z;
+  }
+  
   return vector3;
 });
 

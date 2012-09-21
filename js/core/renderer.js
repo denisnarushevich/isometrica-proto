@@ -1,7 +1,7 @@
 define(function(){
   return {
     container: null,
-    layers: {},
+    layers: [],
     screen: null,
     init: function(container){
       this.container = container;
@@ -9,37 +9,44 @@ define(function(){
       this.screen.canvas.style.cssText = 'width: 100%; height: 100%;';
       this.updateSize();
     },
-    createLayer: function(name){
-      if (!this.layers[name]) this.layers[name] = document.createElement('canvas').getContext('2d');
-      this.layers[name].canvas.width = this.screen.canvas.width;
-      this.layers[name].canvas.height = this.screen.canvas.height;
-      return;
+    createLayer: function(){
+      var key = this.layers.push(document.createElement('canvas').getContext('2d'))-1;
+      this.layers[key].canvas.width = this.screen.canvas.width;
+      this.layers[key].canvas.height = this.screen.canvas.height;
+      return this.layers[key];
     },
-    clearLayer: function(name){
-      this.layers[name].clearRect(0, 0, this.layers[name].canvas.width, this.layers[name].canvas.height);
+    clearLayer: function(layer){
+      layer.clearRect(0, 0, layer.canvas.width, layer.canvas.height);
     },
     drawSprite: function(layer, sprite){
-      var ctx = this.layers[layer];
       var images = sprite.getImages();
+      var offset = sprite.getOffset();
       
-      for(var i in images){
+      for(var i = 0; images[i]; i++){
+      //for(var i in images){
         //if($.browser.webkit) ctx.setAlpha(sprites[i].opacity);
-        ctx.drawImage(images[i], sprite.getOriginOffset()[0], sprite.getOriginOffset()[1]);
+        layer.drawImage(images[i], offset[0], offset[1]);
+
+        //ctx.putImageData(sprite.getPixels(), sprite.getOffset()[0], sprite.getOffset()[1]);
       }
+      
+     //ctx.drawImage(sprite.getCanvas(), sprite.getOriginOffset()[0], sprite.getOriginOffset()[1]);
     },
     renderLayers: function(){
-      for(var key in this.layers){
-        this.screen.drawImage(this.layers[key].canvas, 0, 0);
+      var layers = this.layers;
+      for(var i = 0; layers[i]; i++){
+        this.screen.drawImage(layers[i].canvas, 0, 0);
       }
     },
     setSize: function(size){
+      var layers = this.layers;
+      
       this.screen.canvas.width = size[0];
       this.screen.canvas.height = size[1];
       
-      for(var key in this.layers){
-        var layer = this.layers[key];
-        layer.canvas.width = size[0];
-        layer.canvas.height = size[1];
+      for(var i = 0; layers[i]; i++){
+        layers[i].canvas.width = size[0];
+        layers[i].canvas.height = size[1];
       }
       
       return this;

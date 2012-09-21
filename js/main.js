@@ -9,12 +9,20 @@ require.config({
 //simple time testing		
 function test(subject,n){
   var t = new Date();
-  if(!n)n = 1000000;
+  if(!n)n = 10000;
   for(var i = 0; i < n; i++){
     subject(i);
   }
   console.log( (new Date())-t );
   console.log( ((new Date())-t)/n );
+}
+
+function takeTime(subject, env){
+  var t = new Date();
+  var r = subject.call(this);
+  var t2 = (new Date())-t;
+  window.tktm ? window.tktm = (window.tktm + t2)/2 : window.tktm = t2;
+  return r;
 }
 
 // shim layer with setTimeout fallback
