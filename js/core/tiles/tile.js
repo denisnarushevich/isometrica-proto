@@ -1,4 +1,4 @@
-define(['lib/simplex/simplex', '../objects', '../sprites/tileSprite'], function(simplex, objects, tileSprite){
+define(['../objects', '../sprites/tileSprite'], function(objects, tileSprite){
   var tile = {
     tiles: null,
     gridPoints: null,
