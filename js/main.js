@@ -17,11 +17,11 @@ function test(subject,n){
   console.log( ((new Date())-t)/n );
 }
 
-function takeTime(subject, env){
+function takeTime(globalName, subject){
   var t = new Date();
   var r = subject.call(this);
   var t2 = (new Date())-t;
-  window.tktm ? window.tktm = (window.tktm + t2)/2 : window.tktm = t2;
+  window[globalName] ? window[globalName] = (window[globalName] + t2)/2 : window[globalName] = t2;
   return r;
 }
 
