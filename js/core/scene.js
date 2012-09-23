@@ -14,7 +14,11 @@ define(['./tiles', './grid'], function(tiles, grid){
     this.tiles = [];
     
     var at = [Math.floor(this.at.getX()), Math.floor(this.at.getY())];
-      
+    
+    //from "at" tile in center of the screen loop is going level by level 
+    //increasing XxY area of tiles.
+    //tiles outside of the screen are not drawn.
+    //loop exits when there was no new tiles for last level.
     for(var end, level = 0; !end; level++){
       end = true;
       for(var x = at[0] - level; x <= at[0] + level; x++){
