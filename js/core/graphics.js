@@ -1,11 +1,17 @@
-define(['./scene', './renderer', './logic'], function(scene, renderer, logic){
+define(['./scene', './renderer', './logic', 'lib/chesterGL/chester'], function(scene, renderer, logic){
 
   var graphics = {
     layers: {}
   };
 
   graphics.init = function(viewportBox){
+
     renderer.init(viewportBox);
+
+    chesterGL.setup(renderer.screen.canvas.id = 'mainScreen');
+    var size = chesterGL.viewportSize();
+    chesterGL.loadAsset('texture', 'https://chestergl.commondatastorage.googleapis.com/images/star.png', 'star');
+
 
     this.layers.tiles = renderer.createLayer('tiles');
     this.layers.objects = renderer.createLayer('objects');
