@@ -81,8 +81,8 @@ define(['jquery', './logic', './scene'], function($, logic, scene){
     if(this.lastHovered && this.tileSpriteHitTest(this.lastHovered, mousePos)){
       //do nothing
     }else{
-      for(var key in tileSprites){
-        var tileSprite = tileSprites[key];
+      for(var i = 0; tileSprites[i]; i++){
+        var tileSprite = tileSprites[i];
         if ( this.tileSpriteHitTest(tileSprite, mousePos) ) {
           if ( this.lastHovered ) this.lastHovered.highlite(false);
           tileSprite.highlite(true);
@@ -112,7 +112,7 @@ define(['jquery', './logic', './scene'], function($, logic, scene){
 
     var images = sprite.getImages();
       
-    for(var i in images){
+    for(var i = 0; images[i]; i++){
       context.drawImage(images[i], 0, 0);
     }
 

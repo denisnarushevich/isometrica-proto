@@ -1,10 +1,10 @@
 define(['./building'], function(parent){
-  var houses1 = Object.create(parent);
-  houses1.init = function(tile){
-    parent.init.call(this, tile); //parent init
+  var houses1 = function(tile){
+    parent.call(this, tile); //parent init
     this.name = 'houses1';
-    return this;
   }
+  
+  houses1.prototype = Object.create(parent.prototype);
   
   return houses1;
 });

@@ -8,7 +8,7 @@ define([
   ], function(land, road, shore, water, grid, player){
 
     return {
-      tiles: [],
+       tiles: [],
       hash: [],
       roads: [],
       init: function(){
@@ -428,14 +428,14 @@ define([
         var t;
     
         if(gridPoints[0].getW() && gridPoints[1].getW() && gridPoints[2].getW() && gridPoints[3].getW()){
-          t = Object.create(water).init(gridPoints);
+          t = new water(gridPoints, this);
         }else if(gridPoints[0].getW() || gridPoints[1].getW() || gridPoints[2].getW() || gridPoints[3].getW()){
-          t = Object.create(shore).init(gridPoints);
+          t = new shore(gridPoints, this);
         }else if( this.testTileSet[x] && this.testTileSet[x][y]){
-          t = Object.create(road).init(gridPoints, this);
+          t = new road(gridPoints, this);
           this.roads.push(t);
         }else{
-          t = Object.create(land).init(gridPoints);
+          t = new land(gridPoints, this);
         }
         this.tiles.push(this.hash[x][y] = t);
 		

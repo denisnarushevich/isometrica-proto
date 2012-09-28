@@ -1,16 +1,20 @@
-define(['./sprite', '../resources'], function(sprite, resources){
-  var objectSprite = Object.create(sprite);
+define(['./sprite', '../resources'], function(parent, resources){
+  var sprite = function(model){
+    parent.call(this, model);
+  };
   
-  objectSprite.getImages = function(){
+  sprite.prototype = Object.create(parent.prototype);
+  
+  sprite.prototype.getImages = function(){
     if (this.images) return this.images;
     
-    sprite.getImages.call(this);
+    parent.prototype.getImages.call(this);
     
     this.images.push(resources.getImage('objects/'+this.getModel().getType()+'/'+this.getModel().getName()));
 
     return this.images;
   }
   
-  return objectSprite;
+  return sprite;
 });
 

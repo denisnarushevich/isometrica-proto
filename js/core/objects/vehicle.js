@@ -1,27 +1,25 @@
-define(['./positionable', '../sprites/vehicleSprite', '../pathFinder', '../vector2', '../tiles'], function(parent, sprite, pathFinder, vector2, tiles){
-  var vehicle = Object.create(parent);
-  
-  vehicle.init = function(tile){
-    parent.init.call(this, tile);
+define(['./positionable', '../sprites/vehicleSprite', '../pathFinder', '../vector2', '../tiles'], function(parent, sprite, pathFinder, vec2, tiles){
+  var vehicle = function(tile){
+    parent.call(this, tile);
     this.type = 'vehicle';
-    this.sprite = Object.create(sprite).setModel(this);
+    this.sprite =  new sprite(this);
     
-    vehicle.direction = Object.create(vector2).setX(1).setY(0)
-    vehicle.speed = 2; //tiles in second
-    vehicle.path = [];
-    vehicle.updatedAt = null;
-      
-    return this;
+    this.direction = new vec2(0, 0);
+    this.speed = 2; //tiles in second
+    this.path = [];
+    this.updatedAt = null;
   };
-  
-  vehicle.travelTo = function(destinationTile){
+
+  vehicle.prototype = Object.create(parent.prototype);
+
+  vehicle.prototype.travelTo = function(destinationTile){
     this.path = pathFinder.findPath(this.getTile(), destinationTile, function(tile){
-      return tile.getType() != 'road';
+      return tile.getType() != tile._ROAD;
     });
     this.updatedAt = new Date().getTime()/1000;
   };
   
-  vehicle.update = function(){
+  vehicle.prototype.update = function(){
     if ( this.updatedAt ) {
       var now = new Date().getTime()/1000; //seconds, milliseconds
       var deltaTime = now - this.updatedAt;
@@ -53,18 +51,18 @@ define(['./positionable', '../sprites/vehicleSprite', '../pathFinder', '../vecto
       var pathTile = current;
       this.setTile(pathTile);
     }
-    return parent.update.call(this);
+    return parent.prototype.update.call(this);
   };
   
-  vehicle.getDirection = function(){
+  vehicle.prototype.getDirection = function(){
     return this.direction;
   };
   
-  vehicle.getSubPosition = function(){
+  vehicle.prototype.getSubPosition = function(){
     return this.subPosition;
   };
   
-  vehicle.align = function(){
+  vehicle.prototype.align = function(){
     if ( this.getDirection().getX() )
       if ( this.getDirection().getX() == 1 )
         this.subPosition.setY(0.33);
@@ -77,15 +75,15 @@ define(['./positionable', '../sprites/vehicleSprite', '../pathFinder', '../vecto
         this.subPosition.setX(0.33);    
   };
   
-  vehicle.getSpeed = function(){
+  vehicle.prototype.getSpeed = function(){
     return this.speed;
   };
   
-  vehicle.getPath = function(){
+  vehicle.prototype.getPath = function(){
     return this.path;
   };
   
-  vehicle.setTile = function(tile){
+  vehicle.prototype.setTile = function(tile){
     this.getTile().removeObject(this);
     this.tile = tile;
     tile.addObject(this);

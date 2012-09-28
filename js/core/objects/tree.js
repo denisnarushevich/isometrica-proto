@@ -1,19 +1,17 @@
-define(['./positionable', '../sprites/treeSprite'], function(object, treeSprite){
-  var tree = Object.create(object);
-
-  this.position = null;
-
-  tree.init = function(tile){
-    object.init.call(this, tile); //parent init()
+define(['./positionable', '../sprites/treeSprite'], function(parent, sprite){
+  var tree = function(tile){
+    parent.call(this, tile); //parent init
     this.type = 'tree';
-    this.sprite = Object.create(treeSprite).setModel(this);
-    return this;
+    this.sprite =  new sprite(this);
   }
   
-  tree.getPosition = function(){
+  tree.prototype = Object.create(parent.prototype);
+  
+  tree.prototype.getPosition = function(){
+    //just caching position, we don't need to calc it every time its same all the time.
     if ( this.position ) return this.position;
-    return this.position = object.getPosition.call(this);
-  };
+    return this.position = parent.prototype.getPosition.call(this); 
+  }
   
   return tree;
 });

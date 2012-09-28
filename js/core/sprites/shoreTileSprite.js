@@ -1,15 +1,19 @@
-define(['./tileSprite', '../resources'], function(tileSprite, resources){
-  var shoreSprite = Object.create(tileSprite);
+define(['./tileSprite', '../resources'], function(parent, resources){
+  var sprite = function(model){
+    parent.call(this, model);
+  };
   
-  shoreSprite.getImages = function(){
+  sprite.prototype = Object.create(parent.prototype);
+  
+  sprite.prototype.getImages = function(){
     if (this.images) return this.images;
     
-    tileSprite.getImages.call(this);
+    parent.prototype.getImages.call(this);
     
     this.images.push(resources.getImage('terrain/shore/'+this.getModel().getSlopeId()));
-        
+
     return this.images;
   }
   
-  return shoreSprite;
+  return sprite;
 });

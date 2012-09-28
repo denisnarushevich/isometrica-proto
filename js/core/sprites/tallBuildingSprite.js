@@ -1,3 +1,11 @@
 define(['./buildingSprite'], function(parent){
-  return Object.create(parent).setSize([64, 128]).setOrigin([0, 113]);
+  var sprite = function(model){
+    parent.call(this, model);
+    this.setSize([64, 128]);
+    this.setOrigin([0, 113]);
+  };
+  
+  sprite.prototype = Object.create(parent.prototype);
+  
+  return sprite;
 });

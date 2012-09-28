@@ -1,21 +1,21 @@
-define(['./object', '../vector2', '../grid'], function(object, vector2, grid){
-  var pos = Object.create(object);
-  
-  pos.subPosition = null;
-  
-  pos.init = function(tile){
-    object.init.call(this, tile); //parent init()
-    this.subPosition = Object.create(vector2).setX(0).setY(0);
+define(['./object', '../vector2', '../grid'], function(object, vec2, grid){
+  var pos = function(tile){
+    object.call(this, tile); //parent init()
+    this.subPosition = new vec2(0,0);
     return this;
-  };
+  }
   
-  pos.getPosition = function(){
+  pos.prototype = Object.create(object.prototype);
+  
+  pos.prototype.subPosition = null;
+  
+  pos.prototype.getPosition = function(){
     return grid.getPoint(this.getTile().getPosition().getX() + this.getSubPosition().getX(), this.getTile().getPosition().getY() + this.getSubPosition().getY());
   };
   
-  pos.getSubPosition = function(){
-    return this.subPosition;
-  }
+  pos.prototype.getSubPosition = function(){
+    return this.subPosition; 
+  };
   
   return pos;
 });

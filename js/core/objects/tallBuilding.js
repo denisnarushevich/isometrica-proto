@@ -1,13 +1,12 @@
 define(['./object', '../sprites/tallBuildingSprite'], function(parent, sprite){
-  var building = Object.create(parent);
-
-  building.init = function(tile){
-    parent.init.call(this, tile); //parent init()
+  var building = function(tile){
+    parent.call(this, tile); //parent init
     this.type = 'building';
-    this.sprite = Object.create(sprite).setModel(this);
-    return this;
+    this.sprite =  new sprite(this);
   }
-
+  
+  building.prototype = Object.create(parent.prototype);
+  
   return building;
 });
   

@@ -1,115 +1,111 @@
 define(['./tile', '../objects', 'lib/simplex/simplex'], function(tile, objects, Simplex){
-  var land = Object.create(tile);
+  var land = function(gridPoints, tiles){
+    tile.call(this, gridPoints, tiles); //calling parent constructor
+    this.type = this._LAND;
+  }
   
-  land.init = function(gridPoints, tiles){
-    tile.init.call(this, gridPoints, tiles);
-    this.type = 'land';
-    return this;
-  };  
+  land.prototype = Object.create(tile.prototype);
   
-  land.getObjects = function(){
+  land.prototype.getObjects = function(){
     if (this.objects) return this.objects;
     
-    tile.getObjects.call(this);
+    tile.prototype.getObjects.call(this);
     
     //return generated tree
     var tree = 0, x = this.getPosition().getX(), y = this.getPosition().getY();
 		
     tree += Simplex.noise2d(x, y);
     if(tree > 0 && this.getTerrain() == 'grass'){
-      var obj = Object.create(([objects.tree1, objects.tree2])[Math.floor(Simplex.noise2d(y*2, x*2)+1)]).init(this);
+      var obj = [ new objects.tree1(this) , new objects.tree2(this) ][Math.floor(Simplex.noise2d(y*2, x*2)+1)];
       obj.getSubPosition().setX(1/2+Simplex.noise2d(y/2, x/2)/4).setY(1/2+Simplex.noise2d(x/2, y/2)/4);
       this.objects.push(obj);
     }
+ 
+     if(this.getPosition().getX()== 249 && this.getPosition().getY() == 1021)this.objects=[new objects.flats1(this)];
+    if(this.getPosition().getX()== 249 && this.getPosition().getY() == 1022)this.objects=[new objects.flats2(this)];
+    if(this.getPosition().getX()== 250 && this.getPosition().getY() == 1021)this.objects=[new objects.offices1(this)];
+    if(this.getPosition().getX()== 250 && this.getPosition().getY() == 1022)this.objects=[new objects.offices2(this)];
+    if(this.getPosition().getX()== 251 && this.getPosition().getY() == 1022)this.objects=[new objects.flats2(this)];
+    if(this.getPosition().getX()== 252 && this.getPosition().getY() == 1021)this.objects=[new objects.flats2(this)];
+    if(this.getPosition().getX()== 249 && this.getPosition().getY() == 1019)this.objects=[new objects.houses2(this)];
+    if(this.getPosition().getX()== 250 && this.getPosition().getY() == 1019)this.objects=[new objects.houses1(this)];
+    if(this.getPosition().getX()== 251 && this.getPosition().getY() == 1021)this.objects=[new objects.houses2(this)];
+    if(this.getPosition().getX()== 251 && this.getPosition().getY() == 1019)this.objects=[new objects.houses2(this)];
+    if(this.getPosition().getX()== 252 && this.getPosition().getY() == 1019)this.objects=[new objects.houses1(this)];
+    if(this.getPosition().getX()== 253 && this.getPosition().getY() == 1019)this.objects=[new objects.houses1(this)];
+    if(this.getPosition().getX()== 254 && this.getPosition().getY() == 1019)this.objects=[new objects.houses2(this)];
     
-        //for testing purposes only, delete it
+    if(this.getPosition().getX()== 251 && this.getPosition().getY() == 1030)this.objects=[new objects.houses2(this)];
+    if(this.getPosition().getX()== 252 && this.getPosition().getY() == 1030)this.objects=[new objects.houses1(this)];
+    if(this.getPosition().getX()== 253 && this.getPosition().getY() == 1030)this.objects=[new objects.houses1(this)];
+    if(this.getPosition().getX()== 254 && this.getPosition().getY() == 1030)this.objects=[new objects.houses2(this)];
+    if(this.getPosition().getX()== 255 && this.getPosition().getY() == 1030)this.objects=[new objects.houses1(this)];
+    if(this.getPosition().getX()== 257 && this.getPosition().getY() == 1030)this.objects=[new objects.houses2(this)];
+    if(this.getPosition().getX()== 259 && this.getPosition().getY() == 1030)this.objects=[new objects.houses1(this)];
+    if(this.getPosition().getX()== 258 && this.getPosition().getY() == 1030)this.objects=[new objects.houses2(this)];
     
-    if(this.getPosition().getX()== 249 && this.getPosition().getY() == 1021)this.objects=[Object.create(objects.flats1).init(this)];
-    if(this.getPosition().getX()== 249 && this.getPosition().getY() == 1022)this.objects=[Object.create(objects.flats2).init(this)];
-    if(this.getPosition().getX()== 250 && this.getPosition().getY() == 1021)this.objects=[Object.create(objects.offices1).init(this)];
-    if(this.getPosition().getX()== 250 && this.getPosition().getY() == 1022)this.objects=[Object.create(objects.offices2).init(this)];
-    if(this.getPosition().getX()== 251 && this.getPosition().getY() == 1022)this.objects=[Object.create(objects.flats2).init(this)];
-    if(this.getPosition().getX()== 252 && this.getPosition().getY() == 1021)this.objects=[Object.create(objects.flats2).init(this)];
-    if(this.getPosition().getX()== 249 && this.getPosition().getY() == 1019)this.objects=[Object.create(objects.houses2).init(this)];
-    if(this.getPosition().getX()== 250 && this.getPosition().getY() == 1019)this.objects=[Object.create(objects.houses1).init(this)];
-    if(this.getPosition().getX()== 251 && this.getPosition().getY() == 1021)this.objects=[Object.create(objects.houses2).init(this)];
-    if(this.getPosition().getX()== 251 && this.getPosition().getY() == 1019)this.objects=[Object.create(objects.houses2).init(this)];
-    if(this.getPosition().getX()== 252 && this.getPosition().getY() == 1019)this.objects=[Object.create(objects.houses1).init(this)];
-    if(this.getPosition().getX()== 253 && this.getPosition().getY() == 1019)this.objects=[Object.create(objects.houses1).init(this)];
-    if(this.getPosition().getX()== 254 && this.getPosition().getY() == 1019)this.objects=[Object.create(objects.houses2).init(this)];
+    if(this.getPosition().getX()== 247 && this.getPosition().getY() == 1020)this.objects=[new objects.houses1(this)];
+    if(this.getPosition().getX()== 247 && this.getPosition().getY() == 1021)this.objects=[new objects.house2(this)];
+    if(this.getPosition().getX()== 247 && this.getPosition().getY() == 1022)this.objects=[new objects.house1(this)];
     
-    if(this.getPosition().getX()== 251 && this.getPosition().getY() == 1030)this.objects=[Object.create(objects.houses2).init(this)];
-    if(this.getPosition().getX()== 252 && this.getPosition().getY() == 1030)this.objects=[Object.create(objects.houses1).init(this)];
-    if(this.getPosition().getX()== 253 && this.getPosition().getY() == 1030)this.objects=[Object.create(objects.houses1).init(this)];
-    if(this.getPosition().getX()== 254 && this.getPosition().getY() == 1030)this.objects=[Object.create(objects.houses2).init(this)];
-    if(this.getPosition().getX()== 255 && this.getPosition().getY() == 1030)this.objects=[Object.create(objects.houses1).init(this)];
-    if(this.getPosition().getX()== 257 && this.getPosition().getY() == 1030)this.objects=[Object.create(objects.houses2).init(this)];
-    if(this.getPosition().getX()== 259 && this.getPosition().getY() == 1030)this.objects=[Object.create(objects.houses1).init(this)];
-    if(this.getPosition().getX()== 258 && this.getPosition().getY() == 1030)this.objects=[Object.create(objects.houses2).init(this)];
+    if(this.getPosition().getX()== 247 && this.getPosition().getY() == 1024)this.objects=[new objects.house1(this)];
+    if(this.getPosition().getX()== 247 && this.getPosition().getY() == 1025)this.objects=[new objects.house1(this)];
+    if(this.getPosition().getX()== 247 && this.getPosition().getY() == 1027)this.objects=[new objects.house1(this)];
+    if(this.getPosition().getX()== 247 && this.getPosition().getY() == 1028)this.objects=[new objects.house1(this)];
     
-    if(this.getPosition().getX()== 247 && this.getPosition().getY() == 1020)this.objects=[Object.create(objects.houses1).init(this)];
-    if(this.getPosition().getX()== 247 && this.getPosition().getY() == 1021)this.objects=[Object.create(objects.house2).init(this)];
-    if(this.getPosition().getX()== 247 && this.getPosition().getY() == 1022)this.objects=[Object.create(objects.house1).init(this)];
+    if(this.getPosition().getX()== 249 && this.getPosition().getY() == 1024)this.objects=[new objects.flats2(this)];
+    if(this.getPosition().getX()== 249 && this.getPosition().getY() == 1025)this.objects=[new objects.flats2(this)];
+    if(this.getPosition().getX()== 249 && this.getPosition().getY() == 1027)this.objects=[new objects.houses2(this)];
+    if(this.getPosition().getX()== 249 && this.getPosition().getY() == 1028)this.objects=[new objects.houses2(this)];
     
-    if(this.getPosition().getX()== 247 && this.getPosition().getY() == 1024)this.objects=[Object.create(objects.house1).init(this)];
-    if(this.getPosition().getX()== 247 && this.getPosition().getY() == 1025)this.objects=[Object.create(objects.house1).init(this)];
-    if(this.getPosition().getX()== 247 && this.getPosition().getY() == 1027)this.objects=[Object.create(objects.house1).init(this)];
-    if(this.getPosition().getX()== 247 && this.getPosition().getY() == 1028)this.objects=[Object.create(objects.house1).init(this)];
+    if(this.getPosition().getX()== 263 && this.getPosition().getY() == 1028)this.objects=[new objects.house1(this)];
+    if(this.getPosition().getX()== 263 && this.getPosition().getY() == 1026)this.objects=[new objects.house2(this)];
+    if(this.getPosition().getX()== 263 && this.getPosition().getY() == 1025)this.objects=[new objects.house1(this)];
+    if(this.getPosition().getX()== 263 && this.getPosition().getY() == 1024)this.objects=[new objects.house1(this)];
+    if(this.getPosition().getX()== 263 && this.getPosition().getY() == 1022)this.objects=[new objects.house1(this)];
     
-    if(this.getPosition().getX()== 249 && this.getPosition().getY() == 1024)this.objects=[Object.create(objects.flats2).init(this)];
-    if(this.getPosition().getX()== 249 && this.getPosition().getY() == 1025)this.objects=[Object.create(objects.flats2).init(this)];
-    if(this.getPosition().getX()== 249 && this.getPosition().getY() == 1027)this.objects=[Object.create(objects.houses2).init(this)];
-    if(this.getPosition().getX()== 249 && this.getPosition().getY() == 1028)this.objects=[Object.create(objects.houses2).init(this)];
+    if(this.getPosition().getX()== 251 && this.getPosition().getY() == 1027)this.objects=[new objects.offices1(this)];
+    if(this.getPosition().getX()== 251 && this.getPosition().getY() == 1028)this.objects=[new objects.flats1(this)];
+    if(this.getPosition().getX()== 252 && this.getPosition().getY() == 1027)this.objects=[new objects.offices2(this)];
+    if(this.getPosition().getX()== 252 && this.getPosition().getY() == 1028)this.objects=[new objects.flats2(this)];
+    if(this.getPosition().getX()== 253 && this.getPosition().getY() == 1027)this.objects=[new objects.offices1(this)];
+    if(this.getPosition().getX()== 253 && this.getPosition().getY() == 1028)this.objects=[new objects.flats2(this)];
+    if(this.getPosition().getX()== 254 && this.getPosition().getY() == 1027)this.objects=[new objects.offices1(this)];
+    if(this.getPosition().getX()== 254 && this.getPosition().getY() == 1028)this.objects=[new objects.flats1(this)];
+    if(this.getPosition().getX()== 255 && this.getPosition().getY() == 1028)this.objects=[new objects.flats2(this)];
+    if(this.getPosition().getX()== 255 && this.getPosition().getY() == 1027)this.objects=[new objects.flats2(this)];
     
-    if(this.getPosition().getX()== 263 && this.getPosition().getY() == 1028)this.objects=[Object.create(objects.house1).init(this)];
-    if(this.getPosition().getX()== 263 && this.getPosition().getY() == 1026)this.objects=[Object.create(objects.house2).init(this)];
-    if(this.getPosition().getX()== 263 && this.getPosition().getY() == 1025)this.objects=[Object.create(objects.house1).init(this)];
-    if(this.getPosition().getX()== 263 && this.getPosition().getY() == 1024)this.objects=[Object.create(objects.house1).init(this)];
-    if(this.getPosition().getX()== 263 && this.getPosition().getY() == 1022)this.objects=[Object.create(objects.house1).init(this)];
+    if(this.getPosition().getX()== 255 && this.getPosition().getY() == 1021)this.objects=[new objects.flats2(this)];
+    if(this.getPosition().getX()== 255 && this.getPosition().getY() == 1022)this.objects=[new objects.flats1(this)];
+    if(this.getPosition().getX()== 254 && this.getPosition().getY() == 1021)this.objects=[new objects.flats1(this)];
+    if(this.getPosition().getX()== 254 && this.getPosition().getY() == 1022)this.objects=[new objects.flats2(this)];
     
-    if(this.getPosition().getX()== 251 && this.getPosition().getY() == 1027)this.objects=[Object.create(objects.offices1).init(this)];
-    if(this.getPosition().getX()== 251 && this.getPosition().getY() == 1028)this.objects=[Object.create(objects.flats1).init(this)];
-    if(this.getPosition().getX()== 252 && this.getPosition().getY() == 1027)this.objects=[Object.create(objects.offices2).init(this)];
-    if(this.getPosition().getX()== 252 && this.getPosition().getY() == 1028)this.objects=[Object.create(objects.flats2).init(this)];
-    if(this.getPosition().getX()== 253 && this.getPosition().getY() == 1027)this.objects=[Object.create(objects.offices1).init(this)];
-    if(this.getPosition().getX()== 253 && this.getPosition().getY() == 1028)this.objects=[Object.create(objects.flats2).init(this)];
-    if(this.getPosition().getX()== 254 && this.getPosition().getY() == 1027)this.objects=[Object.create(objects.offices1).init(this)];
-    if(this.getPosition().getX()== 254 && this.getPosition().getY() == 1028)this.objects=[Object.create(objects.flats1).init(this)];
-    if(this.getPosition().getX()== 255 && this.getPosition().getY() == 1028)this.objects=[Object.create(objects.flats2).init(this)];
-    if(this.getPosition().getX()== 255 && this.getPosition().getY() == 1027)this.objects=[Object.create(objects.flats2).init(this)];
+    if(this.getPosition().getX()== 257 && this.getPosition().getY() == 1022)this.objects=[new objects.flats2(this)];
+    if(this.getPosition().getX()== 257 && this.getPosition().getY() == 1023)this.objects=[new objects.offices2(this)];
+    if(this.getPosition().getX()== 257 && this.getPosition().getY() == 1025)this.objects=[new objects.offices1(this)];
+    if(this.getPosition().getX()== 257 && this.getPosition().getY() == 1026)this.objects=[new objects.flats1(this)];
+    if(this.getPosition().getX()== 257 && this.getPosition().getY() == 1027)this.objects=[new objects.flats1(this)];
+    if(this.getPosition().getX()== 257 && this.getPosition().getY() == 1028)this.objects=[new objects.flats1(this)];
     
-    if(this.getPosition().getX()== 255 && this.getPosition().getY() == 1021)this.objects=[Object.create(objects.flats2).init(this)];
-    if(this.getPosition().getX()== 255 && this.getPosition().getY() == 1022)this.objects=[Object.create(objects.flats1).init(this)];
-    if(this.getPosition().getX()== 254 && this.getPosition().getY() == 1021)this.objects=[Object.create(objects.flats1).init(this)];
-    if(this.getPosition().getX()== 254 && this.getPosition().getY() == 1022)this.objects=[Object.create(objects.flats2).init(this)];
+    if(this.getPosition().getX()== 258 && this.getPosition().getY() == 1023)this.objects=[new objects.flats2(this)];
+    if(this.getPosition().getX()== 258 && this.getPosition().getY() == 1026)this.objects=[new objects.flats1(this)];
+    if(this.getPosition().getX()== 258 && this.getPosition().getY() == 1027)this.objects=[new objects.flats1(this)];
+    if(this.getPosition().getX()== 258 && this.getPosition().getY() == 1028)this.objects=[new objects.flats2(this)];
     
-    if(this.getPosition().getX()== 257 && this.getPosition().getY() == 1022)this.objects=[Object.create(objects.flats2).init(this)];
-    if(this.getPosition().getX()== 257 && this.getPosition().getY() == 1023)this.objects=[Object.create(objects.offices2).init(this)];
-    if(this.getPosition().getX()== 257 && this.getPosition().getY() == 1025)this.objects=[Object.create(objects.offices1).init(this)];
-    if(this.getPosition().getX()== 257 && this.getPosition().getY() == 1026)this.objects=[Object.create(objects.flats1).init(this)];
-    if(this.getPosition().getX()== 257 && this.getPosition().getY() == 1027)this.objects=[Object.create(objects.flats1).init(this)];
-    if(this.getPosition().getX()== 257 && this.getPosition().getY() == 1028)this.objects=[Object.create(objects.flats1).init(this)];
+    if(this.getPosition().getX()== 259 && this.getPosition().getY() == 1021)this.objects=[new objects.house1(this)];
+    if(this.getPosition().getX()== 259 && this.getPosition().getY() == 1024)this.objects=[new objects.houses1(this)];
+    if(this.getPosition().getX()== 259 && this.getPosition().getY() == 1026)this.objects=[new objects.houses1(this)];
+    if(this.getPosition().getX()== 259 && this.getPosition().getY() == 1028)this.objects=[new objects.houses2(this)];
     
-    if(this.getPosition().getX()== 258 && this.getPosition().getY() == 1023)this.objects=[Object.create(objects.flats2).init(this)];
-    if(this.getPosition().getX()== 258 && this.getPosition().getY() == 1026)this.objects=[Object.create(objects.flats1).init(this)];
-    if(this.getPosition().getX()== 258 && this.getPosition().getY() == 1027)this.objects=[Object.create(objects.flats1).init(this)];
-    if(this.getPosition().getX()== 258 && this.getPosition().getY() == 1028)this.objects=[Object.create(objects.flats2).init(this)];
-    
-    if(this.getPosition().getX()== 259 && this.getPosition().getY() == 1021)this.objects=[Object.create(objects.house1).init(this)];
-    if(this.getPosition().getX()== 259 && this.getPosition().getY() == 1024)this.objects=[Object.create(objects.houses1).init(this)];
-    if(this.getPosition().getX()== 259 && this.getPosition().getY() == 1026)this.objects=[Object.create(objects.houses1).init(this)];
-    if(this.getPosition().getX()== 259 && this.getPosition().getY() == 1028)this.objects=[Object.create(objects.houses2).init(this)];
-    
-    if(this.getPosition().getX()== 260 && this.getPosition().getY() == 1021)this.objects=[Object.create(objects.house2).init(this)];
-    if(this.getPosition().getX()== 260 && this.getPosition().getY() == 1022)this.objects=[Object.create(objects.house1).init(this)];
-    if(this.getPosition().getX()== 261 && this.getPosition().getY() == 1021)this.objects=[Object.create(objects.house2).init(this)];
-    if(this.getPosition().getX()== 261 && this.getPosition().getY() == 1023)this.objects=[Object.create(objects.house1).init(this)];
-
+    if(this.getPosition().getX()== 260 && this.getPosition().getY() == 1021)this.objects=[new objects.house2(this)];
+    if(this.getPosition().getX()== 260 && this.getPosition().getY() == 1022)this.objects=[new objects.house1(this)];
+    if(this.getPosition().getX()== 261 && this.getPosition().getY() == 1021)this.objects=[new objects.house2(this)];
+    if(this.getPosition().getX()== 261 && this.getPosition().getY() == 1023)this.objects=[new objects.house1(this)];
     
     return this.objects;
-  };
+  }
   
-  land.getTerrain = function(){
+  land.prototype.getTerrain = function(){
     if ( this.terrain ) return this.terrain;
     
     return this.terrain = 'grass';
@@ -141,7 +137,7 @@ define(['./tile', '../objects', 'lib/simplex/simplex'], function(tile, objects, 
         else return this.terrain = 'grass';
       }
     }*/
-  };
-
+  }
+  
   return land;
 });

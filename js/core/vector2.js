@@ -1,4 +1,54 @@
 define(function(){
+  var v2 = function(x, y){
+    this.x = x;
+    this.y = y;
+  };
+  
+  v2.prototype.x = 0;
+  v2.prototype.y = 0;
+  
+  v2.prototype.getX = function(){
+    return this.x;
+  }
+  
+  v2.prototype.getY = function(){
+    return this.y;
+  }
+  
+  v2.prototype.setX = function(x){
+    this.x = x;
+    return this;
+  }
+  
+  v2.prototype.setY = function(y){
+    this.y = y;
+    return this;
+  }
+  
+  v2.prototype.normalize = function(){
+    this.y = this.y / Math.abs(this.y);
+    this.x = this.x / Math.abs(this.x);
+    return this;
+  }
+  
+  v2.prototype.toArray = function(){
+    return [
+      this.y,
+      this.x
+    ];
+  }
+  
+  v2.prototype.toString = function(){
+    return this.y+','+this.x;
+  }
+  
+  return v2;
+  
+  
+  
+  
+  
+  
   var vector2 = {
     x: null,
     y: null

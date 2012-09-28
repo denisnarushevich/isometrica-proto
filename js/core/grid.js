@@ -24,7 +24,7 @@ define(['./gridPoint'], function(gridPoint){
       this.length++;
       
       //get and init gridpoint
-      var gp = Object.create(gridPoint).setGrid(this).setX(x).setY(y);
+      var gp = new gridPoint(this, x, y);
 
       //return gp and cache it if its not inter-point. (with fractal part in the number)
       if ( !(x % 1) || !(y % 1) )   
