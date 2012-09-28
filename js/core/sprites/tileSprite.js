@@ -1,22 +1,24 @@
-define(['./sprite', '../resources'], function(sprite, resources){
-  var tileSprite = Object.create(sprite);
+define(['./sprite', '../resources'], function(parent, resources){
+  var sprite = function(model){
+    parent.call(this, model);
+    this.setSize([64, 47]);
+    this.setOrigin([0, 24]);
+    this.highlited = false;
+  };
   
-  tileSprite.size = [64, 47];
-  tileSprite.origin = [0, 24];
+  sprite.prototype = Object.create(parent.prototype);
   
-  tileSprite.highlited = false;
-  
-  tileSprite.getImages = function(){
+  sprite.prototype.getImages = function(){
     if (this.images) return this.images;
     
-    sprite.getImages.call(this);
+    parent.prototype.getImages.call(this);
     
     this.images.push(resources.getImage('terrain/'+this.getModel().getTerrain()+'/'+this.getModel().getSlopeId()));
-        
+
     return this.images;
-  }
+  };
   
-  tileSprite.highlite = function(bool){
+  sprite.prototype.highlite = function(bool){
     if (bool != undefined) this.highlited = bool;
     
     if(bool != undefined && !bool){
@@ -27,6 +29,6 @@ define(['./sprite', '../resources'], function(sprite, resources){
     return this;
   }
   
-  return tileSprite;
+  return sprite;
 });
 

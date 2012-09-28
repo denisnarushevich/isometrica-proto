@@ -1,15 +1,19 @@
-define(['./tileSprite', '../resources'], function(tileSprite, resources){
-  var roadSprite = Object.create(tileSprite);
+define(['./tileSprite', '../resources'], function(parent, resources){
+  var sprite = function(model){
+    parent.call(this, model);
+  };
   
-  roadSprite.getImages = function(){
+  sprite.prototype = Object.create(parent.prototype);
+  
+  sprite.prototype.getImages = function(){
     if (this.images) return this.images;
     
-    tileSprite.getImages.call(this);
+    parent.prototype.getImages.call(this);
     
-    this.images.push(resources.getImage('terrain/road/'+this.getModel().getShape()+this.getModel().getPlacing()));
-        
+    this.images.push(resources.getImage('terrain/road/'+this.getModel().getShape()+'-'+this.getModel().getPlacing()));
+
     return this.images;
   }
   
-  return roadSprite;
+  return sprite;
 });

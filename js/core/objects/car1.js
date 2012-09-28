@@ -1,11 +1,10 @@
 define(['./vehicle'], function(parent){
-  var car1 = Object.create(parent);
-  
-  car1.init = function(tile){
-    parent.init.call(this, tile); //parent init
+  var car1 = function(tile){
+    parent.call(this, tile); //parent init
     this.name = 'car1';
-    return this;
-  }
+  };
+  
+  car1.prototype = Object.create(parent.prototype);
   
   return car1;
 });

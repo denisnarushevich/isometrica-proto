@@ -1,69 +1,72 @@
-define(['../objects', '../sprites/tileSprite'], function(objects, tileSprite){
-  var tile = {
+define(['../objects', '../sprites/tileSprite'], function(objects, sprite){
+  
+  var tile = function(gridPoints, tiles){
+    this.tiles = tiles;
+    this.sprite =  new sprite(this);
+    this.gridPoints = gridPoints;
+  };
+  
+  tile.prototype = {
+    _LAND: 1,
+    _WATER: 2,
+    _SHORE: 3,
+    _ROAD: 4,
     tiles: null,
     gridPoints: null,
     objects: null,
     slopeId: null,
     sprite: null,
     terrain: null,
-    type: null
-  };
+    type: null,
   
-  tile.init = function(gridPoints, tiles){
-    this.tiles = tiles;
-    this.sprite = Object.create(tileSprite).setModel(this);
-    this.gridPoints = gridPoints;      
-    return this;
-  };
-  
-  tile.update = function(){
+  update: function(){
     var objects = this.getObjects();
     for(var i in objects){
       objects[i].update();
     }
     return this;
-  };
+  },
   
-  tile.getGridPoints = function(){
+  getGridPoints: function(){
     return this.gridPoints;
-  };
+  },
   
-  tile.getObjects = function(){
+  getObjects: function(){
     if (this.objects) return this.objects;
 
     return this.objects = [];
-  };
+  },
   
   
-  tile.getSlopeId = function(){
+  getSlopeId: function(){
     if ( this.slopeId ) return this.slopeId;
 		
     var gridPoints = this.getGridPoints();
     return this.slopeId = 2000 + (gridPoints[1].getZ() - gridPoints[0].getZ() + 2) * 100 + (gridPoints[2].getZ() - gridPoints[0].getZ() + 2) * 10 + (gridPoints[3].getZ() - gridPoints[0].getZ() + 2);
-  };
+  },
   
-  tile.getSprite = function(){
+  getSprite: function(){
     return this.sprite;
-  };
+  },
   
-  tile.getTerrain = function(){
+  getTerrain: function(){
     return this.terrain;
-  };
+  },
   
-  tile.getType = function(){
+  getType: function(){
     return this.type;
-  };
+  },
   
-  tile.getPosition = function(){
+  getPosition: function(){
     return this.gridPoints[0];
-  };
+  },
   
-  tile.addObject = function(object){
+  addObject: function(object){
     this.getObjects().push(object);
     return this;
-  };
+  },
   
-  tile.removeObject = function(object){
+  removeObject: function(object){
     for(var key in this.objects){
       var otherObject = this.objects[key];
       if(otherObject == object){
@@ -77,12 +80,13 @@ define(['../objects', '../sprites/tileSprite'], function(objects, tileSprite){
       }
     }
     return this;
-  };
+  },
   
-  tile.spawnObject = function(prototypeName){
-    var object = Object.create(objects[prototypeName]).init(this);
+  spawnObject: function(prototypeName){
+    var object = new objects[prototypeName](this);
     this.objects.push(object);
     return object;
+  }
   };
   
   return tile;

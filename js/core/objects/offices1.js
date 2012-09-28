@@ -1,10 +1,10 @@
 define(['./tallBuilding'], function(parent){
-  var offices1 = Object.create(parent);
-  offices1.init = function(tile){
-    parent.init.call(this, tile); //parent init
+  var offices1 = function(tile){
+    parent.call(this, tile); //parent init
     this.name = 'offices1';
-    return this;
   }
+  
+  offices1.prototype = Object.create(parent.prototype);
   
   return offices1;
 });

@@ -1,10 +1,10 @@
-define(['./tree'], function(tree){
-  var tree1 = Object.create(tree);
-  tree1.init = function(tile){
-    tree.init.call(this, tile); //parent init
+define(['./tree'], function(parent){
+  var tree1 = function(tile){
+    parent.call(this, tile);
     this.name = 'tree1';
-    return this;
   }
+  
+  tree1.prototype = Object.create(parent.prototype);
   
   return tree1;
 });

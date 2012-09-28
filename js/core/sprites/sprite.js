@@ -1,5 +1,9 @@
 define(function(){
-  return {
+  var sprite = function(model){
+    this.model = model
+  }
+  
+  sprite.prototype = {
     originOffset: null,
     size: null,
     origin: null,
@@ -62,4 +66,6 @@ define(function(){
       return this.getCanvas().getContext('2d').getImageData(0,0,this.getSize()[0],this.getSize()[1]);
     }
   }
+  
+  return sprite;
 });
