@@ -17,7 +17,7 @@ define(['./world', './player'], function(world, player){
   logic.startUpdateLoop = function(){
     setInterval(function(){
       logic.update();
-    }, 1000/25);
+    }, 40);
   };
   
   return logic;
