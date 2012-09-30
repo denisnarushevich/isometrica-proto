@@ -1,396 +1,64 @@
-define([
-  './tiles/land',
-  './tiles/road',
-  './tiles/shore',
-  './tiles/water',
-  './grid',
-  './player'
-  ], function(land, road, shore, water, grid, player){
+define(['./tile'], function(Tile){
+
+    var Tiles = new function(world){
+        this.world = world;
+        this.tiles = new Array();
+    };
+
+    Tiles.prototype.world = null;
+    Tiles.prototype.tilesArray = null;
+    Tiles.prototype.tilesStack = null;
+
+    Tiles.prototype.update = function(){
+        var radius = 50,
+            playerPosition = this.world.player.getPosition(),
+            x0 = Math.floor(playerPosition.getX() - radius),
+            x1 = Math.floor(playerPosition.getX() + radius),
+            y0 = Math.floor(playerPosition.getY() - radius),
+            y1 = Math.floor(playerPosition.getY() + radius);
+
+        for(var x = x0; x < x1; x++){
+            for(var y = y0; y < y1; y++){
+                this.getTile(x, y).update();
+            }
+        }
+    };
+
+    Tiles.prototype.getTile = function(x, y){
+        //look up in cache, and return if is cached
+        if (this.tilesArray[x] && this.tilesArray[x][y]) return this.tilesArray[x][y];
+
+        //make sure that current X in array is array of Ys
+        if (!this.hash[x]) this.hash[x] = [];
+
+        var tile;
+        this.tilesStack.push(this.tilesArray[x][y] = tile = new Tile(tiles, x, y));
+
+        //fifo
+        if(this.tilesStack.length > 20000){
+            var tileOld = this.tilesStack.shift();
+            var position = tileOld.getPosition();
+            delete this.tilesArray[position.getX()][position.getY()];
+        }
+
+        return tile;
+    };
+
+    return Tiles;
+
+
+
+
+
+
+
 
     return {
        tiles: [],
       hash: [],
       roads: [],
       init: function(){
-        //this.t = new Date().getTime();
-    
-        this.testTileSet = [];
-      
-        this.testTileSet[246] = [];
-        this.testTileSet[246][1029] = {
-          type: 'road'
-        };
-        this.testTileSet[246][1028] = {
-          type: 'road'
-        };
-        this.testTileSet[246][1027] = {
-          type: 'road'
-        };
-        this.testTileSet[246][1026] = {
-          type: 'road'
-        };
-        this.testTileSet[246][1025] = {
-          type: 'road'
-        };
-        this.testTileSet[246][1024] = {
-          type: 'road'
-        };
-        this.testTileSet[246][1023] = {
-          type: 'road'
-        };
-        this.testTileSet[247] = [];
-        this.testTileSet[247][1039] = {
-          type: 'road'
-        };
-        this.testTileSet[247][1038] = {
-          type: 'road'
-        };
-        this.testTileSet[247][1037] = {
-          type: 'road'
-        };
-        this.testTileSet[247][1036] = {
-          type: 'road'
-        };
-        this.testTileSet[247][1035] = {
-          type: 'road'
-        };
-        this.testTileSet[247][1034] = {
-          type: 'road'
-        };
-        this.testTileSet[247][1033] = {
-          type: 'road'
-        };
-        this.testTileSet[247][1032] = {
-          type: 'road'
-        };
-        this.testTileSet[247][1031] = {
-          type: 'road'
-        };
-        this.testTileSet[247][1030] = {
-          type: 'road'
-        };
-        this.testTileSet[247][1029] = {
-          type: 'road'
-        };
-        this.testTileSet[247][1023] = {
-          type: 'road'
-        };
-        this.testTileSet[247][1026] = {
-          type: 'road'
-        };
-        this.testTileSet[248] = [];
-        this.testTileSet[248][1030] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1029] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1028] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1027] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1026] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1025] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1024] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1023] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1022] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1021] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1020] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1019] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1018] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1017] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1016] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1015] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1014] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1013] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1012] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1011] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1010] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1009] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1008] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1007] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1006] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1005] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1004] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1003] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1002] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1001] = {
-          type: 'road'
-        };
-        this.testTileSet[248][1000] = {
-          type: 'road'
-        };
-        this.testTileSet[249] = [];
-        this.testTileSet[249][1029] = {
-          type: 'road'
-        };
-        this.testTileSet[249][1023] = {
-          type: 'road'
-        };
-        this.testTileSet[249][1026] = {
-          type: 'road'
-        };
-        this.testTileSet[249][1020] = {
-          type: 'road'
-        };
-        this.testTileSet[250] = [];
-        this.testTileSet[250][1029] = {
-          type: 'road'
-        };
-        this.testTileSet[250][1028] = {
-          type: 'road'
-        };
-        this.testTileSet[250][1027] = {
-          type: 'road'
-        };
-        this.testTileSet[250][1026] = {
-          type: 'road'
-        };
-        this.testTileSet[250][1025] = {
-          type: 'road'
-        };
-        this.testTileSet[250][1024] = {
-          type: 'road'
-        };
-        this.testTileSet[250][1023] = {
-          type: 'road'
-        };
-        this.testTileSet[250][1020] = {
-          type: 'road'
-        };
-      
-        this.testTileSet[251] = [];
-        this.testTileSet[251][1029] = {
-          type: 'road'
-        };
-        this.testTileSet[251][1026] = {
-          type: 'road'
-        };
-        this.testTileSet[251][1023] = {
-          type: 'road'
-        };
-        this.testTileSet[251][1020] = {
-          type: 'road'
-        };
-        this.testTileSet[252] = [];
-        this.testTileSet[252][1029] = {
-          type: 'road'
-        };
-        this.testTileSet[252][1026] = {
-          type: 'road'
-        };
-        this.testTileSet[252][1023] = {
-          type: 'road'
-        };
-        this.testTileSet[252][1020] = {
-          type: 'road'
-        };
-        this.testTileSet[253] = [];
-        this.testTileSet[253][1029] = {
-          type: 'road'
-        };
-        this.testTileSet[253][1026] = {
-          type: 'road'
-        };
-        this.testTileSet[253][1023] = {
-          type: 'road'
-        };
-        this.testTileSet[253][1020] = {
-          type: 'road'
-        };
-        this.testTileSet[254] = [];
-        this.testTileSet[254][1029] = {
-          type: 'road'
-        };
-        this.testTileSet[254][1026] = {
-          type: 'road'
-        };
-        this.testTileSet[254][1023] = {
-          type: 'road'
-        };
-        this.testTileSet[254][1020] = {
-          type: 'road'
-        };
-        this.testTileSet[255] = [];
-        this.testTileSet[255][1029] = {
-          type: 'road'
-        };
-        this.testTileSet[255][1026] = {
-          type: 'road'
-        };
-        this.testTileSet[255][1023] = {
-          type: 'road'
-        };
-        this.testTileSet[255][1020] = {
-          type: 'road'
-        };
-        this.testTileSet[256] = [];
-        this.testTileSet[256][1029] = {
-          type: 'road'
-        };
-        this.testTileSet[256][1028] = {
-          type: 'road'
-        };
-        this.testTileSet[256][1027] = {
-          type: 'road'
-        };
-        this.testTileSet[256][1026] = {
-          type: 'road'
-        };
-        this.testTileSet[256][1025] = {
-          type: 'road'
-        };
-        this.testTileSet[256][1024] = {
-          type: 'road'
-        };
-        this.testTileSet[256][1023] = {
-          type: 'road'
-        };
-        this.testTileSet[256][1022] = {
-          type: 'road'
-        };
-        this.testTileSet[256][1021] = {
-          type: 'road'
-        };
-        this.testTileSet[256][1020] = {
-          type: 'road'
-        };
-        this.testTileSet[257] = [];
-        this.testTileSet[257][1029] = {
-          type: 'road'
-        };
-        this.testTileSet[257][1024] = {
-          type: 'road'
-        };
-        this.testTileSet[257][1020] = {
-          type: 'road'
-        };
-        this.testTileSet[258] = [];
-        this.testTileSet[258][1029] = {
-          type: 'road'
-        };
-        this.testTileSet[258][1024] = {
-          type: 'road'
-        };
-        this.testTileSet[258][1025] = {
-          type: 'road'
-        };
-        this.testTileSet[258][1020] = {
-          type: 'road'
-        };
-        this.testTileSet[259] = [];
-        this.testTileSet[259][1029] = {
-          type: 'road'
-        };
-        this.testTileSet[259][1025] = {
-          type: 'road'
-        };
-        this.testTileSet[259][1020] = {
-          type: 'road'
-        };
-        this.testTileSet[260] = [];
-        this.testTileSet[260][1029] = {
-          type: 'road'
-        };
-        this.testTileSet[260][1025] = {
-          type: 'road'
-        };
-        this.testTileSet[260][1020] = {
-          type: 'road'
-        };
-        this.testTileSet[261] = [];
-        this.testTileSet[261][1029] = {
-          type: 'road'
-        };
-        this.testTileSet[261][1025] = {
-          type: 'road'
-        };
-        this.testTileSet[261][1020] = {
-          type: 'road'
-        };
-        this.testTileSet[262] = [];
-        this.testTileSet[262][1029] = {
-          type: 'road'
-        };
-        this.testTileSet[262][1028] = {
-          type: 'road'
-        };
-        this.testTileSet[262][1027] = {
-          type: 'road'
-        };
-        this.testTileSet[262][1026] = {
-          type: 'road'
-        };
-        this.testTileSet[262][1025] = {
-          type: 'road'
-        };
-        this.testTileSet[262][1024] = {
-          type: 'road'
-        };
-        this.testTileSet[262][1023] = {
-          type: 'road'
-        };
-        this.testTileSet[262][1022] = {
-          type: 'road'
-        };
-        this.testTileSet[262][1021] = {
-          type: 'road'
-        };
-        this.testTileSet[262][1020] = {
-          type: 'road'
-        };
+
       },
       update: function(){
         //      var now = new Date().getTime();
@@ -398,7 +66,7 @@ define([
         //      this.t = now;
         //console.log('Logic updated.');
       
-        //update tiles in some radius around player, cause we can't update whole world.
+        //update tileModels in some radius around player, cause we can't update whole world.
         var playerPos = player.getPosition();
       
         var radius = 50, a = Math.floor(playerPos.getX() - radius), b = Math.floor(playerPos.getX() + radius), c = Math.floor(playerPos.getY() - radius), d = Math.floor(playerPos.getY() + radius); 
@@ -417,7 +85,7 @@ define([
         //get type of requested tile
         //var grid = g.logic.world.grid;
     
-        //gridpoints start count from tiles left (West corner);
+        //gridpoints start count from tileModels left (West corner);
         var gridPoints = [ 
         grid.getPoint(x, y),
         grid.getPoint(x, y + 1),
@@ -457,7 +125,7 @@ define([
     //    replaceTile: function(tile1, tile2){
     //      if ( tile1.getPosition() != tile2.getPosition() ) return false;
     //      this.deleteTile(tile1);
-    //      return this.tiles[tile2.getPosition().getX()][tile2.getPosition().getY()] = tile2;
+    //      return this.tileModels[tile2.getPosition().getX()][tile2.getPosition().getY()] = tile2;
     //    }
     }
   });

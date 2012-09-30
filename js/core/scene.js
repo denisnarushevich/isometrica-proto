@@ -9,21 +9,21 @@ define(['./tiles', './grid'], function(tiles, grid){
   };
     
   scene.getTiles = function(){
-    if(this.atStr == this.at.toString() && this.tiles)return this.tiles; //if 'at' havent changed, then visible tiles is same.
+    if(this.atStr == this.at.toString() && this.tiles)return this.tiles; //if 'at' havent changed, then visible tileModels is same.
     this.atStr = this.at.toString();
     this.tiles = [];
     
     var at = [Math.floor(this.at.getX()), Math.floor(this.at.getY())];
     
     //from "at" tile in center of the screen loop is going level by level 
-    //increasing XxY area of tiles.
-    //tiles outside of the screen are not drawn.
-    //loop exits when there was no new tiles for last level.
+    //increasing XxY area of tileModels.
+    //tileModels outside of the screen are not drawn.
+    //loop exits when there was no new tileModels for last level.
     for(var end, level = 0; !end; level++){
       end = true;
       for(var x = at[0] - level; x <= at[0] + level; x++){
         for(var y = at[1] - level; y <= at[1] + level; y++){
-          if ( x > at[0] - level && x < at[0] + level && y > at[1] - level && y < at[1] + level ) continue; //skiping tiles of previous levels
+          if ( x > at[0] - level && x < at[0] + level && y > at[1] - level && y < at[1] + level ) continue; //skiping tileModels of previous levels
             
           var tile = tiles.getTile(x, y);
           var sprite = tile.getSprite().setOriginOffset(this.coordinatesTransform(x, y, tile.getPosition().getZ()));
