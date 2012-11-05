@@ -1,18 +1,22 @@
-define(['./land', '../sprites/shoreTileSprite'], function(tile, sprite){
-  var shore = function(gridPoints, tiles){
-    tile.call(this, gridPoints, tiles);
+define(['./land'], function(Tile){
+  var Shore = function(tiles, gridPoints){
+    Tile.call(this, tiles, gridPoints);
     this.type = this._SHORE;
-    this.sprite = new sprite(this);
+    this.typeName = 'shore';
     return this;
   }
   
-  shore.prototype = Object.create(tile.prototype);
+  Shore.prototype = Object.create(Tile.prototype);
 
-  shore.prototype.getObjects = function(){
+  Shore.prototype.plantTree = function(){
+      return;
+  }
+
+  Shore.prototype.getObjects = function(){
     if (this.objects) return this.objects;
     
     return this.objects = [];
   };
   
-  return shore;
+  return Shore;
 });

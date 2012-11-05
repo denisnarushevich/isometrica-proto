@@ -1,11 +1,12 @@
-define(['./tileSprite', '../resources'], function(parent, resources){
-  var sprite = function(model){
+define(['./tileSprite'], function(parent){
+  var Sprite = function(model){
     parent.call(this, model);
   };
   
-  sprite.prototype = Object.create(parent.prototype);
+  Sprite.prototype = Object.create(parent.prototype);
+  Sprite.prototype.name = 'road';
   
-  sprite.prototype.getImages = function(){
+  Sprite.prototype.getImages = function(){
     if (this.images) return this.images;
     
     parent.prototype.getImages.call(this);
@@ -15,5 +16,5 @@ define(['./tileSprite', '../resources'], function(parent, resources){
     return this.images;
   }
   
-  return sprite;
+  return Sprite;
 });

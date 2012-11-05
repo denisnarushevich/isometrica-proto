@@ -69,7 +69,7 @@ define(['./vector2'], function(v2){
   }
   
   vector3.toString = function(){
-    return this.y+','+this.x+','+this.z;
+    return this.x+','+this.y+','+this.z;
   }
   
   return vector3;

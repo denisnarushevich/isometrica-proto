@@ -1,5 +1,7 @@
-define(['./grid', './tiles', 'lib/simplex/simplex-noise'], function (Grid, Tiles, Simplex) {
-    var World = function () {
+define(['./grid', './tiles', 'lib/simplex/simplex-noise', './objects'], function (Grid, Tiles, Simplex, Objects) {
+    var World = function (player) {
+        this.player = player;
+
         var simplex = new Simplex([151, 160, 137, 91, 90, 15,
             131, 13, 201, 95, 96, 53, 194, 233, 7, 225, 140, 36, 103, 30, 69, 142, 8, 99, 37, 240, 21, 10, 23,
             190, 6, 148, 247, 120, 234, 75, 0, 26, 197, 62, 94, 252, 219, 203, 117, 35, 11, 32, 57, 177, 33,
@@ -22,29 +24,45 @@ define(['./grid', './tiles', 'lib/simplex/simplex-noise'], function (Grid, Tiles
         this.grid = new Grid(function (x, y) {
             var land = 0, island = 0;
 
-            land += Simplex.noise2d(x / 512, y / 512) / 2; //noisemap of continets
-            land += Simplex.noise2d(x / 256, y / 256) / 4; //of smaler lands
-            land += Simplex.noise2d(x / 128, y / 128) / 8;  //...
-            land += Simplex.noise2d(x / 64, y / 64) / 16; //...
-            land += Simplex.noise2d(x / 32, y / 32) / 32; //...
-            land += Simplex.noise2d(x / 16, y / 16) / 64; //...
-            land += Simplex.noise2d(x / 8, y / 8) / 64; //small details
+            land += simplex.noise2D(x / 512, y / 512) / 2; //noisemap of continets
+            land += simplex.noise2D(x / 256, y / 256) / 4; //of smaler lands
+            land += simplex.noise2D(x / 128, y / 128) / 8;  //...
+            land += simplex.noise2D(x / 64, y / 64) / 16; //...
+            land += simplex.noise2D(x / 32, y / 32) / 32; //...
+            land += simplex.noise2D(x / 16, y / 16) / 64; //...
+            land += simplex.noise2D(x / 8, y / 8) / 64; //small details
 
-            island += Simplex.noise2d(x / 64, y / 64) / 10;
-            island += Simplex.noise2d(x / 32, y / 32) / 20;
-            island += Simplex.noise2d(x / 16, y / 16) / 40;
-            island += Simplex.noise2d(x / 8, y / 8) / 40;
+            island += simplex.noise2D(x / 64, y / 64) / 10;
+            island += simplex.noise2D(x / 32, y / 32) / 20;
+            island += simplex.noise2D(x / 16, y / 16) / 40;
+            island += simplex.noise2D(x / 8, y / 8) / 40;
 
-            return = Math.floor((0.8 * land + 0.2 * island) * 16);
+            return Math.floor((0.8 * land + 0.2 * island) * 16);
         });
 
+        this.forestDistribution = function(x, y){
+            return simplex.noise2D(x, y);
+        }
+
         this.tiles = new Tiles(this);
+        this.objects = new Objects(this);
+        this.waterLevel = 0;
     };
 
+    World.prototype.player = null;
     World.prototype.grid = null;
     World.prototype.tiles = null;
+    World.prototype.objects = null;
+    World.prototype.waterLevel = null;
 
     World.prototype.update = function () {
         this.tiles.update();
+        this.objects.update();
     };
+
+    World.prototype.getWaterLevel = function(){
+        return this.waterLevel;
+    }
+
+    return World;
 });

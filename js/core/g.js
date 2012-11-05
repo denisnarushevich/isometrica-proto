@@ -1,19 +1,19 @@
-define(['./controls', './graphics', './logic', './resources'], function(controls, graphics, logic, resources){
-  var g = {
-    resources: resources,
-    logic: logic,
-    graphics: graphics,
-    controls: controls
-  };
-  
-  g.init = function(viewportBox){
-      logic.init();
-      graphics.init(viewportBox);
-      controls.init();
-      
-      logic.startUpdateLoop();
-      graphics.renderFrames();
-  };
-  
-  return g;
+define(['./controls', './graphics', './logic'], function (Controls, Graphics, Logic) {
+
+    var Core = function (viewportBox, assets) {
+        this.assets = assets;
+        this.logic = new Logic();
+        this.graphics = new Graphics(viewportBox, this.logic, assets);
+        this.controls = new Controls(this.logic, this.graphics);
+
+        this.logic.startUpdateLoop();
+        this.graphics.renderFrames();
+    }
+
+    Core.prototype.resources = null;
+    Core.prototype.logic = null;
+    Core.prototype.graphics = null;
+    Core.prototype.controls = null;
+
+    return Core;
 });

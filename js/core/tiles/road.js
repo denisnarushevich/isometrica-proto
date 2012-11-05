@@ -1,23 +1,23 @@
-define(['./land', '../sprites/roadTileSprite'], function(tile, sprite){
-  var road = function(gridPoints, tiles){
-    tile.call(this, gridPoints, tiles);
+define(['./land'], function(Tile){
+  var Road = function(tiles, gridPoints){
+    Tile.call(this, tiles, gridPoints);
     this.type = this._ROAD;
-    this.sprite = new sprite(this);
+    this.typeName = 'road';
     this.shape = 0;
     this.placing = 0;
     return this;
   }
   
-  road.prototype = Object.create(tile.prototype);
+  Road.prototype = Object.create(Tile.prototype);
   
   
-  road.prototype._STRAIGHT = 1;
-  road.prototype._TURN = 2;
-  road.prototype._T_CROSSING = 3;
-  road.prototype._X_CROSSING = 4;
-  road.prototype._ELEVATION = 5;
+  Road.prototype._STRAIGHT = 1;
+  Road.prototype._TURN = 2;
+  Road.prototype._T_CROSSING = 3;
+  Road.prototype._X_CROSSING = 4;
+  Road.prototype._ELEVATION = 5;
   
-  road.prototype.getShape = function(){
+  Road.prototype.getShape = function(){
     if ( this.shape ) return this.shape;
     
     var pos = this.getPosition();
@@ -41,7 +41,7 @@ define(['./land', '../sprites/roadTileSprite'], function(tile, sprite){
     } 
   }
   
-  road.prototype.getPlacing = function(){
+  Road.prototype.getPlacing = function(){
     var pos = this.getPosition();
     var tiles = this.tiles;
     
@@ -76,18 +76,18 @@ define(['./land', '../sprites/roadTileSprite'], function(tile, sprite){
     }
   };
 
-  road.prototype.getObjects = function(){
+  Road.prototype.getObjects = function(){
     if (this.objects) return this.objects;
     
     return this.objects = [];
   };
 
-  road.prototype.update = function(){
-    tile.prototype.update.call(this);
+  Road.prototype.update = function(){
+    Tile.prototype.update.call(this);
     
     if ( Math.random() < 1/1000 ) 
       this.spawnObject('car1').travelTo(this.tiles.roads[Math.floor(Math.random()*this.tiles.roads.length)]);
   };
   
-  return road;
+  return Road;
 });

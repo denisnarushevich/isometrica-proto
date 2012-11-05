@@ -39,7 +39,7 @@ define(function(){
   }
   
   v2.prototype.toString = function(){
-    return this.y+','+this.x;
+    return this.x+','+this.y;
   }
   
   return v2;

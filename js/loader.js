@@ -1,17 +1,22 @@
-define(['./views/loaderView'], function(view){
-  return {
-    init: function(rootNode, resources){
-      this.resources = resources;
-      view.init();
-      view.render(rootNode);
-    },
-    loadResources: function(callback){
-      this.resources.load(function(progress, name){
-        view.setProgress(progress);
-        view.setText(name)
-      }, function(){
-        callback();
-      });
-    }
-  }
+define(['./views/loaderView'], function (View) {
+    var Loader = function (rootNode, resources) {
+        this.resources = resources;
+        this.view = new View();
+        this.view.render(rootNode);
+    };
+
+    Loader.prototype.resources = null;
+    Loader.prototype.view = null;
+
+    Loader.prototype.loadResources = function (callback) {
+        var loader = this;
+        this.resources.load(function (progress, name) {
+            loader.view.setProgress(progress);
+            loader.view.setText(name)
+        }, function () {
+            callback();
+        });
+    };
+
+    return Loader;
 });
