@@ -1,16 +1,18 @@
 define(['./vector2'], function (Vec2) {
-    var player = function () {
+    var Player = function () {
         this.setPosition(new Vec2(252,1027));
     }
 
-    player.prototype.position = null;
+    Player.prototype.position = null;
 
-    player.prototype.getPosition = function () {
+    Player.prototype.getPosition = function () {
         return this.position;
     };
 
-    player.prototype.setPosition = function(position){
+    Player.prototype.setPosition = function(position){
         this.position = position;
         return this;
     };
+
+    return Player;
 });

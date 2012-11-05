@@ -37,15 +37,17 @@ window.requestAnimFrame = (function(){
     };
 })();
 
-require(['./loader', 'core/g', './views/gView'], function(loader, g, gView){
-  window.g = g;
+var g;
+
+require(['./core/resources', './loader', 'core/g', './views/gView'], function(Resources, Loader, G, gView){
   $(function(){ //waiting for DOM to be ready.
-    var root = document.body;
-    loader.init(root, g.resources);
+    var resources = new Resources();
+    var loader = new Loader(document.body, resources);
     loader.loadResources(function(){
-      gView.render(root);
-      g.init(document.getElementById('viewport'));
+      (new gView()).render(document.body);
+      g = new G(document.getElementById('viewport'), resources);
     });
+
   });
 });
 

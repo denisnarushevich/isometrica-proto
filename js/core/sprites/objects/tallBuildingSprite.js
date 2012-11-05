@@ -1,11 +1,12 @@
 define(['./buildingSprite'], function(parent){
-  var sprite = function(model){
+  var Sprite = function(model){
     parent.call(this, model);
     this.setSize([64, 128]);
     this.setOrigin([0, 113]);
   };
   
-  sprite.prototype = Object.create(parent.prototype);
+  Sprite.prototype = Object.create(parent.prototype);
+  Sprite.prototype.name = 'tallBuilding';
   
-  return sprite;
+  return Sprite;
 });

@@ -1,19 +1,22 @@
 define(function(){
-  return {
-    template: null,
-    init: function(){
-      return this;
-    },
-    render: function(rootNode){
+  var View = function(){
+
+  };
+
+  View.prototype.template = null;
+
+  View.prototype.render = function(rootNode){
       while ( rootNode.firstChild )
-        rootNode.removeChild( rootNode.firstChild );
-      
+          rootNode.removeChild( rootNode.firstChild );
+
       rootNode.appendChild(this.getTemplate());
-      
+
       return this;
-    },
-    getTemplate: function(){
+  };
+
+  View.prototype.getTemplate = function(){
       return this.template;
-    }
-  }
+  };
+
+  return View;
 });

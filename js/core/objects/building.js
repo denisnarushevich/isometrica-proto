@@ -1,12 +1,12 @@
-define(['./object', '../sprites/buildingSprite'], function(parent, sprite){
-  var building = function(tile){
-    parent.call(this, tile); //parent init()
-    this.type = 'building';
-    this.sprite = new sprite(this);
-  }
-  
-  building.prototype = Object.create(parent.prototype);
-  
-  return building;
+define(['./object'], function (Parent) {
+    var Building = function (tile) {
+        Parent.call(this, tile); //parent init()
+    }
+
+    Building.prototype = Object.create(Parent.prototype);
+    Building.prototype.type = 'building';
+    Building.prototype.typeName = 'building';
+
+    return Building;
 });
   
