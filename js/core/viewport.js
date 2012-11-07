@@ -2,13 +2,11 @@ define(['./scene', './renderer', './sprites'], function (Scene, Renderer, Sprite
     function Viewport(graphics, containerElement, viewPosition) {
         this.containerElement = containerElement;
 
-        this.size = new Int16Array([
-            containerElement.clientWidth,
-            containerElement.clientHeight
-        ]);
+        this.size = new Int16Array(2);
 
         this.graphics = graphics;
         this.scene = new Scene(this, viewPosition);
+
         this.renderer = new Renderer(containerElement);
         this.sprites = new Sprites(this, graphics.images);
 
