@@ -4,7 +4,6 @@ define(function () {
         this.container = containerElement;
         this.screen = this.container.appendChild(document.createElement('canvas')).getContext('2d');
         this.screen.canvas.style.cssText = 'width: 100%; height: 100%;';
-        this.updateSize();
     }
 
     Renderer.prototype.container = null;
@@ -55,11 +54,6 @@ define(function () {
             layers[i].canvas.height = size[1];
         }
 
-        return this;
-    };
-
-    Renderer.prototype.updateSize = function () {
-        this.setSize([this.container.clientWidth, this.container.clientHeight]);
         return this;
     };
 

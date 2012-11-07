@@ -70,6 +70,10 @@ define(['jquery', './vector2'], function ($, Vec2) {
             });
         });
 
+        $(this.viewport.containerElement).bind('mouseout', function(){
+           $(this).trigger('mouseup');
+        });
+
         $(this.viewport.containerElement).bind('mousemove', function(event){
             controls.currentPointedPixel.setX(event.pageX);
             controls.currentPointedPixel.setY(event.pageY);
