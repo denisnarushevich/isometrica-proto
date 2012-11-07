@@ -1,37 +1,4 @@
-define(['./viewport'], function (Viewport) {
-//define(['./scene', './renderer', './sprites'], function (Scene, Renderer, Sprites) {
-
-    function Graphics (logic, images) {
-        this.logic = logic;
-        this.images = images;
-        this.viewports = [];
-    };
-
-    Graphics.prototype.logic = null;
-    Graphics.prototype.images = null;
-    Graphics.prototype.viewports = null;
-
-    Graphics.prototype.createViewport = function (containerElement, viewPosition) {
-        var vps = this.viewports;
-        return vps[vps.length] = new Viewport(this, containerElement, viewPosition);
-    };
-
-    Graphics.prototype.renderViewports = function () {
-        var vps = this.viewports, vp;
-        for(var i = 0; vp = vps[i]; i++)
-            vp.render();
-        return this;
-    };
-
-    Graphics.prototype.startRenderLoop = function () {
-        this.renderViewports();
-        var graphics = this;
-        window.requestAnimFrame(function () {
-            graphics.startRenderLoop();
-        });
-    };
-
-    return Graphics;
+define(['./scene', './renderer', './sprites'], function (Scene, Renderer, Sprites) {
 
     var Graphics = function (logic, assets) {
         this.layers = {};
@@ -90,9 +57,21 @@ define(['./viewport'], function (Viewport) {
         window.requestAnimFrame(function () {
             graphics.renderFrames();
         });
-    };
+    }
 
+    Graphics.prototype.coordinatesTransform = function (x, y, z) {
+        var gridSpacing = this.logic.world.grid.spacing;
+        var angle = Math.PI / -4;
 
+        x = (x - this.scene.at.x) * gridSpacing[0];
+        y = (y - this.scene.at.y) * gridSpacing[1];
+        z *= gridSpacing[2];
+
+        return [
+            1 + x * Math.cos(angle) - y * Math.sin(angle) + this.scene.size[0] / 2 | 0,
+            1 - ( x * Math.sin(angle) + y * Math.cos(angle) - this.scene.size[1] ) / 2 - z | 0
+        ];
+    }
 
     return Graphics;
 });

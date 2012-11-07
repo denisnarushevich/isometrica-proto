@@ -1,7 +1,7 @@
 define(['jquery', './vector2'], function ($, Vec2) {
-    function Controls(logic, graphics) {
+    function Controls(logic, viewport) {
         this.logic = logic;
-        this.graphics = graphics;
+        this.viewport = viewport;
         this.currentPointedPixel = new Vec2(0, 0); //e.g. cursor position(pixel)
         this.control1 = false; //e.g. is left mouse button pressed or not
         this.control2 = false; //e.g. is right mouse button pressed or not
@@ -56,21 +56,21 @@ define(['jquery', './vector2'], function ($, Vec2) {
     Controls.prototype.bindDeviceToControls = function(){
         controls = this;
 
-        $(window).bind('mousedown', function(){
+        $(this.viewport.containerElement).bind('mousedown', function(){
             controls.control1 = true;
             $(document.body).css({
                 cursor:'pointer'
             });
         });
 
-        $(window).bind('mouseup', function(){
+        $(this.viewport.containerElement).bind('mouseup', function(){
             controls.control1 = false;
             $(document.body).css({
                 cursor:'default'
             });
         });
 
-        $(window).bind('mousemove', function(event){
+        $(this.viewport.containerElement).bind('mousemove', function(event){
             controls.currentPointedPixel.setX(event.pageX);
             controls.currentPointedPixel.setY(event.pageY);
             //console.log(controls.transformPixelToPosition(controls.currentPointedPixel).toString());

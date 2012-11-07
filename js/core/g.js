@@ -1,19 +1,22 @@
 define(['./controls', './graphics', './logic'], function (Controls, Graphics, Logic) {
 
-    var Core = function (viewportBox, assets) {
+    function Core(mainViewportContainerElement, assets) {
         this.assets = assets;
-        this.logic = new Logic();
-        this.graphics = new Graphics(viewportBox, this.logic, assets);
-        this.controls = new Controls(this.logic, this.graphics);
 
+        this.logic = new Logic();
         this.logic.startUpdateLoop();
-        this.graphics.renderFrames();
+
+        this.graphics = new Graphics(this.logic, assets.images);
+        this.mainViewport = this.graphics.createViewport(mainViewportContainerElement, this.logic.player.getPosition());
+        this.graphics.startRenderLoop();
+
+        new Controls(this.logic, this.mainViewport);
     }
 
-    Core.prototype.resources = null;
+    Core.prototype.assets = null;
     Core.prototype.logic = null;
     Core.prototype.graphics = null;
-    Core.prototype.controls = null;
+    Core.prototype.mainViewport = null;
 
     return Core;
 });

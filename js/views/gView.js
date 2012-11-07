@@ -10,7 +10,7 @@ define(['./view'], function (Parent) {
         if (this.template) return this.template;
 
         var gameView = document.createElement('div');
-        gameView.appendChild(document.createElement('div')).id = 'viewport';
+        gameView.appendChild(document.createElement('div')).id = 'mainViewport';
         gameView.id = 'game';
 
         return this.template = gameView;

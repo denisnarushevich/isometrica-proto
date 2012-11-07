@@ -6,7 +6,7 @@ define(['./world', './player'], function (World, Player) {
 
     logic.prototype.update = function () {
         this.world.update();
-        this.player.getPosition().setX(this.player.getPosition().getX() - 1);
+        //this.player.getPosition().setX(this.player.getPosition().getX() +2);
     };
 
     logic.prototype.startUpdateLoop = function () {

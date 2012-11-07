@@ -9,9 +9,12 @@ define([
 './sprites/objects/treeSprite',
 './sprites/objects/vehicleSprite',
 ],function(){
-    var Sprites = function(graphics, images){
-        this.graphics = graphics;
+    var Sprites = function(viewport, images){
+        this.viewport = viewport;
         this.images = images;
+
+        this.tile = {};
+        this.object = {};
     };
 
     Sprites.prototype = {};
@@ -19,8 +22,8 @@ define([
     Sprites.prototype.constructors = {};
     Sprites.prototype.constructors.object = {};
     Sprites.prototype.constructors.tile = {};
-    Sprites.prototype.tile = {};
-    Sprites.prototype.object = {};
+    Sprites.prototype.tile = null;
+    Sprites.prototype.object = null;
     for (var i = 0; arguments[i]; i++) {
         var Sprite = arguments[i];
         Sprites.prototype.constructors[Sprite.prototype.type][Sprite.prototype.name] = Sprite;
@@ -43,7 +46,6 @@ define([
         //console.log(1);
         var sprite = new this.constructors[collectionName][model.typeName](model);
         sprite.sprites = this;
-        sprite.update();
         //var pos = model.getPosition();
         //sprite.setOriginOffset(this.graphics.coordinatesTransform(pos.getX(), pos.getY(), pos.getZ()));
 
