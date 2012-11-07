@@ -1,6 +1,7 @@
 define(function () {
     var sprite = function (model) {
         this.model = model;
+        this.offset = new Int32Array(2);
     }
 
     sprite.prototype = {
@@ -12,6 +13,7 @@ define(function () {
         type:null, //e.g. 'tile'
         name:null, //e.g. 'tree'
         sprites: null, //sprites *class*
+        offset: null,
         setSize:function (size) {
             this.size = size;
             return this;
@@ -32,10 +34,10 @@ define(function () {
             return this.originOffset;
         },
         getOffset:function () {
-            return [
-                this.getOriginOffset()[0] - this.getOrigin()[0],
-                this.getOriginOffset()[1] - this.getOrigin()[1]
-            ];
+            var origin = this.getOrigin(), originOffset = this.getOriginOffset();
+            this.offset[0] = originOffset[0] - origin[0];
+            this.offset[1] = originOffset[1] - origin[1];
+            return this.offset
         },
         getSize:function () {
             return this.size;
@@ -49,10 +51,6 @@ define(function () {
         },
         getModel:function () {
             return this.model;
-        },
-        update: function(){
-            var pos = this.getModel().getPosition();
-            this.setOriginOffset(this.sprites.graphics.coordinatesTransform(pos.getX(), pos.getY(), pos.getZ()));
         },
 
         //test

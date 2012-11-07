@@ -61,11 +61,11 @@ define(['./vector2'], function(v2){
   }
   
   vector3.toArray = function(){
-    return [
+    return new Int32Array([
       this.y,
       this.x,
       this.z
-    ];
+    ]);
   }
   
   vector3.toString = function(){

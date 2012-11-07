@@ -2,56 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b64dabe-715f-46cb-a6e1-0c43d22a3ea0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/core/sprites.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/core/sprites/tiles/landSprite.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/core/sprites/tiles/waterSprite.js" />
-      <change type="DELETED" beforePath="D:\dev\isometrica\js\core\objects\positionable.js" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\isometrica\js\core\objects\flats2.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/controls.js" afterPath="$PROJECT_DIR$/js/core/controls.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/g.js" afterPath="$PROJECT_DIR$/js/core/g.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/graphics.js" afterPath="$PROJECT_DIR$/js/core/graphics.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/grid.js" afterPath="$PROJECT_DIR$/js/core/grid.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/gridPoint.js" afterPath="$PROJECT_DIR$/js/core/gridPoint.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/images.js" afterPath="$PROJECT_DIR$/js/core/images.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/logic.js" afterPath="$PROJECT_DIR$/js/core/logic.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/objects.js" afterPath="$PROJECT_DIR$/js/core/objects.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/objects/building.js" afterPath="$PROJECT_DIR$/js/core/objects/building.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/objects/car1.js" afterPath="$PROJECT_DIR$/js/core/objects/car1.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/objects/house1.js" afterPath="$PROJECT_DIR$/js/core/objects/house1.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/objects/object.js" afterPath="$PROJECT_DIR$/js/core/objects/object.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/objects/tallBuilding.js" afterPath="$PROJECT_DIR$/js/core/objects/tallBuilding.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/objects/tree.js" afterPath="$PROJECT_DIR$/js/core/objects/tree.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/objects/tree1.js" afterPath="$PROJECT_DIR$/js/core/objects/tree1.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/objects/tree2.js" afterPath="$PROJECT_DIR$/js/core/objects/tree2.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/objects/vehicle.js" afterPath="$PROJECT_DIR$/js/core/objects/vehicle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/player.js" afterPath="$PROJECT_DIR$/js/core/player.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/renderer.js" afterPath="$PROJECT_DIR$/js/core/renderer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/resources.js" afterPath="$PROJECT_DIR$/js/core/resources.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/scene.js" afterPath="$PROJECT_DIR$/js/core/scene.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/sprites.js" afterPath="$PROJECT_DIR$/js/core/sprites.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/sprites/sprite.js" afterPath="$PROJECT_DIR$/js/core/sprites/sprite.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/tiles.js" afterPath="$PROJECT_DIR$/js/core/tiles.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/tiles/land.js" afterPath="$PROJECT_DIR$/js/core/tiles/land.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/tiles/road.js" afterPath="$PROJECT_DIR$/js/core/tiles/road.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/tiles/shore.js" afterPath="$PROJECT_DIR$/js/core/tiles/shore.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/tiles/tile.js" afterPath="$PROJECT_DIR$/js/core/tiles/tile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/tiles/water.js" afterPath="$PROJECT_DIR$/js/core/tiles/water.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/vector2.js" afterPath="$PROJECT_DIR$/js/core/vector2.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/vector3.js" afterPath="$PROJECT_DIR$/js/core/vector3.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/core/world.js" afterPath="$PROJECT_DIR$/js/core/world.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/loader.js" afterPath="$PROJECT_DIR$/js/loader.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/main.js" afterPath="$PROJECT_DIR$/js/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/views/gView.js" afterPath="$PROJECT_DIR$/js/views/gView.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/views/loaderView.js" afterPath="$PROJECT_DIR$/js/views/loaderView.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/views/view.js" afterPath="$PROJECT_DIR$/js/views/view.js" />
-      <change type="MOVED" beforePath="D:\dev\isometrica\js\core\sprites\treeSprite.js" afterPath="$PROJECT_DIR$/js/core/sprites/objects/treeSprite.js" />
-      <change type="MOVED" beforePath="D:\dev\isometrica\js\core\sprites\roadTileSprite.js" afterPath="$PROJECT_DIR$/js/core/sprites/tiles/roadSprite.js" />
-      <change type="MOVED" beforePath="D:\dev\isometrica\js\core\sprites\tallBuildingSprite.js" afterPath="$PROJECT_DIR$/js/core/sprites/objects/tallBuildingSprite.js" />
-      <change type="MOVED" beforePath="D:\dev\isometrica\js\core\sprites\objectSprite.js" afterPath="$PROJECT_DIR$/js/core/sprites/objects/objectSprite.js" />
-      <change type="MOVED" beforePath="D:\dev\isometrica\js\core\sprites\vehicleSprite.js" afterPath="$PROJECT_DIR$/js/core/sprites/objects/vehicleSprite.js" />
-      <change type="MOVED" beforePath="D:\dev\isometrica\js\core\sprites\shoreTileSprite.js" afterPath="$PROJECT_DIR$/js/core/sprites/tiles/shoreSprite.js" />
-      <change type="MOVED" beforePath="D:\dev\isometrica\js\core\sprites\buildingSprite.js" afterPath="$PROJECT_DIR$/js/core/sprites/objects/buildingSprite.js" />
-      <change type="MOVED" beforePath="D:\dev\isometrica\js\core\sprites\tileSprite.js" afterPath="$PROJECT_DIR$/js/core/sprites/tiles/tileSprite.js" />
     </list>
     <ignored path="isometrica.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -71,28 +35,10 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="tile.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/core/tiles/tile.js">
+      <file leaf-file-name="g.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/core/g.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="12" selection-start="1538" selection-end="1538" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tiles.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/core/tiles.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="46" selection-start="2573" selection-end="2573" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="logic.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/core/logic.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="8" selection-start="258" selection-end="258" vertical-scroll-proportion="0.0">
+            <state line="3" column="29" selection-start="175" selection-end="175" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -101,7 +47,16 @@
       <file leaf-file-name="graphics.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/core/graphics.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="46" selection-start="1394" selection-end="1394" vertical-scroll-proportion="0.0">
+            <state line="20" column="8" selection-start="697" selection-end="742" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="viewport.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/core/viewport.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="39" selection-start="781" selection-end="781" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -110,34 +65,16 @@
       <file leaf-file-name="objects.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/core/objects.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="25" selection-start="325" selection-end="325" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="controls.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/core/controls.js">
+      <file leaf-file-name="renderer.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/core/renderer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="11" selection-start="1995" selection-end="2625" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="vector2.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/core/vector2.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="0" selection-start="246" selection-end="246" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="g.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/core/g.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="0" selection-start="336" selection-end="336" vertical-scroll-proportion="0.0">
+            <state line="31" column="67" selection-start="1277" selection-end="1277" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -146,16 +83,47 @@
       <file leaf-file-name="scene.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/core/scene.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="30" selection-start="2480" selection-end="2480" vertical-scroll-proportion="1.0320089">
+            <state line="119" column="46" selection-start="4601" selection-end="4601" vertical-scroll-proportion="0.2143774">
+              <folding>
+                <element signature="e#347#1208#0" expanded="false" />
+                <element signature="e#1270#1888#0" expanded="false" />
+                <element signature="e#3658#4089#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="vector2.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/core/vector2.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="3" selection-start="249" selection-end="249" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="grid.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/core/grid.js">
+      <file leaf-file-name="sprites.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/core/sprites.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="40" column="0" selection-start="1170" selection-end="1170" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sprite.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/core/sprites/sprite.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="36" column="41" selection-start="998" selection-end="1014" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="logic.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/core/logic.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="10" selection-start="260" selection-end="260" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -171,22 +139,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/js/core/sprites/sprite.js" />
-        <option value="$PROJECT_DIR$/js/core/sprites.js" />
-        <option value="$PROJECT_DIR$/js/core/world.js" />
-        <option value="$PROJECT_DIR$/js/core/objects/dynamicObject.js" />
-        <option value="$PROJECT_DIR$/js/core/graphics.js" />
-        <option value="$PROJECT_DIR$/js/core/objects/movingObject.js" />
-        <option value="$PROJECT_DIR$/js/core/pathFinder.js" />
-        <option value="$PROJECT_DIR$/js/core/objects/object.js" />
-        <option value="$PROJECT_DIR$/js/core/objects.js" />
-        <option value="$PROJECT_DIR$/js/core/objects/vehicle.js" />
-        <option value="$PROJECT_DIR$/js/core/scene.js" />
-        <option value="$PROJECT_DIR$/js/core/g.js" />
         <option value="$PROJECT_DIR$/js/core/tiles/tile.js" />
-        <option value="$PROJECT_DIR$/js/core/controls.js" />
-        <option value="$PROJECT_DIR$/js/core/logic.js" />
+        <option value="$PROJECT_DIR$/js/core/vector2.js" />
+        <option value="$PROJECT_DIR$/js/core/vector3.js" />
         <option value="$PROJECT_DIR$/js/core/tiles.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/js/core/controls.js" />
+        <option value="$PROJECT_DIR$/js/views/gView.js" />
+        <option value="$PROJECT_DIR$/js/main.js" />
+        <option value="$PROJECT_DIR$/js/core/g.js" />
+        <option value="$PROJECT_DIR$/js/core/graphics.js" />
+        <option value="$PROJECT_DIR$/js/core/renderer.js" />
+        <option value="$PROJECT_DIR$/js/core/sprites.js" />
+        <option value="$PROJECT_DIR$/js/core/viewport.js" />
+        <option value="$PROJECT_DIR$/js/core/sprites/sprite.js" />
+        <option value="$PROJECT_DIR$/js/core/logic.js" />
+        <option value="$PROJECT_DIR$/js/core/scene.js" />
       </list>
     </option>
   </component>
@@ -284,7 +252,65 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="isometrica" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="isometrica" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="isometrica" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="isometrica" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="isometrica" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="isometrica" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sprites" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -316,13 +342,13 @@
     <property name="FileHistory.org.zmlx.hg4idea.provider.HgHistoryProvider_treeWidth3" value="970" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="FileHistory.org.zmlx.hg4idea.provider.HgHistoryProvider_treeOrder3" value="3" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\dev\isometrica\js\core\sprites\tiles" />
       <recent name="D:\dev\isometrica\js\core" />
+      <recent name="D:\dev\isometrica\js\core\sprites\tiles" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\dev\isometrica\js\core\sprites\objects" />
@@ -352,6 +378,9 @@
       <setting name="jsFile" value="" />
       <method />
     </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="$PROJECT_DIR$" coffeescript-run="false">
+      <method />
+    </configuration>
     <configuration default="true" type="XSLT" factoryName="XSLT">
       <option name="myOutputFile" />
       <option name="myOpenOutputFile" value="false" />
@@ -366,9 +395,6 @@
       <OutputType value="CONSOLE" save-to-file="false" />
       <FileType name="XML" />
       <JdkChoice value="FROM_MODULE" />
-      <method />
-    </configuration>
-    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="$PROJECT_DIR$" coffeescript-run="false">
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugSession" factoryName="Remote">
@@ -432,8 +458,9 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19895834" sideWeight="0.15037593" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19895834" sideWeight="0.84210527" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13641246" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19895834" sideWeight="0.1471536" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19895834" sideWeight="0.7089152" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15121412" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
@@ -442,7 +469,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32867885" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -503,105 +529,119 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js/core/objects/vehicle.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="3" selection-start="2266" selection-end="2266" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/core/sprites/sprite.js">
+    <entry file="file://$PROJECT_DIR$/js/core/sprites/tiles/landSprite.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/core/sprites.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.05629139" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/core/sprites/tiles/tileSprite.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/core/gridPoint.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/core/g.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="336" selection-end="336" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/core/graphics.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="46" selection-start="1394" selection-end="1394" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavascriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript5.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="7" selection-start="858" selection-end="858" vertical-scroll-proportion="0.33333334" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/core/vector2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="246" selection-end="246" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/core/objects.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="25" selection-start="325" selection-end="325" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/core/grid.js">
-      <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="23" selection-start="1519" selection-end="1519" vertical-scroll-proportion="-32.53846">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/views/gView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="71" selection-start="380" selection-end="380" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="67" selection-start="1474" selection-end="1474" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/core/controls.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="11" selection-start="1995" selection-end="2625" vertical-scroll-proportion="0.0">
+        <state line="60" column="14" selection-start="2568" selection-end="2568" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/core/tiles/tile.js">
+    <entry file="file://$PROJECT_DIR$/js/core/graphics.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="12" selection-start="1538" selection-end="1538" vertical-scroll-proportion="0.0">
+        <state line="20" column="8" selection-start="697" selection-end="742" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/core/viewport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="39" selection-start="781" selection-end="781" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/core/objects.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/core/g.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="29" selection-start="175" selection-end="175" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/core/renderer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="67" selection-start="1277" selection-end="1277" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/core/sprites/sprite.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="41" selection-start="998" selection-end="1014" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/core/logic.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="8" selection-start="258" selection-end="258" vertical-scroll-proportion="0.0">
+        <state line="8" column="10" selection-start="260" selection-end="260" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/core/tiles.js">
+    <entry file="file://$PROJECT_DIR$/js/core/sprites.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="46" selection-start="2573" selection-end="2573" vertical-scroll-proportion="0.0">
+        <state line="40" column="0" selection-start="1170" selection-end="1170" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/core/vector2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="3" selection-start="249" selection-end="249" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/core/scene.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="30" selection-start="2480" selection-end="2480" vertical-scroll-proportion="1.0320089">
-          <folding />
+        <state line="119" column="46" selection-start="4601" selection-end="4601" vertical-scroll-proportion="0.2143774">
+          <folding>
+            <element signature="e#347#1208#0" expanded="false" />
+            <element signature="e#1270#1888#0" expanded="false" />
+            <element signature="e#3658#4089#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
