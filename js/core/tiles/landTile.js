@@ -9,14 +9,17 @@ define(['./tile'], function (Parent) {
     LandTile.prototype.spriteType = 'LandTileSprite';
 
     LandTile.prototype.plantTree = function () {
-        var world = this.tiles.world, pos = this.getPosition(), x = pos.getX(), y = pos.getY();
-        if (world.forestDistribution(x, y) > 0) {
+        var world = this.tiles.world,
+            pos = this.getPosition(),
+            x = pos.getX(),
+            y = pos.getY();
+
+        if (world.objects.getObjectsInTile(x, y).length == 0 && world.forestDistribution(x, y) > 0) {
             var d = world.forestDistribution(x * 2, y * 2);
             var tree = ['Tree1Object', 'Tree2Object'][Math.ceil(d)];
             var posX = x + 1/2 + world.forestDistribution(y / 2, x / 2) / 4;
             var posY = y + 1/2 + world.forestDistribution(x / 2, y / 2) / 4;
-            this.tiles.world.objects.createObject(tree, posX, posY);
-            //this.tiles.world.objects.createObject(tree, x + Math.abs(d), posY + Math.abs(d));
+            world.objects.createObject(tree, posX, posY);
         }
         return;
     }
