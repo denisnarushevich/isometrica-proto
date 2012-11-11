@@ -32,10 +32,10 @@ define(function(){
   }
   
   v2.prototype.toArray = function(){
-    return new Int32Array([
-      this.y,
-      this.x
-    ]);
+    return [
+      this.x,
+      this.y
+    ];
   }
   
   v2.prototype.toString = function(){

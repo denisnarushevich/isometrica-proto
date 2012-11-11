@@ -1,22 +1,21 @@
 define(['./../sprite'], function(Parent){
-  var Sprite = function(model){
-    Parent.call(this, model);
+    function ObjectSprite(ObjectSprites, model) {
+        Parent.call(this, ObjectSprites, model);
   };
   
-  Sprite.prototype = Object.create(Parent.prototype);
+  ObjectSprite.prototype = Object.create(Parent.prototype);
+  ObjectSprite.prototype.type = "ObjectSprite";
 
-  Sprite.prototype.type = 'object';
+  ObjectSprite.prototype.type = 1;
 
-  Sprite.prototype.getImages = function(){
-    if (this.images) return this.images;
-    
+  ObjectSprite.prototype.getImages = function(){
     Parent.prototype.getImages.call(this);
-    
-    this.images.push(this.sprites.images.getImage('objects/'+this.getModel().getType()+'/'+this.getModel().getName()));
+    var name = this.getModel().getName();
+    this.images.push(this.sprites.images.getImage('objects/'+name+'/'+name));
 
     return this.images;
   }
   
-  return Sprite;
+  return ObjectSprite;
 });
 

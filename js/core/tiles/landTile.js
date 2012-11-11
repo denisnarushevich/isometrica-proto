@@ -1,18 +1,18 @@
-define(['./tile'], function (Tile) {
-    var Land = function (tiles, gridPoints) {
-        Tile.call(this, tiles, gridPoints); //calling parent constructor
-        this.type = this._LAND;
-        this.typeName = 'land';
+define(['./tile'], function (Parent) {
+    function LandTile(tiles, gridPoints) {
+        Parent.call(this, tiles, gridPoints); //calling parent constructor
         this.plantTree();
     }
 
-    Land.prototype = Object.create(Tile.prototype);
+    LandTile.prototype = Object.create(Parent.prototype);
+    LandTile.prototype.type = 'LandTile';
+    LandTile.prototype.spriteType = 'LandTileSprite';
 
-    Land.prototype.plantTree = function () {
+    LandTile.prototype.plantTree = function () {
         var world = this.tiles.world, pos = this.getPosition(), x = pos.getX(), y = pos.getY();
         if (world.forestDistribution(x, y) > 0) {
             var d = world.forestDistribution(x * 2, y * 2);
-            var tree = ['tree1', 'tree6'][Math.ceil(d)];
+            var tree = ['Tree1Object', 'Tree2Object'][Math.ceil(d)];
             var posX = x + 1/2 + world.forestDistribution(y / 2, x / 2) / 4;
             var posY = y + 1/2 + world.forestDistribution(x / 2, y / 2) / 4;
             this.tiles.world.objects.createObject(tree, posX, posY);
@@ -21,7 +21,7 @@ define(['./tile'], function (Tile) {
         return;
     }
 
-    Land.prototype.getTerrain = function () {
+    LandTile.prototype.getTerrain = function () {
         if (this.terrain) return this.terrain;
 
         return this.terrain = 'grass';
@@ -55,5 +55,5 @@ define(['./tile'], function (Tile) {
          }*/
     }
 
-    return Land;
+    return LandTile;
 });

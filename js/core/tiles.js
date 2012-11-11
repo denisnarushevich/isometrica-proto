@@ -1,4 +1,4 @@
-define(['./tiles/shore', './tiles/land', './tiles/water'], function (Shore, Land, Water) {
+define(['./tiles/shoreTile', './tiles/landTile', './tiles/waterTile'], function (Shore, Land, Water) {
 
     var Tiles = function (world) {
         this.world = world;

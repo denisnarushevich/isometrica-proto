@@ -1,8 +1,6 @@
 define([
-    './objects/tree1',
-    './objects/tree2',
-    './objects/car1',
-    './objects/house1'
+    './objects/tree1Object',
+    './objects/tree2Object'
 ], function () {
 
     var Objects = function (world) {
@@ -17,7 +15,8 @@ define([
     Objects.prototype.constructors = {};
     for (var i = 0; arguments[i]; i++) {
         var Object = arguments[i];
-        Objects.prototype.constructors[Object.prototype.name] = Object;
+
+        Objects.prototype.constructors[Object.prototype.type] = Object;
     };
 
     Object.prototype.objectsArray = null;
@@ -26,10 +25,10 @@ define([
     Objects.prototype.update = function () {
         var radius = 40,
             playerPosition = this.world.player.getPosition(),
-            x0 = Math.floor(playerPosition.getX() - radius),
-            x1 = Math.floor(playerPosition.getX() + radius),
-            y0 = Math.floor(playerPosition.getY() - radius),
-            y1 = Math.floor(playerPosition.getY() + radius);
+            x0 = (playerPosition.getX() - radius) | 0,
+            x1 = (playerPosition.getX() + radius) | 0,
+            y0 = (playerPosition.getY() - radius) | 0,
+            y1 = (playerPosition.getY() + radius) | 0;
 
         for(var x = x0; x < x1; x++)
             for(var y = y0; y < y1; y++){

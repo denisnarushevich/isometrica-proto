@@ -25,8 +25,8 @@ define(['./vector2'], function(v2){
   
   v3.prototype.toArray = function(){
     return [
-      this.y,
       this.x,
+      this.y,
       this.z
     ];
   }

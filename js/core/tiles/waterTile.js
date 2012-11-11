@@ -1,19 +1,19 @@
-define(['./tile', '../vector3'], function(Tile, Vec3){
-  var Water = function(tiles, gridPoints){
-    Tile.call(this, tiles, gridPoints);
-    this.type = this._WATER;
-    this.typeName = 'water';
+define(['./tile', '../vector3'], function(Parent, Vec3){
+  function WaterTile(tiles, gridPoints){
+    Parent.call(this, tiles, gridPoints);
     this.slopeId = 2222;
     this.deepness = tiles.world.getWaterLevel() - this.getPosition().getZ();
     this.setPosition(new Vec3(this.getPosition().getX(), this.getPosition().getY(), tiles.world.getWaterLevel()));
     return this;
   }
   
-  Water.prototype = Object.create(Tile.prototype);
+  WaterTile.prototype = Object.create(Parent.prototype);
+  WaterTile.prototype.type = 'WaterTile';
+  WaterTile.prototype.spriteType = 'LandTileSprite';
 
-  Water.prototype.deepness = null;
+  WaterTile.prototype.deepness = null;
   
-  Water.prototype.getTerrain = function(){
+  WaterTile.prototype.getTerrain = function(){
     if ( this.terrain ) return this.terrain;
     
     if ( this.deepness == 0 ) this.terrain = 'water';
@@ -22,5 +22,5 @@ define(['./tile', '../vector3'], function(Tile, Vec3){
     return this.terrain; 
   }
   
-  return Water;
+  return WaterTile;
 });

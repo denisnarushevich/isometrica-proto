@@ -19,6 +19,8 @@ define(['jquery', './vector2'], function ($, Vec2) {
     Controls.prototype.control1 = null;
     Controls.prototype.control2 = null;
 
+    Controls.prototype.lastHovered = null;
+
     /**
      * it takes mouse coordinates and rotates them by -45 degree, then dividing x coordinate by 2.
      * this way we get mouse position in "isometric" coordinates.
@@ -34,6 +36,9 @@ define(['jquery', './vector2'], function ($, Vec2) {
 
     Controls.prototype.update = function () {
         if (this.control1) { //if left mouse button is pressed
+            if(this.lastHovered)
+                this.lastHovered.getModel().isPointed(false); //disable higliting
+
             if (this.previousPointedPixel) {
                 var px0 = this.previousPointedPixel,
                     px1 = this.currentPointedPixel,
@@ -48,8 +53,10 @@ define(['jquery', './vector2'], function ($, Vec2) {
                 this.previousPointedPixel = new Vec2(this.currentPointedPixel.getX(), this.currentPointedPixel.getY());
             }
         } else {
-            if (this.previousPointedPixel)
+            if (this.previousPointedPixel) //disabled map panning
                 this.previousPointedPixel = null;
+
+            this.detectHoveredTile();
         }
     };
 
@@ -77,113 +84,39 @@ define(['jquery', './vector2'], function ($, Vec2) {
         $(this.viewport.containerElement).bind('mousemove', function(event){
             controls.currentPointedPixel.setX(event.pageX);
             controls.currentPointedPixel.setY(event.pageY);
-            //console.log(controls.transformPixelToPosition(controls.currentPointedPixel).toString());
             controls.update();
         });
     };
 
-    return Controls;
-
-    var controls = {
-        mouseAtWhenPressed:[0, 0],
-        mapAtWhenPressed:[0, 0],
-        sensitivity:1,
-        tileSideLen:null,
-        lastHovered:null
-    };
-
-    controls.init = function () {
-        $(window).bind('mousedown', function (event) {
-            controls.downHandler(event);
-        });
-
-        $(window).mousemove(function (event) {
-            controls.detectHoveredTile([event.pageX, event.pageY]);
-        });
-
-        this.tileSideLen = this.transformMousePosition(64, 0)[0]; //actually I don't know exactly(mathematically) why it works', but if tile image is in right proportions, the its ok.
-    };
-
-    controls.downHandler = function (event) {
-        this.mouseAtWhenPressed = this.transformMousePosition(event.pageX, event.pageY)
-        this.mapAtWhenPressed = [logic.player.position.getX(), logic.player.position.getY()];
-
-        $(window).bind('mousemove.scroll', function (event) {
-            controls.moveHandler(event);
-        });
-
-        $(window).bind('mouseup', function (event) {
-            controls.upHandler(event);
-        });
-
-        //setting cursor
-        $('body').css({
-            cursor:'pointer'
-        });
-
-        return false; //to avoid text and image selection
-    };
-
-    controls.upHandler = function (event) {
-        $(window).unbind('mousemove.scroll');
-        $(window).unbind('mouseup');
-
-        //UNsetting cursor
-        $('body').css({
-            cursor:'initial'
-        });
-    };
-
-    controls.moveHandler = function (event) {
-        //current position of mouse pointer on screen in screen pixel coordinates
-        var currentAt = this.transformMousePosition(event.pageX, event.pageY);
-
-        //distance from click point, in screen pixel coordinates
-        var scrolledFor = [
-            ( currentAt[0] - this.mouseAtWhenPressed[0] ) / this.tileSideLen * this.sensitivity,
-            ( currentAt[1] - this.mouseAtWhenPressed[1] ) / this.tileSideLen * this.sensitivity
-        ];
-
-        logic.player.position.setX(this.mapAtWhenPressed[0] - scrolledFor[0]).setY(this.mapAtWhenPressed[1] - scrolledFor[1]);
-    };
-
-    /**
-     * it takes mouse coordinates and rotates them by -45 degree, then dividing x coordinate by 2.
-     * this way we get mouse position in "isometric" coordinates.
-     */
-    controls.transformMousePosition = function (x, y) {
-        return [
-            (x) * Math.cos(Math.PI / -4) / 2 - (y) * Math.sin(Math.PI / -4),
-            -( (x) * Math.sin(Math.PI / -4) / 2 + (y) * Math.cos(Math.PI / -4) ),
-        ];
-    };
-
-    controls.detectHoveredTile = function (mousePos) {
-        var tileSprites = scene.getTiles();
+    Controls.prototype.detectHoveredTile = function () {
+        var tileSprites = this.viewport.scene.getTiles(), sprite;
 
         //if we have previos hovered, then we first check if its still hovered,
         //and avoid looping through all scene
-        if (this.lastHovered && this.tileSpriteHitTest(this.lastHovered, mousePos)) {
+        if (this.lastHovered && this.tileSpriteHitTest(this.lastHovered)) {
             //do nothing
         } else {
-            for (var i = 0; tileSprites[i]; i++) {
-                var tileSprite = tileSprites[i];
-                if (this.tileSpriteHitTest(tileSprite, mousePos)) {
-                    if (this.lastHovered) this.lastHovered.highlite(false);
-                    tileSprite.highlite(true);
-                    this.lastHovered = tileSprite;
+            if (this.lastHovered) this.lastHovered.getModel().isPointed(false);
+
+            for (var i = 0; sprite = tileSprites[i]; i++) {
+                if (this.tileSpriteHitTest(sprite)) {
+                    sprite.getModel().isPointed(true);
+                    this.lastHovered = sprite;
+                    break;
                 }
             }
         }
-    }
+    };
 
-    controls.tileSpriteHitTest = function (tileSprite, mousePos) {
-        var canvas = window.tmpcnv ? window.tmpcnv : window.tmpcnv = document.createElement('canvas');
-        var context = window.tmpctx ? window.tmpctx : window.tmpctx = canvas.getContext('2d');
+    Controls.prototype.tileSpriteHitTest = function (sprite) {
+        //var canvas = window.tmpcnv ? window.tmpcnv : window.tmpcnv = document.createElement('canvas');
+        //var context = window.tmpctx ? window.tmpctx : window.tmpctx = canvas.getContext('2d');
+        var canvas = document.createElement('canvas');
+        var context = canvas.getContext('2d');
 
-        var sprite = tileSprite;
         var offset = sprite.getOffset();
         var size = sprite.getSize();
+        var mousePos = this.currentPointedPixel.toArray();
 
         //quick tile sprite bounding box hit test
         if (mousePos[0] < offset[0] ||
@@ -207,7 +140,7 @@ define(['jquery', './vector2'], function ($, Vec2) {
         ;
 
         return false;
-    }
+    };
 
-    return controls;
+    return Controls;
 });
