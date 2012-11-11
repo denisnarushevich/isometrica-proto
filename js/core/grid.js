@@ -1,12 +1,13 @@
 define(['./gridPoint'], function (GridPoint) {
-    var Grid = function (zValue) {
+    var Grid = function (world, zValue) {
         this.zValue = zValue;
         this.gridPoints = [];
         this.gridPointsStack = [];
+        this.world = world;
     };
 
+    Grid.prototype.world = null;
     Grid.prototype.zValue = null;
-    Grid.prototype.waterLevel = 0;
     Grid.prototype.spacing = new Int8Array([45, 45, 8]);
     Grid.prototype.gridPoints = null;
     Grid.prototype.gridPointsStack = null;

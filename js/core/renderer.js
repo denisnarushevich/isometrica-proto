@@ -11,10 +11,15 @@ define(function () {
     Renderer.prototype.layers = null;
 
     Renderer.prototype.createLayer = function () {
-        var key = this.layers.push(document.createElement('canvas').getContext('2d')) - 1;
-        this.layers[key].canvas.width = this.screen.canvas.width;
-        this.layers[key].canvas.height = this.screen.canvas.height;
-        return this.layers[key];
+        var canvas = document.createElement('canvas'),
+            context = canvas.getContext('2d');
+
+        canvas.width = this.screen.canvas.width;
+        canvas.height = this.screen.canvas.height;
+
+        this.layers.push(context);
+
+        return context;
     };
 
     Renderer.prototype.clearLayer = function (layer) {
@@ -38,10 +43,12 @@ define(function () {
     };
 
     Renderer.prototype.renderLayers = function () {
-        var layers = this.layers;
-        for (var i = 0; i < layers.length; i++) {
-            this.screen.drawImage(layers[i].canvas, 0, 0);
-        }
+        var layers = this.layers,
+            screen = this.screen,
+            layer, i;
+
+        for (i = 0; layer = layers[i]; i++)
+            screen.drawImage(layer.canvas, 0, 0);
     };
 
     Renderer.prototype.setSize = function (size) {

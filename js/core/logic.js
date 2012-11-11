@@ -1,7 +1,6 @@
-define(['./world', './player'], function (World, Player) {
+define(['./world',], function (World) {
     var logic = function () {
-        this.player = new Player();
-        this.world = new World(this.player);
+        this.world = new World();
     };
 
     logic.prototype.update = function () {

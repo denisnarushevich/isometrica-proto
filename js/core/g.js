@@ -7,7 +7,7 @@ define(['./controls', './graphics', './logic'], function (Controls, Graphics, Lo
         this.logic.startUpdateLoop();
 
         this.graphics = new Graphics(this.logic, assets.images);
-        this.mainViewport = this.graphics.createViewport(mainViewportContainerElement, this.logic.player.getPosition());
+        this.mainViewport = this.graphics.createViewport(mainViewportContainerElement, this.logic.world.player.getPosition());
         this.graphics.startRenderLoop();
 
         new Controls(this.logic, this.mainViewport);

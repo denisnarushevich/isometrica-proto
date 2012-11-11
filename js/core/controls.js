@@ -43,7 +43,7 @@ define(['jquery', './vector2'], function ($, Vec2) {
                 var px0 = this.previousPointedPixel,
                     px1 = this.currentPointedPixel,
                     movedPos = this.transformPixelToPosition(new Vec2(px1.getX() - px0.getX(), px1.getY() - px0.getY()));
-                    playerPos = this.logic.player.getPosition();
+                    playerPos = this.logic.world.player.getPosition();
 
                 playerPos.setX(playerPos.getX() - movedPos.getX() * this.sensitivity / 10);
                 playerPos.setY(playerPos.getY() - movedPos.getY() * this.sensitivity / 10);

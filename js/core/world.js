@@ -1,6 +1,6 @@
-define(['./grid', './tiles', 'lib/simplex/simplex-noise', './objects'], function (Grid, Tiles, Simplex, Objects) {
-    var World = function (player) {
-        this.player = player;
+define(['./grid', './tiles', 'lib/simplex/simplex-noise', './objects', './vector2', './player', './worldPosition'], function (Grid, Tiles, Simplex, Objects, Vec2, Player, WorldPosition) {
+    var World = function () {
+        this.player = new Player(new WorldPosition(this, 252, 1027));
 
         var simplex = new Simplex([151, 160, 137, 91, 90, 15,
             131, 13, 201, 95, 96, 53, 194, 233, 7, 225, 140, 36, 103, 30, 69, 142, 8, 99, 37, 240, 21, 10, 23,
@@ -21,7 +21,7 @@ define(['./grid', './tiles', 'lib/simplex/simplex-noise', './objects'], function
         //but because at the same time we need it to have smooth slopec <45Deg, there's a drawback - its too flat
         //height varies only from -16 to 16. can't afford anymore, because then there will be cliffs.
         //it would be good to invent something better then this aproach, with smooth slopes  and different landscape
-        this.grid = new Grid(function (x, y) {
+        this.grid = new Grid(this, function (x, y) {
             var land = 0, island = 0;
 
             land += simplex.noise2D(x / 512, y / 512) / 2; //noisemap of continets
@@ -47,13 +47,16 @@ define(['./grid', './tiles', 'lib/simplex/simplex-noise', './objects'], function
         this.tiles = new Tiles(this);
         this.objects = new Objects(this);
         this.waterLevel = 0;
+        this.size = new Vec2(65535, 65535);
     };
 
-    World.prototype.player = null;
     World.prototype.grid = null;
     World.prototype.tiles = null;
     World.prototype.objects = null;
     World.prototype.waterLevel = null;
+    World.prototype.size = null;
+    World.prototype.player = null;
+
 
     World.prototype.update = function () {
         this.tiles.update();
