@@ -17,9 +17,9 @@ define(['./viewport'], function (Viewport) {
     };
 
     Graphics.prototype.renderViewports = function () {
-        var vps = this.viewports, vp;
-        for(var i = 0; vp = vps[i]; i++)
-            vp.render();
+        var vps = this.viewports;
+        for(var i = 0; i < vps.length; i++)
+            vps[i].render();
         return this;
     };
 

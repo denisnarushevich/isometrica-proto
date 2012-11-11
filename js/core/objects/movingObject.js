@@ -1,9 +1,10 @@
 define(['./object'], function(Parent){
-    MovingObject = function(objects, x, y){
+    function MovingObject(objects, x, y){
         Parent.call(this, objects, x, y)
     };
 
     MovingObject.prototype = Object.create(Parent.prototype);
+    MovingObject.prototype.type = "MovingObject";
 
     MovingObject.prototype.update = function(){
         Parent.prototype.update.call(this);

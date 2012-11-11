@@ -1,5 +1,5 @@
 define(['../vector3'], function (Vec3) {
-    var Object = function (objects, x, y) {
+    function Object(objects, x, y) {
         this.objects = objects;
         this.position = new Vec3(x, y, objects.world.grid.getValue(x, y));
     };
@@ -7,7 +7,10 @@ define(['../vector3'], function (Vec3) {
     Object.prototype.id = null;
     Object.prototype.objects = null;
     Object.prototype.position = null;
-    Object.prototype.modelType = 'object';
+    Object.prototype.type = 'Object';
+    Object.prototype.baseType = 'Object';
+    Object.prototype.spriteType = null;
+    Object.prototype.name = null;
 
     Object.prototype.getName = function () {
         return this.name;
@@ -21,14 +24,17 @@ define(['../vector3'], function (Vec3) {
         return this.type;
     };
 
+    Object.prototype.getBaseType = function () {
+        return this.type;
+    };
+
+    Object.prototype.getSpriteType = function(){
+        return this.spriteType;
+    };
+
     Object.prototype.getTile = function () {
         var pos = this.getPosition();
         return this.objects.world.tiles.getTile(pos.getX() | 0, pos.getY() | 0);
-    };
-
-    Object.prototype.setName = function (name) {
-        this.name = name;
-        return this;
     };
 
     Object.prototype.setType = function (typeName) {

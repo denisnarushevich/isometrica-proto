@@ -47,12 +47,12 @@ define(['./scene', './renderer', './sprites'], function (Scene, Renderer, Sprite
 
         renderer.clearLayer(layers.tiles);
 
-        for (i = 0; tiles[i]; i++)
+        for (i = 0; i < tiles.length; i++)
             renderer.drawSprite(layers.tiles, tiles[i]); //tile layer
 
         this.renderer.clearLayer(layers.objects);
 
-        for (i = 0; objects[i]; i++) //~5ms
+        for (i = 0; i < objects.length; i++) //~5ms
             renderer.drawSprite(layers.objects, objects[i]); //object layer*/
 
         renderer.renderLayers();

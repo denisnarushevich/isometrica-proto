@@ -40,11 +40,12 @@ window.requestAnimFrame = (function () {
 
 require(['./core/resources', './loader', 'core/g', './views/gView'], function (Assets, Loader, Isometrica, gView) {
     $(function () { //waiting for DOM to be ready.
+        var isometricaRootNode = document.getElementById('isometricaRoot');
         var assets = new Assets();
-        var loader = new Loader(document.body, assets);
+        var loader = new Loader(isometricaRootNode, assets);
 
         loader.loadResources(function () {
-            (new gView()).render(document.body);
+            (new gView()).render(isometricaRootNode);
             window.isometrica = new Isometrica(mainViewport, assets);
         });
 

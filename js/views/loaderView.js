@@ -13,7 +13,7 @@ define(['./view'], function (Parent) {
         progressBar.appendChild(document.createElement('div')).className = 'bar';
         progressBar.appendChild(document.createElement('div')).className = 'text';
         progressBar.className = 'progressBar';
-        loaderView.id = 'loader';
+        loaderView.id = 'loaderView';
 
         return this.template = loaderView;
     };

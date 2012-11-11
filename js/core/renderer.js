@@ -25,7 +25,7 @@ define(function () {
         var images = sprite.getImages();
         var offset = sprite.getOffset();
 
-        for (var i = 0; images[i]; i++) {
+        for (var i = 0; i < images.length; i++) {
             //for(var i in images){
             //if($.browser.webkit) ctx.setAlpha(sprites[i].opacity);
             layer.drawImage(images[i], offset[0] | 0, offset[1] | 0);
@@ -34,11 +34,12 @@ define(function () {
         }
 
         //ctx.drawImage(sprite.getCanvas(), sprite.getOriginOffset()[0], sprite.getOriginOffset()[1]);
+        //sprite.sprites.freeSprite(sprite);
     };
 
     Renderer.prototype.renderLayers = function () {
         var layers = this.layers;
-        for (var i = 0; layers[i]; i++) {
+        for (var i = 0; i < layers.length; i++) {
             this.screen.drawImage(layers[i].canvas, 0, 0);
         }
     };
@@ -49,7 +50,7 @@ define(function () {
         this.screen.canvas.width = size[0];
         this.screen.canvas.height = size[1];
 
-        for (var i = 0; layers[i]; i++) {
+        for (var i = 0; i < layers.length; i++) {
             layers[i].canvas.width = size[0];
             layers[i].canvas.height = size[1];
         }

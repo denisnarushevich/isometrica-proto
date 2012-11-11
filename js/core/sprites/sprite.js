@@ -1,17 +1,18 @@
 define(function () {
-    var sprite = function (model) {
+    function Sprite(sprites, model) {
+        this.sprites = sprites;
         this.model = model;
-        this.offset = new Int32Array(2);
+        this.offset = [];
+        this.images = [];
     }
 
-    sprite.prototype = {
+    Sprite.prototype = {
         originOffset:null,
         size:null,
         origin:null,
         images:null,
         model:null, //tile or 'object' object.
-        type:null, //e.g. 'tile'
-        name:null, //e.g. 'tree'
+        type: 'Sprite', //e.g. 'tile'
         sprites: null, //sprites *class*
         offset: null,
         setSize:function (size) {
@@ -46,7 +47,6 @@ define(function () {
             return this.origin;
         },
         getImages:function () {
-            if (!this.images)this.images = [];
             return this.images;
         },
         getModel:function () {
@@ -72,5 +72,5 @@ define(function () {
         }
     }
 
-    return sprite;
+    return Sprite;
 });
