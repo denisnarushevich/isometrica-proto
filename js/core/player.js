@@ -1,6 +1,6 @@
-define(['./vector2'], function (Vec2) {
-    var Player = function () {
-        this.setPosition(new Vec2(252,1027));
+define(function () {
+    var Player = function (position) {
+        this.setPosition(position);
     }
 
     Player.prototype.position = null;

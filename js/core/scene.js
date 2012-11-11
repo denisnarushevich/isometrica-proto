@@ -36,6 +36,9 @@ define(function () {
                     if (x > at[0] - level && x < at[0] + level && y > at[1] - level && y < at[1] + level) continue; //skiping tileModels of previous levels
 
                     tile = tiles.getTile(x, y);
+
+                    if(!tile) continue;
+
                     sprite = sprites.createSpriteFor(tile);
                     sprite.setOriginOffset(this.coordinatesTransform(x, y, tile.getPosition().getZ()));
                     offset = sprite.getOffset();
