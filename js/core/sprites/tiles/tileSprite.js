@@ -11,23 +11,17 @@ define(['./../sprite'], function (Parent) {
     TileSprite.prototype = Object.create(Parent.prototype);
     TileSprite.prototype.type = "TileSprite";
 
-    TileSprite.prototype.type = 0;
-    //Sprite.prototype.size = new Uint16Array([64, 47]);
-    //Sprite.prototype.origin = new Uint16Array([0, 24]);
-
     TileSprite.prototype.getImages = function () {
-        var model = this.getModel();
-        this.images.push(this.sprites.images.getImage('terrain/' + model.getTerrain() + '/' + model.getSlopeId()));
-        this.highlite();
-        return this.images;
-    };
+        var model = this.getModel(),
+            imageAssets = this.sprites.images,
+            slopeId = model.getSlopeId(),
+            images = [imageAssets.getImage('terrain/' + model.getTerrain() + '/' + slopeId)];
 
-    TileSprite.prototype.highlite = function () {
-        var model = this.getModel();
         if(model.isPointed()){
-            this.images.push(this.sprites.images.getImage('terrain/misc/highlite/'+model.getSlopeId()));
+            images.push(imageAssets.getImage('terrain/misc/highlite/' + slopeId));
         }
-        return this;
+
+        return images;
     };
 
     return TileSprite;

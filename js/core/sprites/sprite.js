@@ -3,7 +3,6 @@ define(function () {
         this.sprites = sprites;
         this.model = model;
         this.offset = [];
-        this.images = [];
     }
 
     Sprite.prototype = {
@@ -35,10 +34,10 @@ define(function () {
             return this.originOffset;
         },
         getOffset:function () {
-            var origin = this.getOrigin(), originOffset = this.getOriginOffset();
-            this.offset[0] = originOffset[0] - origin[0];
-            this.offset[1] = originOffset[1] - origin[1];
-            return this.offset
+            var origin = this.getOrigin(), originOffset = this.getOriginOffset(), offset = this.offset;
+            offset[0] = originOffset[0] - origin[0];
+            offset[1] = originOffset[1] - origin[1];
+            return offset;
         },
         getSize:function () {
             return this.size;
@@ -51,24 +50,6 @@ define(function () {
         },
         getModel:function () {
             return this.model;
-        },
-
-        //test
-        getCanvas:function () {
-            if (this.canvas)return this.canvas;
-            var images = this.getImages();
-            var cnv = document.createElement('canvas');
-            cnv.width = this.getSize()[0];
-            cnv.height = this.getSize()[1];
-            var ctx = cnv.getContext('2d');
-            for (var i in images) {
-                ctx.drawImage(images[i], 0, 0);
-            }
-            return this.canvas = cnv;
-        },
-        getPixels:function () {
-            if (this.pixelArray)return this.pixelArray;
-            return this.getCanvas().getContext('2d').getImageData(0, 0, this.getSize()[0], this.getSize()[1]);
         }
     }
 

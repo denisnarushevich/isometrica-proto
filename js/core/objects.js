@@ -77,6 +77,8 @@ define([
 
         this.objectsIdArray[object.id = this.lastId++] = object;
 
+        object.globalId = this.world.lastGlobalId++;
+
         return object;
     };
 
