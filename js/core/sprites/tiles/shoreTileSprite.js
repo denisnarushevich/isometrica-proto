@@ -9,11 +9,17 @@ define(['./tileSprite'], function (Parent) {
     ShoreTileSprite.prototype.type = "ShoreTileSprite";
 
     ShoreTileSprite.prototype.getImages = function () {
-        Parent.prototype.getImages.call(this);
+        var model = this.getModel(),
+            imageAssets = this.sprites.images;
+            slopeId = model.getSlopeId();
+            images = [imageAssets.getImage('terrain/' + model.getTerrain() + '/' + slopeId),
+                imageAssets.getImage('terrain/shore/' + slopeId)];
 
-        this.images.push(this.sprites.images.getImage('terrain/shore/' + this.getModel().getSlopeId()));
-        this.highlite();
-        return this.images;
+        if(model.isPointed()){
+            images.push(imageAssets.getImage('terrain/misc/highlite/' + slopeId));
+        }
+
+        return images;
     }
 
     return ShoreTileSprite;

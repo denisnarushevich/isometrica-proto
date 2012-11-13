@@ -48,6 +48,8 @@ define(['./grid', './tiles', 'lib/simplex/simplex-noise', './objects', './vector
         this.objects = new Objects(this);
         this.waterLevel = 0;
         this.size = new Vec2(65535, 65535);
+
+        this.lastGlobalId = 0;
     };
 
     World.prototype.grid = null;
@@ -56,6 +58,7 @@ define(['./grid', './tiles', 'lib/simplex/simplex-noise', './objects', './vector
     World.prototype.waterLevel = null;
     World.prototype.size = null;
     World.prototype.player = null;
+    World.prototype.lastGlobalId = null;
 
 
     World.prototype.update = function () {

@@ -27,13 +27,12 @@ define(function () {
     };
 
     Renderer.prototype.drawSprite = function (layer, sprite) {
-        var images = sprite.getImages();
-        var offset = sprite.getOffset();
+        var images = sprite.getImages(), offset = sprite.getOffset(), image, i;
 
-        for (var i = 0; i < images.length; i++) {
+        for (i = 0; image = images[i]; i++) {
             //for(var i in images){
             //if($.browser.webkit) ctx.setAlpha(sprites[i].opacity);
-            layer.drawImage(images[i], offset[0] | 0, offset[1] | 0);
+            layer.drawImage(image, offset[0] | 0, offset[1] | 0);
 
             //ctx.putImageData(sprite.getPixels(), sprite.getOffset()[0], sprite.getOffset()[1]);
         }
@@ -52,14 +51,16 @@ define(function () {
     };
 
     Renderer.prototype.setSize = function (size) {
-        var layers = this.layers;
+        var layers = this.layers,
+            canvas = this.screen.canvas,
+            layer, i;
 
-        this.screen.canvas.width = size[0];
-        this.screen.canvas.height = size[1];
+        canvas.width = size[0];
+        canvas.height = size[1];
 
-        for (var i = 0; i < layers.length; i++) {
-            layers[i].canvas.width = size[0];
-            layers[i].canvas.height = size[1];
+        for (i = 0; layer = layers[i]; i++) {
+            layer.canvas.width = size[0];
+            layer.canvas.height = size[1];
         }
 
         return this;
