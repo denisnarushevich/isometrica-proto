@@ -1,50 +1,47 @@
-define(['./gridPoint'], function (GridPoint) {
+define(['./vector3'], function (Vector3) {
     var Grid = function (world, zValue) {
         this.zValue = zValue;
-        this.gridPoints = [];
-        this.gridPointsStack = [];
         this.world = world;
+        this.worldSizeY = world.getSize().getY();
+        this.zValues = new Array(world.getSize().getX() * world.getSize().getY());
     };
 
     Grid.prototype.world = null;
+    Grid.prototype.worldSizeY = null;
     Grid.prototype.zValue = null;
+    Grid.prototype.zValues = null;
     Grid.prototype.spacing = new Int8Array([45, 45, 8]);
-    Grid.prototype.gridPoints = null;
-    Grid.prototype.gridPointsStack = null;
 
     Grid.prototype.getPoint = function (x, y) {
         var gp, gps = this.gridPoints;
 
-        //check and return if gridpoint exists in cache
-        if (gps[x] && (gp = gps[x][y])) return gp;
-
-        //make sure that current X is array of Ys
-        if (!gps[x]) gps[x] = [];
-
-        //cache new gridpoint
-        this.gridPointsStack.push(gps[x][y] = gp = new GridPoint(this, x, y));
-
-        //fifo
-        if (this.gridPointsStack.length > 20000) {
-            var gpOld = this.gridPointsStack.shift();
-            delete gps[gpOld.getX()][gpOld.getY()];
-        }
+        return new Vector3(x, y, this.getZValue(x, y));
 
         return gp;
+    };
+
+    Grid.prototype.getZValue = function (x, y){
+        var zs = this.zValues,
+            index = x * this.worldSizeY + y,
+            val = zs[index];
+
+        if(val)return val;
+
+        return zs[index] = this.zValue(x, y);
     };
 
     Grid.prototype.getValue = function (x, y) {
         var x0 = x | 0,
             y0 = y | 0,
-            p1 = this.getPoint(x0, y0).getZ(),
-            p2 = this.getPoint(x0, y0 + 1).getZ(),
-            p3 = this.getPoint(x0 + 1, y0).getZ(),
-            p4 = this.getPoint(x0 + 1, y0 + 1).getZ(),
+            p1 = this.getZValue(x0, y0),
+            p2 = this.getZValue(x0, y0 + 1),
+            p3 = this.getZValue(x0 + 1, y0),
+            p4 = this.getZValue(x0 + 1, y0 + 1),
             xf = Math.abs(x % 1),
-            yf = Math.abs(y % 1),
-            i1, i2; //linear interpol
+            yf = Math.abs(y % 1);
+            //i1, i2; //linear interpol
 
-        if (x < 0) {
+        /*if (x < 0) {
             i1 = p3 * (1 - xf) + p1 * xf;
             i2 = p4 * (1 - xf) + p2 * xf;
         } else {
@@ -55,7 +52,10 @@ define(['./gridPoint'], function (GridPoint) {
         if (y < 0)
             return i2 * (1 - yf) + i1 * yf;
         else
-            return i1 * (1 - yf) + i2 * yf;
+            return i1 * (1 - yf) + i2 * yf;*/
+
+        //above lines are commented because x and y always is >0
+        return (p3 * (1 - xf) + p1 * xf) * (1 - yf) + (p4 * (1 - xf) + p2 * xf) * yf;
     };
 
     return Grid;

@@ -1,5 +1,9 @@
 define(['./grid', './tiles', 'lib/simplex/simplex-noise', './objects', './vector2', './player', './worldPosition'], function (Grid, Tiles, Simplex, Objects, Vec2, Player, WorldPosition) {
     var World = function () {
+        this.waterLevel = 0;
+        this.size = new Vec2(65535, 65535);
+        this.lastGlobalId = 0;
+
         this.player = new Player(new WorldPosition(this, 252, 1027));
 
         var simplex = new Simplex([151, 160, 137, 91, 90, 15,
@@ -46,10 +50,6 @@ define(['./grid', './tiles', 'lib/simplex/simplex-noise', './objects', './vector
 
         this.tiles = new Tiles(this);
         this.objects = new Objects(this);
-        this.waterLevel = 0;
-        this.size = new Vec2(65535, 65535);
-
-        this.lastGlobalId = 0;
     };
 
     World.prototype.grid = null;
@@ -68,7 +68,11 @@ define(['./grid', './tiles', 'lib/simplex/simplex-noise', './objects', './vector
 
     World.prototype.getWaterLevel = function(){
         return this.waterLevel;
-    }
+    };
+
+    World.prototype.getSize = function(){
+        return this.size;
+    };
 
     return World;
 });
