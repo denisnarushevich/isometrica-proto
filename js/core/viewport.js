@@ -48,7 +48,7 @@ define(['./scene', './renderer', './sprites'], function (Scene, Renderer, Sprite
             objectsLayer = layers.objects,
             sprite;
 
-        //this.renderer.clearLayer(layers.tiles);
+        this.renderer.clearLayer(layers.tiles);
 
         for (i = 0; sprite = tiles[i]; i++)
             renderer.drawSprite(tilesLayer, sprite); //tile layer
