@@ -37,6 +37,8 @@ define(function () {
 
                     tile = tiles.getTile(x, y);
 
+                    //if(!tile) continue;
+
                     sprite = sprites.createSpriteFor(tile);
                     sprite.setOriginOffset(this.coordinatesTransform(x, y, tile.getPosition().getZ()));
                     offset = sprite.getOffset();
