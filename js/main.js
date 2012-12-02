@@ -1,54 +1,70 @@
 require.config({
+    baseUrl:"./js",
     paths:{
-        "caat":"./lib/caat/caat-min",
-        "jquery":"./lib/jquery/jquery-1.7.1.min",
-        'core':'./core',
-        'lib':'./lib'
+        //dirs
+        "templates":"../templates",
+        "controllers":"./controllers",
+        "collections":"./collections",
+        "views":"./views",
+        "models":"./models",
+        lib:"./libs",
+        "libs":"./libs",
+        utils:'./utils',
+
+        //libs
+        "jquery":"libs/jquery/jquery-1.8.3.min",
+        "underscore":"libs/underscore/underscore-1.4.2",
+        "backbone":"libs/backbone/backbone-0.9.2",
+        "ich":"libs/icanhaz/ICanHaz_with_requirejs_fix",
+
+        //plugins
+        "text":"libs/requirejs/plugins/text" //text plugin of require js.
+    },
+    shim:{
+        'backbone':{
+            //These script dependencies should be loaded before loading
+            //backbone.js
+            deps:['underscore', 'jquery'],
+            //Once loaded, use the global 'Backbone' as the
+            //module value.
+            exports:'Backbone'
+        },
+        'photon':{
+            exports:'PhotonPeer'
+        },
+        'underscore':{
+            exports:'_'
+        }
     }
 });
 
-//simple time testing		
-function test(subject, n) {
-    var t = new Date();
-    if (!n)n = 10000;
-    for (var i = 0; i < n; i++) {
-        subject(i);
-    }
-    console.log((new Date()) - t);
-    console.log(((new Date()) - t) / n);
-}
+require([
+    'jquery',
+    'underscore',
+    'backbone',
+    'ich',
+], function (Jquery, Underscore, Backbone, ich) {
 
-function takeTime(globalName, subject) {
-    var t = new Date();
-    var r = subject.call(this);
-    var t2 = (new Date()) - t;
-    window[globalName] ? window[globalName] = (window[globalName] + t2) / 2 : window[globalName] = t2;
-    return r;
-}
+    //Define globals
+    window.$ = Jquery;
+    window.Backbone = Backbone;
+    window._ = Underscore;
 
-// shim layer with setTimeout fallback
-window.requestAnimFrame = (function () {
-    return  window.requestAnimationFrame ||
-        window.webkitRequestAnimationFrame ||
-        window.mozRequestAnimationFrame ||
-        window.oRequestAnimationFrame ||
-        window.msRequestAnimationFrame ||
-        function (callback) {
-            window.setTimeout(callback, 1000 / 60);
-        };
-})();
+    // shim layer with setTimeout fallback
+    window.requestAnimFrame = (function () {
+        return  window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            window.oRequestAnimationFrame ||
+            window.msRequestAnimationFrame ||
+            function (callback) {
+                window.setTimeout(callback, 1000 / 60);
+            };
+    })();
 
-require(['./core/resources', './loader', 'core/g', './views/gView'], function (Assets, Loader, Isometrica, gView) {
-    $(function () { //waiting for DOM to be ready.
-        var isometricaRootNode = document.getElementById('isometricaRoot');
-        var assets = new Assets();
-        var loader = new Loader(isometricaRootNode, assets);
-
-        loader.loadResources(function () {
-            (new gView()).render(isometricaRootNode);
-            window.isometrica = new Isometrica(mainViewport, assets);
-        });
-
+    require(['./app'], function (app) {
+        window.isometrica = app;
+        app.main();
     });
 });
 
