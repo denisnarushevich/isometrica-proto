@@ -29,12 +29,15 @@ define([
             spritesById = this.spritesById,
             constructor;
 
+        //if is cached return cached
         if(sprite = spritesById[model.globalId])return sprite;
 
+        //...if not get the constructor
         constructor = this.constructors[model.getSpriteType()];
 
+        //and instaniate, if consturctor for such model type exists
         if(constructor !== undefined)
-            return this.spritesById[model.globalId] =  new this.constructors[model.getSpriteType()](this, model);
+            return this.spritesById[model.globalId] =  new constructor(this, model);
         else
             throw "Don't have sprite constructor with name "+model.getSpriteType();
     };

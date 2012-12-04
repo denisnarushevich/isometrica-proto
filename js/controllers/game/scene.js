@@ -1,4 +1,4 @@
-define(function () {
+define(['./sprites/tiles/outworldTileSprite'],function (OutworldTileSprite) {
     function Scene(viewport, at) {
         this.at = at;
         this.viewport = viewport;
@@ -9,6 +9,8 @@ define(function () {
 
     ;
 
+    var p = Scene.prototype;
+
     Scene.prototype.world = null;
     Scene.prototype.grid = null;
     Scene.prototype.viewport = null;
@@ -16,7 +18,7 @@ define(function () {
     Scene.prototype.visibleTilePositions = null;
 
     Scene.prototype.getTiles = function () {
-        var at = [this.at.getX() | 0, this.at.getY() | 0],
+        var at = [this.at.x | 0, this.at.y | 0],
             tiles = this.world.tiles,
             size = this.viewport.size,
             visibleTilePositions = this.visibleTilePositions = [],
@@ -37,16 +39,21 @@ define(function () {
 
                     tile = tiles.getTile(x, y);
 
-                    //if(!tile) continue;
+                    //if no tile, e.g. it's outside world border, draw dummy water tile
+                    if(tile){
+                        sprite = sprites.createSpriteFor(tile);
+                        sprite.setOriginOffset(this.coordinatesTransform(x, y, tile.position.z));
+                    }else{
+                        sprite = new OutworldTileSprite(sprites);
+                        sprite.setOriginOffset(this.coordinatesTransform(x, y, tiles.world.waterLevel));
+                    }
 
-                    sprite = sprites.createSpriteFor(tile);
-                    sprite.setOriginOffset(this.coordinatesTransform(x, y, tile.getPosition().getZ()));
                     offset = sprite.getOffset();
 
                     //check rect intersection of tile image and window
                     if (offset[0] > size[0] || offset[0] < -sprite.size[0] || offset[1] > size[1] || offset[1] < -sprite.size[1]) continue;
 
-                    visibleTilePositions.push(tile.getPosition());
+                    visibleTilePositions.push(tile.position);
                     visibleTileSprites.push(sprite);
                     end = false;
                 }
@@ -95,8 +102,8 @@ define(function () {
             cosValue = Math.cos(angle),
             sinValue = Math.sin(angle);
 
-        x = (x - this.at.getX()) * gridSpacing[0];
-        y = (y - this.at.getY()) * gridSpacing[1];
+        x = (x - this.at.x) * gridSpacing[0];
+        y = (y - this.at.y) * gridSpacing[1];
         z *= gridSpacing[2];
 
         return [

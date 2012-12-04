@@ -1,12 +1,13 @@
 define([
     'controllers/loader',
     'controllers/game'
-],function(Loader, Game){
-   var app = {
-        rootNode: null
-   };
+], function (Loader, Game) {
+    var app = {
+        rootNode:null,
+        gameInstance:null,
+    };
 
-    app.main = function(){
+    app.main = function () {
         //init rootNode where all views will be appended.
         this.rootNode = document.getElementById('isometricaRoot');
 
@@ -15,14 +16,14 @@ define([
         loader.renderView(app.rootNode);
 
         //init game
-        var game = new Game(loader.assets);
+        this.gameInstance = new Game(loader.assets);
 
-        loader.loadAssets(function(assets){
+        loader.loadAssets(function (assets) {
             //once loaded, launch game
-            game.renderView(app.rootNode);
-            game.start();
+            app.gameInstance.renderView(app.rootNode);
+            app.gameInstance.start();
         });
     };
 
-   return app;
+    return app;
 });

@@ -2,8 +2,8 @@ define(['./tile', '../vector3'], function(Parent, Vec3){
   function WaterTile(tiles, gridPoints){
     Parent.call(this, tiles, gridPoints);
     this.slopeId = 2222;
-    this.deepness = tiles.world.getWaterLevel() - this.getPosition().getZ();
-    this.setPosition(new Vec3(this.getPosition().getX(), this.getPosition().getY(), tiles.world.getWaterLevel()));
+    this.deepness = tiles.world.waterLevel - this.getPosition().getZ();
+    this.setPosition(new Vec3(this.getPosition().getX(), this.getPosition().getY(), tiles.world.waterLevel));
     return this;
   }
   
