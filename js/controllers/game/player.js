@@ -1,18 +1,26 @@
 define(function () {
-    var Player = function (position) {
-        this.setPosition(position);
+    var Player = function (world, position) {
+        this.world = world;
+        this.position = position;
     }
 
-    Player.prototype.position = null;
+    var p = Player.prototype
 
-    Player.prototype.getPosition = function () {
-        return this.position;
-    };
+    p.position = null;
 
-    Player.prototype.setPosition = function(position){
-        this.position = position;
-        return this;
-    };
+    p.update = function () {
+        if (this.position.x < 0)
+            this.position.x = 0;
+
+        if (this.position.x > this.world.size.x)
+            this.position.x = this.world.size.x;
+
+        if (this.position.y < 0)
+            this.position.y = 0;
+
+        if (this.position.y > this.world.size.y)
+            this.position.y = this.world.size.y;
+    }
 
     return Player;
 });

@@ -22,7 +22,7 @@ define(['views/gameView','./game/controls', './game/graphics', './game/logic'], 
         this.logic.startUpdateLoop();
 
         this.graphics = new Graphics(this.logic, this.assets.images);
-        this.mainViewport = this.graphics.createViewport(mainViewport, this.logic.world.player.getPosition());
+        this.mainViewport = this.graphics.createViewport(mainViewport, this.logic.world.player.position);
         this.graphics.startRenderLoop();
 
         new Controls(this.logic, this.mainViewport);

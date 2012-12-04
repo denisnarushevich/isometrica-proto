@@ -2,8 +2,8 @@ define(['./vector3'], function (Vector3) {
     var Grid = function (world, zValue) {
         this.zValue = zValue;
         this.world = world;
-        this.worldSizeY = world.getSize().getY();
-        this.zValues = new Array(world.getSize().getX() * world.getSize().getY());
+        this.worldSizeY = world.size.y;
+        this.zValues = new Array(world.size.x * world.size.y);
     };
 
     Grid.prototype.world = null;

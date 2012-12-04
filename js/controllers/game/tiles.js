@@ -2,21 +2,23 @@ define(['./tiles/shoreTile', './tiles/landTile', './tiles/waterTile'], function 
 
     var Tiles = function (world) {
         this.world = world;
-        this.tilesDictionary = new Array(world.getSize().getX() * world.getSize().getY());
-        this.worldSizeY = world.getSize().getY();
+        this.tilesDictionary = new Array(world.size.x * world.size.y);
+        this.worldSizeY = world.size.y;
     };
 
-    Tiles.prototype.world = null;
-    Tiles.prototype.worldSizeY = null;
-    Tiles.prototype.tilesDictionary = null;
+    var p = Tiles.prototype;
+
+    p.world = null;
+    p.worldSizeY = null;
+    p.tilesDictionary = null;
 
     Tiles.prototype.update = function () {
         var radius = 40,
-            playerPosition = this.world.player.getPosition(),
-            x0 = Math.floor(playerPosition.getX() - radius),
-            x1 = Math.floor(playerPosition.getX() + radius),
-            y0 = Math.floor(playerPosition.getY() - radius),
-            y1 = Math.floor(playerPosition.getY() + radius);
+            playerPosition = this.world.player.position,
+            x0 = Math.floor(playerPosition.x - radius),
+            x1 = Math.floor(playerPosition.x + radius),
+            y0 = Math.floor(playerPosition.y - radius),
+            y1 = Math.floor(playerPosition.y + radius);
 
         for (var x = x0; x < x1; x++)
             for (var y = y0; y < y1; y++)
@@ -66,6 +68,9 @@ define(['./tiles/shoreTile', './tiles/landTile', './tiles/waterTile'], function 
     };
 
     Tiles.prototype.getTile = function (x, y) {
+        /*if(x < 0 || y < 0 || x > this.world.size.x || y > this.world.size.y)
+            return false;*/
+
         var tiles = this.tilesDictionary,
             id = x * this.worldSizeY + y,
             tile = tiles[id];
@@ -75,7 +80,7 @@ define(['./tiles/shoreTile', './tiles/landTile', './tiles/waterTile'], function 
         //...otherwise create new tile...
 
         //gridpoints start count from tileModels left (West corner) and goes clockwise;
-        var waterLevel = this.world.getWaterLevel(), grid = this.world.grid, gridPoints = [
+        var waterLevel = this.world.waterLevel, grid = this.world.grid, gridPoints = [
             grid.getPoint(x, y),
             grid.getPoint(x, y + 1),
             grid.getPoint(x + 1, y + 1),

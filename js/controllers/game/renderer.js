@@ -36,7 +36,6 @@ define(function () {
 
             //ctx.putImageData(sprite.getPixels(), sprite.getOffset()[0], sprite.getOffset()[1]);
         }
-
         //ctx.drawImage(sprite.getCanvas(), sprite.getOriginOffset()[0], sprite.getOriginOffset()[1]);
         //sprite.sprites.freeSprite(sprite);
     };

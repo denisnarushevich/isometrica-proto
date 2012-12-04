@@ -25,11 +25,11 @@ define([
 
     Objects.prototype.update = function () {
         var radius = 40,
-            playerPosition = this.world.player.getPosition(),
-            x0 = (playerPosition.getX() - radius) | 0,
-            x1 = (playerPosition.getX() + radius) | 0,
-            y0 = (playerPosition.getY() - radius) | 0,
-            y1 = (playerPosition.getY() + radius) | 0;
+            playerPosition = this.world.player.position,
+            x0 = (playerPosition.x - radius) | 0,
+            x1 = (playerPosition.x + radius) | 0,
+            y0 = (playerPosition.y - radius) | 0,
+            y1 = (playerPosition.y + radius) | 0;
 
         for(var x = x0; x < x1; x++)
             for(var y = y0; y < y1; y++){

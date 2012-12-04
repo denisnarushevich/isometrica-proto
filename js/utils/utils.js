@@ -1,6 +1,8 @@
-define(['./vec2', './vec3'], function(vec2, vec3){
+define(['./vector2', './vector3'], function(Vec2, Vec3){
     return {
-        vec2: vec2,
-        vec3: vec3
+        Math: {
+            Vec2: Vec2,
+            Vec3: Vec3
+        }
     };
 });

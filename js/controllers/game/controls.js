@@ -1,8 +1,8 @@
-define(['./vector2'], function (Vec2) {
+define(function () {
     function Controls(logic, viewport) {
         this.logic = logic;
         this.viewport = viewport;
-        this.currentPointedPixel = new Vec2(0, 0); //e.g. cursor position(pixel)
+        this.currentPointedPixel = new Utils.Math.Vec2(0, 0); //e.g. cursor position(pixel)
         this.control1 = false; //e.g. is left mouse button pressed or not
         this.control2 = false; //e.g. is right mouse button pressed or not
         this.bindDeviceToControls();
@@ -26,11 +26,15 @@ define(['./vector2'], function (Vec2) {
      * this way we get mouse position in "isometric" coordinates.
      */
     Controls.prototype.transformPixelToPosition = function (pixel) {
-        var x = pixel.getX(), y = pixel.getY(), PI = Math.PI;
+        var x = pixel.x,
+            y = pixel.y,
+            angle45 = Math.PI / -4,
+            cosOfAngle45 = Math.cos(angle45),
+            sinOfAngle45 = Math.sin(angle45);
 
-        return new Vec2(
-            x * Math.cos(PI / -4) / 2 - y * Math.sin(PI / -4),
-            -( x * Math.sin(PI / -4) / 2 + y * Math.cos(PI / -4) )
+        return new Utils.Math.Vec2(
+            x * cosOfAngle45 / 2 - y * sinOfAngle45,
+            -( x * sinOfAngle45 / 2 + y * cosOfAngle45 )
         );
     };
 
@@ -42,15 +46,15 @@ define(['./vector2'], function (Vec2) {
             if (this.previousPointedPixel) {
                 var px0 = this.previousPointedPixel,
                     px1 = this.currentPointedPixel,
-                    movedPos = this.transformPixelToPosition(new Vec2(px1.getX() - px0.getX(), px1.getY() - px0.getY()));
-                    playerPos = this.logic.world.player.getPosition();
+                    movedPos = this.transformPixelToPosition(new Utils.Math.Vec2(px1.x - px0.x, px1.y - px0.y));
+                    playerPos = this.logic.world.player.position;
 
-                playerPos.setX(playerPos.getX() - movedPos.getX() * this.sensitivity / 10);
-                playerPos.setY(playerPos.getY() - movedPos.getY() * this.sensitivity / 10);
-                this.previousPointedPixel.setX(this.currentPointedPixel.getX());
-                this.previousPointedPixel.setY(this.currentPointedPixel.getY());
+                movedPos.scale(this.sensitivity / 10);
+                playerPos.sub(movedPos);
+                px0.x = px1.x;
+                px0.y = px1.y;
             } else {
-                this.previousPointedPixel = new Vec2(this.currentPointedPixel.getX(), this.currentPointedPixel.getY());
+                this.previousPointedPixel = new Utils.Math.Vec2(this.currentPointedPixel.x, this.currentPointedPixel.y);
             }
         } else {
             if (this.previousPointedPixel) //disabled map panning
@@ -82,8 +86,8 @@ define(['./vector2'], function (Vec2) {
         });
 
         $(this.viewport.containerElement).bind('mousemove', function(event){
-            controls.currentPointedPixel.setX(event.pageX);
-            controls.currentPointedPixel.setY(event.pageY);
+            controls.currentPointedPixel.x = event.pageX;
+            controls.currentPointedPixel.y = event.pageY;
             controls.update();
         });
     };
@@ -100,9 +104,11 @@ define(['./vector2'], function (Vec2) {
 
             for (var i = 0; sprite = tileSprites[i]; i++) {
                 if (this.tileSpriteHitTest(sprite)) {
-                    sprite.getModel().isPointed(true);
-                    this.lastHovered = sprite;
-                    break;
+                    if(sprite.getModel()){
+                        sprite.getModel().isPointed(true);
+                        this.lastHovered = sprite;
+                        break;
+                    }
                 }
             }
         }
@@ -116,13 +122,13 @@ define(['./vector2'], function (Vec2) {
 
         var offset = sprite.getOffset();
         var size = sprite.getSize();
-        var mousePos = this.currentPointedPixel.toArray();
+        var mousePos = this.currentPointedPixel;
 
         //quick tile sprite bounding box hit test
-        if (mousePos[0] < offset[0] ||
-            mousePos[1] < offset[1] ||
-            mousePos[0] > offset[0] + size[0] ||
-            mousePos[1] > offset[1] + size[1]) return false;
+        if (mousePos.x < offset[0] ||
+            mousePos.y < offset[1] ||
+            mousePos.x > offset[0] + size[0] ||
+            mousePos.y > offset[1] + size[1]) return false;
 
         //more accurate tile sprite image hit test, by checking if pixel is alpha.
         canvas.width = size[0];
@@ -134,7 +140,7 @@ define(['./vector2'], function (Vec2) {
             context.drawImage(images[i], 0, 0);
         }
 
-        if (context.getImageData(mousePos[0] - offset[0], mousePos[1] - offset[1], 1, 1).data[3] > 0) {
+        if (context.getImageData(mousePos.x - offset[0], mousePos.y - offset[1], 1, 1).data[3] > 0) {
             return true;
         }
         ;

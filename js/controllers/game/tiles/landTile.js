@@ -55,9 +55,9 @@ define(['./tile'], function (Parent) {
     p.update = function(){
         Parent.prototype.update.call(this);
 
-        if(Math.random()>0.90 && this.position.x == 252 && this.position.y == 1027){
+        if(false && Math.random()>0.91 && this.position.x == 242 && this.position.y == 1027){
             var a = this.tiles.world.objects.createObject('CarObject', this.getPosition().getX(), this.getPosition().getY());
-            a.setDestination(this.tiles.getTile(252 + Math.round(Math.random()*40-20), 1027 + Math.round(Math.random()*40-20)));
+            a.setDestination(this.tiles.getTile(232 + Math.round(Math.random()*40-20), 1027 + Math.round(Math.random()*40-20)));
         }
     }
 

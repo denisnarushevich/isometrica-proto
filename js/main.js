@@ -39,13 +39,15 @@ require.config({
 });
 
 require([
+    'utils/utils',
     'jquery',
     'underscore',
     'backbone',
     'ich',
-], function (Jquery, Underscore, Backbone, ich) {
+], function (Utils, Jquery, Underscore, Backbone, ich) {
 
     //Define globals
+    window.Utils = Utils;
     window.$ = Jquery;
     window.Backbone = Backbone;
     window._ = Underscore;
