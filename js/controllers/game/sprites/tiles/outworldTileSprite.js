@@ -9,10 +9,7 @@ define(['./tileSprite'], function (Parent) {
     p.type = "OutworldTileSprite";
 
     p.getImages = function () {
-        var imageAssets = this.sprites.images,
-            images = [imageAssets.getImage('terrain/deepwater/2222')];
-
-        return images;
+        return [this.sprites.images.getImage('terrain/deepwater/2222')];
     };
 
     return OutworldTileSprite;

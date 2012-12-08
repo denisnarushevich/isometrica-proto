@@ -2,6 +2,7 @@ define([
 './sprites/tiles/landTileSprite',
 './sprites/tiles/roadTileSprite',
 './sprites/tiles/shoreTileSprite',
+'./sprites/tiles/waterTileSprite',
 
 './sprites/objects/treeObjectSprite',
 './sprites/objects/vehicleObjectSprite',
@@ -30,14 +31,15 @@ define([
             constructor;
 
         //if is cached return cached
-        if(sprite = spritesById[model.globalId])return sprite;
+       // if(sprite = spritesById[model.globalId])return sprite;
 
-        //...if not get the constructor
+        //...if not then get the constructor
         constructor = this.constructors[model.getSpriteType()];
 
-        //and instaniate, if consturctor for such model type exists
-        if(constructor !== undefined)
-            return this.spritesById[model.globalId] =  new constructor(this, model);
+        //...and instaniate, if consturctor for such model type exists
+        if(constructor)
+            //return spritesById[model.globalId] =  new constructor(this, model);
+            return new constructor(this, model);
         else
             throw "Don't have sprite constructor with name "+model.getSpriteType();
     };

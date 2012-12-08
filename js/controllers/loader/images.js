@@ -168,8 +168,9 @@ define(function () {
 
     p.getImage = function (urn) {
         //console.log(arguments.callee.caller.toString());
-        if (this.hash[urn])
-            return this.hash[urn];
+        var image;
+        if (image = this.hash[urn])
+            return image;
         else throw 'Error: There is no such image "' + urn;
     };
 

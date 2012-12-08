@@ -41,7 +41,7 @@ define(function () {
     Controls.prototype.update = function () {
         if (this.control1) { //if left mouse button is pressed
             if(this.lastHovered)
-                this.lastHovered.getModel().isPointed(false); //disable higliting
+                this.lastHovered.model.isPointed(false); //disable higliting
 
             if (this.previousPointedPixel) {
                 var px0 = this.previousPointedPixel,
@@ -100,12 +100,12 @@ define(function () {
         if (this.lastHovered && this.tileSpriteHitTest(this.lastHovered)) {
             //do nothing
         } else {
-            if (this.lastHovered) this.lastHovered.getModel().isPointed(false);
+            if (this.lastHovered) this.lastHovered.model.isPointed(false);
 
             for (var i = 0; sprite = tileSprites[i]; i++) {
                 if (this.tileSpriteHitTest(sprite)) {
-                    if(sprite.getModel()){
-                        sprite.getModel().isPointed(true);
+                    if(sprite.model){
+                        sprite.model.isPointed(true);
                         this.lastHovered = sprite;
                         break;
                     }

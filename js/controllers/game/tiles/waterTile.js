@@ -9,7 +9,7 @@ define(['./tile', '../vector3'], function(Parent, Vec3){
   
   WaterTile.prototype = Object.create(Parent.prototype);
   WaterTile.prototype.type = 'WaterTile';
-  WaterTile.prototype.spriteType = 'LandTileSprite';
+  WaterTile.prototype.spriteType = 'WaterTileSprite';
 
   WaterTile.prototype.deepness = null;
   

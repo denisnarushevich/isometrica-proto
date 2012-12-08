@@ -3,7 +3,7 @@ define(['./sprites/tiles/outworldTileSprite'],function (OutworldTileSprite) {
         this.at = at;
         this.viewport = viewport;
         this.world = this.viewport.graphics.logic.world;
-        this.visibleTilePositions = [];
+        this.visibleTilePositions = new Array();
         this.grid = this.world.grid;
     }
 
@@ -19,12 +19,15 @@ define(['./sprites/tiles/outworldTileSprite'],function (OutworldTileSprite) {
 
     Scene.prototype.getTiles = function () {
         var at = [this.at.x | 0, this.at.y | 0],
+            atX = at[0],
+            atY = at[1],
             tiles = this.world.tiles,
             size = this.viewport.size,
             visibleTilePositions = this.visibleTilePositions = [],
             sprites = this.viewport.sprites,
             tile, sprite, offset,
             visibleTileSprites = [],
+            count = 0,
             x, y;
 
         //from "at" tile in center of the screen loop is going level by level
@@ -33,9 +36,9 @@ define(['./sprites/tiles/outworldTileSprite'],function (OutworldTileSprite) {
         //loop exits when there was no new tileModels for last level.
         for (var end, level = 0; !end; level++) {
             end = true;
-            for (x = at[0] - level; x <= at[0] + level; x++) {
-                for (y = at[1] - level; y <= at[1] + level; y++) {
-                    if (x > at[0] - level && x < at[0] + level && y > at[1] - level && y < at[1] + level) continue; //skiping tileModels of previous levels
+            for (x = atX - level; x <= atX + level; x++) {
+                for (y = atY - level; y <= atY + level; y++) {
+                    if (x > atX - level && x < atX + level && y > atY - level && y < atY + level) continue; //skiping tileModels of previous levels
 
                     tile = tiles.getTile(x, y);
 
@@ -53,8 +56,9 @@ define(['./sprites/tiles/outworldTileSprite'],function (OutworldTileSprite) {
                     //check rect intersection of tile image and window
                     if (offset[0] > size[0] || offset[0] < -sprite.size[0] || offset[1] > size[1] || offset[1] < -sprite.size[1]) continue;
 
-                    visibleTilePositions.push(tile.position);
-                    visibleTileSprites.push(sprite);
+                    visibleTilePositions[count] = tile.position;
+                    visibleTileSprites[count] = sprite;
+                    count++;
                     end = false;
                 }
             }
@@ -68,7 +72,7 @@ define(['./sprites/tiles/outworldTileSprite'],function (OutworldTileSprite) {
             objects = this.world.objects,
             sprites = this.viewport.sprites,
             visibleObjects = [],
-            position, i, j, tileObjects, object, pos, sprite;
+            position, i, j, tileObjects, object, pos, sprite, count = 0;
 
         for (i = 0; position = tilePositions[i]; i++) {
             tileObjects = objects.getObjectsInTile(position.getX(), position.getY());
@@ -78,14 +82,14 @@ define(['./sprites/tiles/outworldTileSprite'],function (OutworldTileSprite) {
                 sprite = sprites.createSpriteFor(object);
                 sprite.setOriginOffset(this.coordinatesTransform(pos.getX(), pos.getY(), pos.getZ()));
 
-                visibleObjects.push(sprite);
+                visibleObjects[count++] = sprite;
             }
         }
         ;
 
         //sorting by depth, where depth is y screen offset coordinate.
         visibleObjects.sort(function (obj1, obj2) {
-            return obj1.getOriginOffset()[1] < obj2.getOriginOffset()[1] ? -1 : 1;
+            return obj1.zIndex < obj2.zIndex ? -1 : 1;
         });
 
         return visibleObjects;
@@ -95,7 +99,7 @@ define(['./sprites/tiles/outworldTileSprite'],function (OutworldTileSprite) {
         return this.size = size;
     };
 
-    Scene.prototype.coordinatesTransform = function (x, y, z) {
+    Scene.prototype.coordinatesTransform = function (x, y, z) { //TODO should accept pos vect, and output array;
         //console.log(this.containerElement.id);
         var gridSpacing = this.grid.spacing,
             angle = Math.PI / -4,
