@@ -9,7 +9,7 @@ define(['./../sprite'], function(Parent){
   ObjectSprite.prototype.type = 1;
 
   ObjectSprite.prototype.getImages = function(){
-    var name = this.getModel().getName();
+    var name = this.model.getName();
     return [this.sprites.images.getImage('objects/'+name+'/'+name)];
   }
   

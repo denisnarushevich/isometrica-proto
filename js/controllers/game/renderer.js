@@ -27,12 +27,12 @@ define(function () {
     };
 
     Renderer.prototype.drawSprite = function (layer, sprite) {
-        var images = sprite.getImages(), offset = sprite.getOffset(), image, i;
+        var images = sprite.getImages(), offset = sprite.getOffset(), image, i, x = offset[0] | 0, y = offset[1] | 0;
 
         for (i = 0; image = images[i]; i++) {
             //for(var i in images){
             //if($.browser.webkit) ctx.setAlpha(sprites[i].opacity);
-            layer.drawImage(image, offset[0] | 0, offset[1] | 0);
+            layer.drawImage(image, x, y);
 
             //ctx.putImageData(sprite.getPixels(), sprite.getOffset()[0], sprite.getOffset()[1]);
         }

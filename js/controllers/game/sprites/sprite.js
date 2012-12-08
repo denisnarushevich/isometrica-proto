@@ -2,18 +2,17 @@ define(function () {
     function Sprite(sprites, model) {
         this.sprites = sprites;
         this.model = model;
-        this.offset = [];
     }
 
     Sprite.prototype = {
-        originOffset:null,
+        zIndex:0,
         size:null,
         origin:null,
         images:null,
         model:null, //tile or 'object' object.
-        type: 'Sprite', //e.g. 'tile'
-        sprites: null, //sprites *class*
-        offset: null,
+        type:'Sprite', //e.g. 'tile'
+        sprites:null, //sprites *class*
+        offset:null,
         setSize:function (size) {
             this.size = size;
             return this;
@@ -22,22 +21,23 @@ define(function () {
             this.origin = origin;
             return this;
         },
-        setModel:function (model) {
-            this.model = model;
-            return this;
-        },
         setOriginOffset:function (offset) {
-            this.originOffset = offset;
+            var or = this.origin;
+            this.zIndex = offset[1];
+            offset[0] -= or[0];
+            offset[1] -= or[1];
+            this.offset = offset;
             return this;
         },
         getOriginOffset:function () {
             return this.originOffset;
         },
         getOffset:function () {
-            var origin = this.getOrigin(), originOffset = this.getOriginOffset(), offset = this.offset;
-            offset[0] = originOffset[0] - origin[0];
-            offset[1] = originOffset[1] - origin[1];
-            return offset;
+            return this.offset;
+            if (this.offset)return this.offset;
+            var origin = this.origin, originOffset = this.originOffset;
+            return this.offset = [originOffset[0] - origin[0],
+                originOffset[1] - origin[1]];
         },
         getSize:function () {
             return this.size;
@@ -47,9 +47,6 @@ define(function () {
         },
         getImages:function () {
             return this.images;
-        },
-        getModel:function () {
-            return this.model;
         }
     }
 
