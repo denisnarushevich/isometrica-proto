@@ -50,13 +50,13 @@ define(['./scene', './renderer', './sprites'], function (Scene, Renderer, Sprite
 
         this.renderer.clearLayer(layers.tiles);
 
-        for (i = 0; sprite = tiles[i]; i++)
-            renderer.drawSprite(tilesLayer, sprite); //tile layer
+        for (i = 0, tilesLen = tiles.length; i < tilesLen; i++)
+            renderer.drawSprite(tilesLayer, tiles[i]); //tile layer
 
         renderer.clearLayer(objectsLayer);
 
-        for (i = 0; sprite = objects[i]; i++) //~5ms
-            renderer.drawSprite(objectsLayer, sprite); //object layer*/
+        for (i = 0, objectsLen = objects.length; i < objectsLen; i++) //~5ms
+            renderer.drawSprite(objectsLayer, objects[i]); //object layer*/
 
         renderer.renderLayers();
     };

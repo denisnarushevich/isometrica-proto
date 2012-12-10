@@ -21,6 +21,7 @@ define(['./sprites/outworldTileSprite'], function (OutworldTileSprite) {
         var at = [this.at.x | 0, this.at.y | 0],
             atX = at[0],
             atY = at[1],
+            leni, lenj,
             tiles = this.world.tiles,
             size = this.viewport.size,
             visibleTilePositions = this.visibleTilePositions = [],
@@ -36,8 +37,8 @@ define(['./sprites/outworldTileSprite'], function (OutworldTileSprite) {
         //loop exits when there was no new tileModels for last level.
         for (var end, level = 0; !end; level++) {
             end = true;
-            for (x = atX - level; x <= atX + level; x++) {
-                for (y = atY - level; y <= atY + level; y++) {
+            for (x = atX - level, leni = atX + level; x <= leni; x++) {
+                for (y = atY - level, lenj = atY + level; y <= lenj; y++) {
                     if (x > atX - level && x < atX + level && y > atY - level && y < atY + level) continue; //skiping tileModels of previous levels
 
                     tile = tiles.getTile(x, y);
@@ -72,11 +73,14 @@ define(['./sprites/outworldTileSprite'], function (OutworldTileSprite) {
             objects = this.world.objects,
             sprites = this.viewport.sprites,
             visibleObjects = [],
-            position, i, j, tileObjects, object, pos, sprite, count = 0;
+            position, i, j, tileObjects, object, pos, sprite, leni, lenj, count = 0;
 
-        for (i = 0; position = tilePositions[i]; i++) {
-            tileObjects = objects.getObjectsInTile(position.getX(), position.getY());
-            for (j = 0; object = tileObjects[j]; j++) {
+        for (i = 0, leni = tilePositions.length; i < leni; i++) {
+            position = tilePositions[i];
+            tileObjects = objects.getObjectsInTile(position.x, position.y);
+
+            for (j = 0, lenj = tileObjects.length; j < lenj; j++) {
+                object = tileObjects[j];
                 pos = object.getPosition();
 
                 sprite = sprites.createSpriteFor(object);
