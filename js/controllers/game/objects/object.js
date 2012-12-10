@@ -2,7 +2,9 @@ define(['../vector3'], function (Vec3) {
     function Object(objects, x, y) {
         this.objects = objects;
         this.position = new Vec3(x, y, objects.world.grid.getValue(x, y));
-    };
+    }
+
+    ;
 
     Object.prototype.id = null;
     Object.prototype.objects = null;
@@ -28,7 +30,7 @@ define(['../vector3'], function (Vec3) {
         return this.baseType;
     };
 
-    Object.prototype.getSpriteType = function(){
+    Object.prototype.getSpriteType = function () {
         return this.spriteType;
     };
 

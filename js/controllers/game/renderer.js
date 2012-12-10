@@ -32,7 +32,7 @@ define(function () {
         for (i = 0; image = images[i]; i++) {
             //for(var i in images){
             //if($.browser.webkit) ctx.setAlpha(sprites[i].opacity);
-            layer.drawImage(image, x, y);
+            layer.drawImage(image, sprite.clip[0], sprite.clip[1], sprite.size[0], sprite.size[1], x, y, sprite.size[0], sprite.size[1]);
 
             //ctx.putImageData(sprite.getPixels(), sprite.getOffset()[0], sprite.getOffset()[1]);
         }

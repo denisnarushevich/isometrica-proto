@@ -1,4 +1,4 @@
-define(['./world',], function (World) {
+define(['./world', ], function (World) {
     var logic = function () {
         this.world = new World();
     };

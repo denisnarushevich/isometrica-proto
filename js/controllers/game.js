@@ -1,4 +1,4 @@
-define(['views/gameView','./game/controls', './game/graphics', './game/logic'], function (View, Controls, Graphics, Logic) {
+define(['views/gameView', './game/controls', './game/graphics', './game/logic'], function (View, Controls, Graphics, Logic) {
 
     function Game(assets) {
         this.assets = assets;
@@ -12,12 +12,12 @@ define(['views/gameView','./game/controls', './game/graphics', './game/logic'], 
     p.graphics = null;
     p.mainViewport = null;
 
-    p.renderView = function(rootNode){
+    p.renderView = function (rootNode) {
         this.view.el = rootNode;
         this.view.render();
     }
 
-    p.start = function(){
+    p.start = function () {
         this.logic = new Logic();
         this.logic.startUpdateLoop();
 

@@ -20,12 +20,12 @@ define(['./vector3'], function (Vector3) {
         return gp;
     };
 
-    Grid.prototype.getZValue = function (x, y){
+    Grid.prototype.getZValue = function (x, y) {
         var zs = this.zValues,
             index = x * this.worldSizeY + y,
             val = zs[index];
 
-        if(val)return val;
+        if (val)return val;
 
         return zs[index] = this.zValue(x, y);
     };

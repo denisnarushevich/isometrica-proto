@@ -8,7 +8,7 @@ define(['./objectSprite'], function (Parent) {
     var p = BuildingObjectSprite.prototype = Object.create(Parent.prototype);
     p.type = 'BuildingObjectSprite';
     p.size = [64, 64];
-    p.origin  = [0, 49];
+    p.origin = [0, 49];
 
     return BuildingObjectSprite;
 });

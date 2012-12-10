@@ -1,4 +1,4 @@
-define(['./sprites/tiles/outworldTileSprite'],function (OutworldTileSprite) {
+define(['./sprites/outworldTileSprite'], function (OutworldTileSprite) {
     function Scene(viewport, at) {
         this.at = at;
         this.viewport = viewport;
@@ -43,10 +43,10 @@ define(['./sprites/tiles/outworldTileSprite'],function (OutworldTileSprite) {
                     tile = tiles.getTile(x, y);
 
                     //if no tile, e.g. it's outside world border, draw dummy water tile
-                    if(tile){
+                    if (tile) {
                         sprite = sprites.createSpriteFor(tile);
                         sprite.setOriginOffset(this.coordinatesTransform(x, y, tile.position.z));
-                    }else{
+                    } else {
                         sprite = new OutworldTileSprite(sprites);
                         sprite.setOriginOffset(this.coordinatesTransform(x, y, tiles.world.waterLevel));
                     }

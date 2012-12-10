@@ -7,7 +7,9 @@ define(function () {
         this.control2 = false; //e.g. is right mouse button pressed or not
         this.bindDeviceToControls();
         this.sensitivity = 0.3;
-    };
+    }
+
+    ;
 
     Controls.prototype = {};
 
@@ -40,14 +42,14 @@ define(function () {
 
     Controls.prototype.update = function () {
         if (this.control1) { //if left mouse button is pressed
-            if(this.lastHovered)
+            if (this.lastHovered)
                 this.lastHovered.model.isPointed(false); //disable higliting
 
             if (this.previousPointedPixel) {
                 var px0 = this.previousPointedPixel,
                     px1 = this.currentPointedPixel,
                     movedPos = this.transformPixelToPosition(new Utils.Math.Vec2(px1.x - px0.x, px1.y - px0.y));
-                    playerPos = this.logic.world.player.position;
+                playerPos = this.logic.world.player.position;
 
                 movedPos.scale(this.sensitivity / 10);
                 playerPos.sub(movedPos);
@@ -64,28 +66,28 @@ define(function () {
         }
     };
 
-    Controls.prototype.bindDeviceToControls = function(){
+    Controls.prototype.bindDeviceToControls = function () {
         controls = this;
 
-        $(this.viewport.containerElement).bind('mousedown', function(){
+        $(this.viewport.containerElement).bind('mousedown', function () {
             controls.control1 = true;
             $(document.body).css({
                 cursor:'pointer'
             });
         });
 
-        $(this.viewport.containerElement).bind('mouseup', function(){
+        $(this.viewport.containerElement).bind('mouseup', function () {
             controls.control1 = false;
             $(document.body).css({
                 cursor:'default'
             });
         });
 
-        $(this.viewport.containerElement).bind('mouseout', function(){
-           $(this).trigger('mouseup');
+        $(this.viewport.containerElement).bind('mouseout', function () {
+            $(this).trigger('mouseup');
         });
 
-        $(this.viewport.containerElement).bind('mousemove', function(event){
+        $(this.viewport.containerElement).bind('mousemove', function (event) {
             controls.currentPointedPixel.x = event.pageX;
             controls.currentPointedPixel.y = event.pageY;
             controls.update();
@@ -104,7 +106,7 @@ define(function () {
 
             for (var i = 0; sprite = tileSprites[i]; i++) {
                 if (this.tileSpriteHitTest(sprite)) {
-                    if(sprite.model){
+                    if (sprite.model) {
                         sprite.model.isPointed(true);
                         this.lastHovered = sprite;
                         break;

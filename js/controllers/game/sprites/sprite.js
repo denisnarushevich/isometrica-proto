@@ -13,6 +13,7 @@ define(function () {
         type:'Sprite', //e.g. 'tile'
         sprites:null, //sprites *class*
         offset:null,
+        clip:[0, 0],
         setSize:function (size) {
             this.size = size;
             return this;

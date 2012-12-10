@@ -44,10 +44,10 @@ define(function () {
         this.perm = new Uint8Array(512);
         this.permMod12 = new Uint8Array(512);
 
-        if(typeof(random) == 'object' && random.length == 256){ //if array.
+        if (typeof(random) == 'object' && random.length == 256) { //if array.
             this.p = new Uint8Array(random);
-        }else{
-            if(!random)random = Math.random;
+        } else {
+            if (!random)random = Math.random;
             for (var i = 0; i < 256; i++) {
                 this.p[i] = random() * 256;
             }

@@ -16,27 +16,27 @@ define(['./movingObject', '../pathFinder', '../vector2'], function (Parent, path
 
     p.destination = null;
 
-    p.setDestination = function(destinationTile){
+    p.setDestination = function (destinationTile) {
         this.destination = destinationTile;
         this.path = this.travelTo(destinationTile);
     }
 
     Vehicle.prototype.travelTo = function (destinationTile) {
         this.path = pathFinder.findPath(this.getTile(), destinationTile, function (tile) {
-            return tile.getType() != "LandTile";
+            return tile.type != "land";
         });
         //this.updatedAt = new Date().getTime() / 1000;
         return this.path;
     };
 
     Vehicle.prototype.update = function () {
-        if(this.path.length != 0){
+        if (this.path.length != 0) {
             //get next tile in path
             var next = this.path[0];
 
             //get direction
-            this.getDirection().setX(next.getPosition().getX() - this.getTile().getPosition().getX());
-            this.getDirection().setY(next.getPosition().getY() - this.getTile().getPosition().getY());
+            this.getDirection().setX(next.position.x - this.getTile().position.x);
+            this.getDirection().setY(next.position.y - this.getTile().position.y);
             this.getDirection().normalize();
 
             //get time passed from prev update
@@ -50,7 +50,7 @@ define(['./movingObject', '../pathFinder', '../vector2'], function (Parent, path
             this.position.x += distance * this.direction.x;
             this.position.y += distance * this.direction.y;
 
-            if(next.id == this.getTile().id){
+            if (next.id == this.getTile().id) {
                 this.path.shift();
             }
         }
@@ -64,15 +64,15 @@ define(['./movingObject', '../pathFinder', '../vector2'], function (Parent, path
 
     Vehicle.prototype.align = function () {
         /*if (this.getDirection().getX())
-            if (this.getDirection().getX() == 1)
-                this.subPosition.setY(0.33);
-            else
-                this.subPosition.setY(0.66);
-        else if (this.getDirection().getY() == 1)
-            this.subPosition.setX(0.66);
-        else
-            this.subPosition.setX(0.33);
-            */
+         if (this.getDirection().getX() == 1)
+         this.subPosition.setY(0.33);
+         else
+         this.subPosition.setY(0.66);
+         else if (this.getDirection().getY() == 1)
+         this.subPosition.setX(0.66);
+         else
+         this.subPosition.setX(0.33);
+         */
     };
 
     Vehicle.prototype.getSpeed = function () {

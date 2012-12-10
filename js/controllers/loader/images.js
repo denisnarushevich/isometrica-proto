@@ -7,6 +7,11 @@ define(function () {
 
     p.urns = [
         /* TILES */
+        'terrain/grass/grass.png',
+        'terrain/coast/coast.png',
+        'terrain/sea/sea.png',
+        'terrain/deepsea/deepsea.png',
+        'terrain/cursor/cursor.png',
         'terrain/misc/highlite/2101.png',
         'terrain/misc/highlite/2111.png',
         'terrain/misc/highlite/2112.png',
