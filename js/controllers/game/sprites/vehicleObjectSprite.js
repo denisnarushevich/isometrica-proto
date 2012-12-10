@@ -10,9 +10,9 @@ define(['./objectSprite'], function (Parent) {
     p.size = [16, 16];
     p.origin = [8, 10];
 
-    VehicleObjectSprite.prototype.getImages = function(){
+    VehicleObjectSprite.prototype.getImages = function () {
         var name = this.model.getName();
-        return [this.sprites.images.getImage('objects/vehicles/'+name)];
+        return [this.sprites.images.getImage('objects/vehicles/' + name)];
     }
 
     return VehicleObjectSprite;

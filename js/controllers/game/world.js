@@ -44,7 +44,7 @@ define(['./grid', './tiles', 'lib/simplex/simplex-noise', './objects', './player
             return Math.floor((0.8 * land + 0.2 * island) * 16);
         });
 
-        this.forestDistribution = function(x, y){
+        this.forestDistribution = function (x, y) {
             return simplex.noise2D(x, y);
         }
 

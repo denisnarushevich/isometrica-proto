@@ -7,10 +7,10 @@ define(['text!templates/loader/loadScreen.html'], function (template) {
             $(this.el).empty();
             $(this.el).append(this.template);
         },
-        setProgress: function(progress){
+        setProgress:function (progress) {
             $('.bar', this.template)[0].style.width = (progress * 100) + '%';
         },
-        setText: function(text){
+        setText:function (text) {
             $('.text', this.template).text(text);
         }
     });

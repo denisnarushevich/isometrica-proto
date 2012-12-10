@@ -1,4 +1,4 @@
-define(['./tiles/shoreTile', './tiles/landTile', './tiles/waterTile'], function (Shore, Land, Water) {
+define(['./tiles/tile'], function (Tile) {
 
     var Tiles = function (world) {
         this.world = world;
@@ -18,87 +18,30 @@ define(['./tiles/shoreTile', './tiles/landTile', './tiles/waterTile'], function 
             x0 = Math.floor(playerPosition.x - radius),
             x1 = Math.floor(playerPosition.x + radius),
             y0 = Math.floor(playerPosition.y - radius),
-            y1 = Math.floor(playerPosition.y + radius);
+            y1 = Math.floor(playerPosition.y + radius),
+            tile;
 
         for (var x = x0; x < x1; x++)
             for (var y = y0; y < y1; y++)
-                this.getTile(x, y).update();
-    };
-
-    Tiles.prototype.getTileOld = function (x, y) {
-        var id, cachedTile, XYToIdMap = this.XYToIdMap;
-
-        //look up for id, for cached tile and return it if success.
-        if (XYToIdMap[x] && (id = XYToIdMap[x][y]) && (cachedTile = this.idMap[id])) return cachedTile;
-
-        //...otherwise create new tile...
-
-        //gridpoints start count from tileModels left (West corner) and goes clockwise;
-        var tile, waterLevel = this.world.getWaterLevel(), grid = this.world.grid, gridPoints = [
-            grid.getPoint(x, y),
-            grid.getPoint(x, y + 1),
-            grid.getPoint(x + 1, y + 1),
-            grid.getPoint(x + 1, y)
-        ];
-
-        if (gridPoints[0].getZ() <= waterLevel && gridPoints[1].getZ() <= waterLevel && gridPoints[2].getZ() <= waterLevel && gridPoints[3].getZ() <= waterLevel)
-            tile = new Water(this, gridPoints);
-        else if (gridPoints[0].getZ() <= waterLevel || gridPoints[1].getZ() <= waterLevel || gridPoints[2].getZ() <= waterLevel || gridPoints[3].getZ() <= waterLevel)
-            tile = new Shore(this, gridPoints);
-        else
-            tile = new Land(this, gridPoints);
-
-        if (!id) {
-            if (!XYToIdMap[x])
-                XYToIdMap[x] = [];
-
-            id = XYToIdMap[x][y] = this.lastId++;
-        }
-
-        tile.setId(id);
-        tile.globalId = this.world.lastGlobalId++;
-        this.idMap[id] = tile;
-        this.cacheList.push(id);
-
-        if (this.cacheList.length > 20000) {
-            delete this.idMap[this.cacheList.shift()];
-        }
-
-        return tile;
+                if(tile = this.getTile(x, y))
+                    tile.update();
     };
 
     Tiles.prototype.getTile = function (x, y) {
-        /*if(x < 0 || y < 0 || x > this.world.size.x || y > this.world.size.y)
-            return false;*/
+        if(x < 0 || y < 0 || x > this.world.size.x || y > this.world.size.y)
+         return false;
 
         var tiles = this.tilesDictionary,
             id = x * this.worldSizeY + y,
             tile = tiles[id];
 
-        if(tile)return tile;
+        if (tile)return tile;
 
         //...otherwise create new tile...
 
-        //gridpoints start count from tileModels left (West corner) and goes clockwise;
-        var waterLevel = this.world.waterLevel, grid = this.world.grid, gridPoints = [
-            grid.getPoint(x, y),
-            grid.getPoint(x, y + 1),
-            grid.getPoint(x + 1, y + 1),
-            grid.getPoint(x + 1, y)
-            ],
-            z0 = gridPoints[0].getZ(),
-            z1 = gridPoints[1].getZ(),
-            z2 = gridPoints[2].getZ(),
-            z3 = gridPoints[3].getZ();
+        tile = new Tile(this, x, y);
 
-        if (z0 <= waterLevel && z1 <= waterLevel && z2 <= waterLevel && z3 <= waterLevel)
-            tile = new Water(this, gridPoints);
-        else if (z0 <= waterLevel || gridPoints[1].getZ() <= waterLevel || z2 <= waterLevel || z3 <= waterLevel)
-            tile = new Shore(this, gridPoints);
-        else
-            tile = new Land(this, gridPoints);
-
-        tile.setId(id);
+        tile.id = id;
         tile.globalId = this.world.lastGlobalId++;
         return tiles[id] = tile;
     };
