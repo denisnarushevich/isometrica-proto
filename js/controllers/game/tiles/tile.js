@@ -21,6 +21,7 @@ define(function () {
         else if (this.type == 'water') {
             this.position.deep = tiles.world.waterLevel - this.position.z;
             this.position.z = tiles.world.waterLevel;
+            this.spriteType = 'WaterTileSprite';
         }
     }
 

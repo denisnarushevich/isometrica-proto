@@ -1,5 +1,6 @@
 define([
     './sprites/tileSprite',
+    './sprites/waterTileSprite',
 
     './sprites/treeObjectSprite',
     './sprites/vehicleObjectSprite',
@@ -39,7 +40,7 @@ define([
         //return spritesById[model.globalId] =  new constructor(this, model);
             return new constructor(this, model);
         else
-            throw "Don't have sprite constructor with name " + model.getSpriteType();
+            throw "Don't have sprite constructor with name " + model.spriteType;
     };
 
     return Sprites;
