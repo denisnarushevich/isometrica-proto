@@ -57,7 +57,8 @@ define(['./sprites/outworldTileSprite'], function (OutworldTileSprite) {
                     //check rect intersection of tile image and window
                     if (offset[0] > size[0] || offset[0] < -sprite.size[0] || offset[1] > size[1] || offset[1] < -sprite.size[1]) continue;
 
-                    visibleTilePositions[count] = tile.position;
+                    if(tile)
+                        visibleTilePositions[count] = tile.position;
                     visibleTileSprites[count] = sprite;
                     count++;
                     end = false;
