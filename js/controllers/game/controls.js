@@ -99,17 +99,21 @@ define(function () {
                 case 37:
                     //left
                     that.logic.world.player.position.x -= 1;
+                    that.logic.world.player.position.y -= 1;
                     break;
                 case 38:
                     //up
+                    that.logic.world.player.position.x -= 1;
                     that.logic.world.player.position.y += 1;
                     break;
                 case 39:
                     //right
                     that.logic.world.player.position.x += 1;
+                    that.logic.world.player.position.y += 1;
                     break;
                 case 40:
                     //down;
+                    that.logic.world.player.position.x += 1;
                     that.logic.world.player.position.y -= 1;
                     break;
                 default:
