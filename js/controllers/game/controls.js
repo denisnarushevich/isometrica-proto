@@ -92,6 +92,30 @@ define(function () {
             controls.currentPointedPixel.y = event.pageY;
             controls.update();
         });
+
+        var that = this;
+        $(document).bind('keydown', function (event) {
+            switch(event.which){
+                case 37:
+                    //left
+                    that.logic.world.player.position.x -= 1;
+                    break;
+                case 38:
+                    //up
+                    that.logic.world.player.position.y += 1;
+                    break;
+                case 39:
+                    //right
+                    that.logic.world.player.position.x += 1;
+                    break;
+                case 40:
+                    //down;
+                    that.logic.world.player.position.y -= 1;
+                    break;
+                default:
+                    break;
+            }
+        });
     };
 
     Controls.prototype.detectHoveredTile = function () {
