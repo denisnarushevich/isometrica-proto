@@ -17,6 +17,8 @@ require.config({
         "backbone":"libs/backbone/backbone-0.9.2",
         "ich":"libs/icanhaz/ICanHaz_with_requirejs_fix",
 
+        "caat":"libs/caat/caat-0.5-build-47",
+
         //plugins
         "text":"libs/requirejs/plugins/text" //text plugin of require js.
     },
@@ -34,6 +36,9 @@ require.config({
         },
         'underscore':{
             exports:'_'
+        },
+        'caat':{
+            exports:'CAAT'
         }
     }
 });
