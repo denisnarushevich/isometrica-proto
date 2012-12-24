@@ -1,4 +1,4 @@
-define(['./vector3'], function (Vector3) {
+define(function () {
     var Grid = function (world, zValue) {
         this.zValue = zValue;
         this.world = world;
@@ -15,7 +15,7 @@ define(['./vector3'], function (Vector3) {
     Grid.prototype.getPoint = function (x, y) {
         var gp, gps = this.gridPoints;
 
-        return new Vector3(x, y, this.getZValue(x, y));
+        return new Utils.Math.Vec3(x, y, this.getZValue(x, y));
 
         return gp;
     };

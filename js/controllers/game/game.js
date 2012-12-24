@@ -1,4 +1,4 @@
-define(['views/gameView', './game/controls', './game/graphics', './game/logic'], function (View, Controls, Graphics, Logic) {
+define(['views/gameView', './controls', './graphics', './logic'], function (View, Controls, Graphics, Logic) {
 
     function Game(assets) {
         this.assets = assets;

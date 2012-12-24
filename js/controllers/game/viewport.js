@@ -15,8 +15,6 @@ define(['./scene', './renderer', './sprites'], function (Scene, Renderer, Sprite
         this.layers.objects = this.renderer.createLayer();
     }
 
-    ;
-
     Viewport.prototype.containerElement = null;
     Viewport.prototype.graphics = null;
     Viewport.prototype.scene = null;

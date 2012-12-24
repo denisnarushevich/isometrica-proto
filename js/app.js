@@ -1,6 +1,6 @@
 define([
-    'controllers/loader',
-    'controllers/game'
+    'controllers/loader/loader',
+    'controllers/game/game'
 ], function (Loader, Game) {
     var app = {
         rootNode:null,

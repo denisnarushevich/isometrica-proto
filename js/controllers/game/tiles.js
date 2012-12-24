@@ -23,13 +23,13 @@ define(['./tiles/tile'], function (Tile) {
 
         for (var x = x0; x < x1; x++)
             for (var y = y0; y < y1; y++)
-                if(tile = this.getTile(x, y))
+                if (tile = this.getTile(x, y))
                     tile.update();
     };
 
     Tiles.prototype.getTile = function (x, y) {
-        if(x < 0 || y < 0 || x > this.world.size.x || y > this.world.size.y)
-         return false;
+        if (x < 0 || y < 0 || x > this.world.size.x || y > this.world.size.y)
+            return false;
 
         var tiles = this.tilesDictionary,
             id = x * this.worldSizeY + y,
@@ -56,6 +56,21 @@ define(['./tiles/tile'], function (Tile) {
         var tile;
         if (tile = this.tilesDictionary[id])return tile;
         return false;
+    };
+
+    p.idToXY = function (id, returnArray) {
+        var f = id / this.worldSizeY,
+            x = f | 0,
+            y = (f - x) * this.worldSizeY | 0;
+
+        returnArray[0] = x;
+        returnArray[1] = y;
+
+        return returnArray;
+    };
+
+    p.XYToId = function(x, y){
+      return x * this.worldSizeY + y;
     };
 
     return Tiles;

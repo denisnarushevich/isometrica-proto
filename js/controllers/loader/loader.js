@@ -1,4 +1,4 @@
-define(['views/loaderView', './loader/assets'], function (View, Assets) {
+define(['views/loaderView', './assets'], function (View, Assets) {
     var Loader = function () {
         this.assets = new Assets();
         this.view = new View();
