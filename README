@@ -1,7 +1,10 @@
+SAMPLE:
+http://narushevich.lv/isometrica
+
 *About*
 
 This is browser game, or its engine, which making is inspired from TTD, OpenTTD and SimCity.
-Currently there is no strict game direction or scenario, basicaly this is *unlimited* procedurally generated world,
+Currently there is no strict game direction or scenario, basicaly this is *unlimited*(65k * 65k tiles) procedurally generated world on fly,
 where users can build building and that way earning some money. More money you have => bigger building you can build and and earn more income.
 There is plans on making it more RPGish like, where each player would have avatar...kinda "eRepublik".
 
@@ -18,25 +21,27 @@ Currently game is in very early stages, and I'm looking for contributors, or, if
 
 *Technologies used*
 
-On client side currently it is just native JS, plus requireJS for dependency management and Jquery - just for event model using on user interactions.
-I'm trying to avoid using any libraries, cause its decreasing overall performance.
+Would like to have JS everywhere. JS+NodeJS+MongoDB.
 
-On server side, currently there is nothing, but I think it will be Node.js or Python (because it can work with JS web worker socket).
+3rd party libraries used:
+Backbone,
+Underscore,
+Jquery
+...
 
+I'm trying to avoid using libraries, cause its decreasing overall performance.
 
 
 *Performance*
 
+At the moment 
 Currently, best performance can be expierenced on machines that supports webgl for canvas rendering, but classical cpu rendered is good too.
-In perspective, there is idea to rewrite whole code on CoffeScript, cause it can lead to higher perfromance.
-Rewriting on CoffeeScript requires a lot of work, so I'm looking anyone to fork and rewrite! ;)
-
+I have 30-40fps @ 1920x1080 on my i3 notebook with intel hd3000.
 
 
 *Licensing*
 
-Licensed under GPL.
-
+I guess it's Licensed under GPL.
 
 
 *Interesting & usefull resources*
