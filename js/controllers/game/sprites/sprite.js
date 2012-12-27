@@ -24,9 +24,9 @@ define(function () {
         },
         setOriginOffset:function (offset) {
             var or = this.origin;
-            this.zIndex = offset[1];
-            offset[0] -= or[0];
-            offset[1] -= or[1];
+            this.zIndex = offset.y;
+            offset.x -= or[0];
+            offset.y -= or[1];
             this.offset = offset;
             return this;
         },

@@ -32,8 +32,8 @@ define(function () {
             image,
             imagesLen = images.length,
             i,
-            x = offset[0] | 0,
-            y = offset[1] | 0;
+            x = offset.x | 0,
+            y = offset.y | 0;
 
         for (i = 0; i < imagesLen; i++) {
             //for(var i in images){
