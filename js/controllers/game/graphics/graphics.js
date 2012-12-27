@@ -1,13 +1,11 @@
 define(['./viewport'], function (Viewport) {
 
-    function Graphics(logic, images) {
+    function Graphics(logic) {
         this.logic = logic;
-        this.images = images;
         this.viewports = [];
     }
 
     Graphics.prototype.logic = null;
-    Graphics.prototype.images = null;
     Graphics.prototype.viewports = null;
 
     Graphics.prototype.createViewport = function (containerElement, viewPosition) {

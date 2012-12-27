@@ -1,17 +1,21 @@
-define(['./objectSprite'], function (Parent) {
-    function TreeObjectSprite(sprites, model) {
-        Parent.call(this, sprites, model);
+define(['../assets'], function(assets){
+    function TreeSprite(){
+        this.image = assets.getImage('objects/Tree1/Tree1');
     }
 
-    ;
+    var p = TreeSprite.prototype;
 
-    var p = TreeObjectSprite.prototype = Object.create(Parent.prototype);
-    p.type = "TreeObjectSprite";
-    p.size = [64, 64];
-    p.origin = [34, 53];
-    p.getImages = function () {
-        var name = this.model.getName();
-        return [this.sprites.images.getImage('objects/Tree1/Tree1')];
-    }
-    return TreeObjectSprite;
+    var V2 = Utils.Math.Vec2;
+
+    p.type = 'TreeSprite';
+    p.offset = null;
+    p.size = new V2(64, 64);
+    p.origin = new V2(34, 53);
+    p.frames = {
+        0: new V2(0, 0)
+    };
+    p.image = null;
+    p.frame = 0;
+
+    return TreeSprite;
 });

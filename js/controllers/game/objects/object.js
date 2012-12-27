@@ -1,7 +1,7 @@
-define(['../vector3'], function (Vec3) {
+define(function () {
     function Object(objects, x, y) {
         this.objects = objects;
-        this.position = new Vec3(x, y, objects.world.grid.getValue(x, y));
+        this.position = new Utils.Math.Vec3(x, y, objects.world.grid.getValue(x, y));
     }
 
     ;
@@ -36,7 +36,7 @@ define(['../vector3'], function (Vec3) {
 
     Object.prototype.getTile = function () {
         var pos = this.getPosition();
-        return this.objects.world.tiles.getTile(pos.getX() | 0, pos.getY() | 0);
+        return this.objects.world.tiles.getTile(pos.x | 0, pos.y | 0);
     };
 
     Object.prototype.setType = function (typeName) {

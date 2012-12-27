@@ -1,8 +1,8 @@
-define(['./movingObject', '../pathFinder', '../vector2'], function (Parent, pathFinder, Vec2) {
+define(['./movingObject', '../pathFinder'], function (Parent, pathFinder) {
     var Vehicle = function (objects, x, y) {
         Parent.call(this, objects, x, y);
 
-        this.direction = new Vec2(0, 0);
+        this.direction = new Utils.Math.Vec2(0, 0);
         this.path = [];
         this.updatedAt = new Date().getTime() / 1000;
     };
@@ -35,8 +35,8 @@ define(['./movingObject', '../pathFinder', '../vector2'], function (Parent, path
             var next = this.path[0];
 
             //get direction
-            this.getDirection().setX(next.position.x - this.getTile().position.x);
-            this.getDirection().setY(next.position.y - this.getTile().position.y);
+            this.getDirection().x = next.position.x - this.getTile().position.x;
+            this.getDirection().y = next.position.y - this.getTile().position.y;
             this.getDirection().normalize();
 
             //get time passed from prev update

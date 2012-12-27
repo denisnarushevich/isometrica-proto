@@ -1,10 +1,16 @@
 define([
-    './sprites/tileSprite',
-    './sprites/waterTileSprite',
-
+    './sprites/grassLandSprite',
+    './sprites/coastSeaSprite',
     './sprites/treeObjectSprite',
-    './sprites/vehicleObjectSprite',
 ], function () {
+    var Sprites = {};
+
+    for (var i = 0; i < arguments.length; i++)
+        Sprites[arguments[i].prototype.type] = arguments[i];
+
+    return Sprites;
+
+
     var Sprites = function (viewport, images) {
         this.viewport = viewport;
         this.images = images;

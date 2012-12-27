@@ -16,7 +16,7 @@ define([
         loader.renderView(app.rootNode);
 
         //init game
-        this.gameInstance = new Game(loader.assets);
+        this.gameInstance = new Game();
 
         loader.loadAssets(function (assets) {
             //once loaded, launch game

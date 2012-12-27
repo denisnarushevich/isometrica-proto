@@ -1,6 +1,5 @@
-define(['views/loaderView', './assets'], function (View, Assets) {
+define(['views/loaderView', '../game/assets'], function (View, assets) {
     var Loader = function () {
-        this.assets = new Assets();
         this.view = new View();
     };
 
@@ -11,11 +10,11 @@ define(['views/loaderView', './assets'], function (View, Assets) {
 
     p.loadAssets = function (callback) {
         var loader = this;
-        this.assets.load(function (progress, name) {
+        assets.load(function (progress, name) {
             loader.view.setProgress(progress);
             loader.view.setText(name)
         }, function () {
-            callback(loader.assets);
+            callback(assets);
         });
     };
 

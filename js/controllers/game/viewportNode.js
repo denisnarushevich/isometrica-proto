@@ -1,20 +1,17 @@
-define(['./config', './tileNode', './renderer'], function (config, TileNode, Renderer) {
-
-    function Scene(viewport) {
+define(['./config', './tileNode'], function (config, TileNode) {
+    function ViewportNode(viewport) {
         this.position = viewport.position;
         this.size = viewport.size;
         this.viewport = viewport;
-        this.renderer = new Renderer(viewport.containerElement);
-        this.layer = this.renderer.createLayer();
     }
 
-    var p = Scene.prototype;
+    var p = ViewportNode.prototype;
 
     p.position = null;
-    p.size = null;
     p.viewport = null;
+    p.size = null
 
-    p.addVisibleTileNodes = function () {
+    p.addVisibleTileNodes = function(){
         var atX = this.position.x | 0,
             atY = this.position.y | 0,
             count = 0,
@@ -41,7 +38,6 @@ define(['./config', './tileNode', './renderer'], function (config, TileNode, Ren
                 //up
                 tile = tiles.getTile(x1 - j, y1 + j);
                 position2D = new Utils.Math.Vec2(0, 0);
-
                 this.coordinatesTransform(tile.position, position2D);
 
                 if (position2D.y > viewportSize[1] || position2D.y < -config.TILE_IMG_H)
@@ -49,7 +45,6 @@ define(['./config', './tileNode', './renderer'], function (config, TileNode, Ren
 
                 tileNode = new TileNode(tile);
                 tileNode.position = position2D;
-                tileNode.parent = this;
                 children[count++] = tileNode;
             }
 
@@ -64,10 +59,13 @@ define(['./config', './tileNode', './renderer'], function (config, TileNode, Ren
 
                 tileNode = new TileNode(tile);
                 tileNode.position = position2D;
-                tileNode.parent = this;
                 children[count++] = tileNode;
             }
         }
+    }
+
+    p.addObjectNodesOfVisibleTileNodes = function(){
+
     }
 
     p.coordinatesTransform = function (vector3, vector2) {
@@ -83,35 +81,5 @@ define(['./config', './tileNode', './renderer'], function (config, TileNode, Ren
         vector2.y = 1 - ( x * sinValue + y * cosValue - this.size[1] ) / 2 - z;
     }
 
-    p.buildScene = function () {
-        this.addVisibleTileNodes();
-        var tileNodes = this.children;
-
-        var tileNodesCount = tileNodes.length;
-        for (var i = 0; i < tileNodesCount; i++) {
-            tileNodes[i].addTileSpriteNodes();
-            tileNodes[i].addObjectNodes();
-        }
-    }
-
-    p.renderNode = function(node){
-        if(node.type === 'SpriteNode'){
-            this.renderer.drawSprite(this.layer, node);
-        }else{
-            var children = node.children,
-                childrenCount = children.length,
-                i;
-
-            for(i = 0; i < childrenCount; i++){
-                this.renderNode(children[i]);
-            }
-        }
-    }
-
-    p.render = function(){
-        this.renderNode(this);
-        this.renderer.renderLayers();
-    }
-
-    return Scene;
+    return ViewportNode;
 });

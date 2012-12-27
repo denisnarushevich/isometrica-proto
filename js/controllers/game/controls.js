@@ -123,7 +123,7 @@ define(function () {
     };
 
     Controls.prototype.detectHoveredTile = function () {
-        var tileSprites = this.viewport.scene.getTiles(), sprite;
+        var tileSprites = this.viewport.getTiles(), sprite;
 
         //if we have previos hovered, then we first check if its still hovered,
         //and avoid looping through all scene
@@ -170,7 +170,7 @@ define(function () {
             context.drawImage(images[i], 0, 0);
         }
 
-        if (context.getImageData(mousePos.x - offset[0], mousePos.y - offset[1], 1, 1).data[3] > 0) {
+        if (context.getImageData(mousePos.x - offset.x, mousePos.y - offset.y, 1, 1).data[3] > 0) {
             return true;
         }
         ;

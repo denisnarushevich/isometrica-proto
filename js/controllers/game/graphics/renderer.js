@@ -32,8 +32,8 @@ define(function () {
             image,
             imagesLen = images.length,
             i,
-            x = offset.x | 0,
-            y = offset.y | 0;
+            x = offset[0] | 0,
+            y = offset[1] | 0;
 
         for (i = 0; i < imagesLen; i++) {
             //for(var i in images){
@@ -44,17 +44,6 @@ define(function () {
         }
         //ctx.drawImage(sprite.getCanvas(), sprite.getOriginOffset()[0], sprite.getOriginOffset()[1]);
         //sprite.sprites.freeSprite(sprite);
-    };
-
-    Renderer.prototype.drawSprite = function(layer, spriteNode){
-        var sprite = spriteNode.sprite,
-            image = sprite.image,
-            frameOffset = sprite.frames[sprite.frame],
-            originOffset = sprite.origin,
-            x = spriteNode.position.x - originOffset.x,
-            y = spriteNode.position.y - originOffset.y;
-
-        layer.drawImage(image, frameOffset.x, frameOffset.y, sprite.size.x, sprite.size.y, x | 0, y | 0, sprite.size.x, sprite.size.y);
     };
 
     Renderer.prototype.renderLayers = function () {
