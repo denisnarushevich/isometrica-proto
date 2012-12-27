@@ -1,62 +1,71 @@
-define(['./scene', './renderer', './sprites'], function (Scene, Renderer, Sprites) {
-    function Viewport(graphics, containerElement, viewPosition) {
+define(['./config', './scene'], function (config, Scene) {
+    function Viewport(graphics, containerElement, position) {
+        this.position = position;
+
         this.containerElement = containerElement;
 
         this.size = new Int16Array(2);
 
         this.graphics = graphics;
-        this.scene = new Scene(this, viewPosition);
 
-        this.renderer = new Renderer(containerElement);
-        this.sprites = new Sprites(this, graphics.images);
-
-        this.layers = {};
-        this.layers.tiles = this.renderer.createLayer();
-        this.layers.objects = this.renderer.createLayer();
+        this.scene = new Scene(this);
     }
 
-    Viewport.prototype.containerElement = null;
-    Viewport.prototype.graphics = null;
-    Viewport.prototype.scene = null;
-    Viewport.prototype.renderer = null;
-    Viewport.prototype.sprites = null;
-    Viewport.prototype.scene = null;
-    Viewport.prototype.layers = null;
+    var p = Viewport.prototype;
 
-    Viewport.prototype.updateSize = function () {
+    p.position = null;
+    p.size = null;
+    p.containerElement = null;
+    p.graphics = null;
+    p.scene = null;
+
+    p.updateSize = function () {
         if (this.size[0] != this.containerElement.clientWidth || this.size[1] != this.containerElement.clientHeight) {
             this.size[0] = this.containerElement.clientWidth;
             this.size[1] = this.containerElement.clientHeight;
 
-            this.scene.setSize(this.size);
-            this.renderer.setSize(this.size);
+            this.scene.renderer.setSize(this.size);
         }
         ;
 
     };
 
-    Viewport.prototype.render = function () {
+    p.render = function(){
         this.updateSize();
 
-        var i, tiles = this.scene.getTiles(),
-            objects = this.scene.getObjects(),
-            layers = this.layers,
-            renderer = this.renderer,
-            tilesLayer = layers.tiles,
-            objectsLayer = layers.objects,
-            sprite;
+        this.scene.buildScene();
+        this.scene.render();
+    }
 
-        this.renderer.clearLayer(layers.tiles);
+    p.getObjects = function () {
+        var tilePositions = this.visibleTilePositions,
+            objects = this.graphics.logic.world.objects,
+            sprites = this.sprites,
+            visibleObjects = [],
+            position, i, j, tileObjects, object, pos, sprite, leni, lenj, count = 0;
 
-        for (i = 0, tilesLen = tiles.length; i < tilesLen; i++)
-            renderer.drawSprite(tilesLayer, tiles[i]); //tile layer
+        for (i = 0, leni = tilePositions.length; i < leni; i++) {
+            position = tilePositions[i];
+            tileObjects = objects.getObjectsInTile(position.x, position.y);
 
-        renderer.clearLayer(objectsLayer);
+            for (j = 0, lenj = tileObjects.length; j < lenj; j++) {
+                object = tileObjects[j];
+                pos = object.getPosition();
 
-        for (i = 0, objectsLen = objects.length; i < objectsLen; i++) //~5ms
-            renderer.drawSprite(objectsLayer, objects[i]); //object layer*/
+                sprite = sprites.createSpriteFor(object);
+                sprite.setOriginOffset(this.coordinatesTransform(pos, []));
 
-        renderer.renderLayers();
+                visibleObjects[count++] = sprite;
+            }
+        }
+        ;
+
+        //sorting by depth, where depth is y screen offset coordinate.
+        visibleObjects.sort(function (obj1, obj2) {
+            return obj1.zIndex < obj2.zIndex ? -1 : 1;
+        });
+
+        return visibleObjects;
     };
 
     return Viewport;

@@ -1,13 +1,11 @@
 define(['views/gameView', './controls', './graphics', './logic'], function (View, Controls, Graphics, Logic) {
 
-    function Game(assets) {
-        this.assets = assets;
+    function Game() {
         this.view = new View();
     }
 
     var p = Game.prototype;
 
-    p.assets = null;
     p.logic = null;
     p.graphics = null;
     p.mainViewport = null;
@@ -21,7 +19,7 @@ define(['views/gameView', './controls', './graphics', './logic'], function (View
         this.logic = new Logic();
         this.logic.startUpdateLoop();
 
-        this.graphics = new Graphics(this.logic, this.assets.images);
+        this.graphics = new Graphics(this.logic);
         this.mainViewport = this.graphics.createViewport(mainViewport, this.logic.world.player.position);
         this.graphics.startRenderLoop();
 

@@ -13,7 +13,7 @@ define(['./object'], function (Parent) {
 
         //update Z coordinate for current position.
         var pos = this.getPosition();
-        pos.setZ(this.objects.world.grid.getValue(pos.getX(), pos.getY()));
+        pos.z = this.objects.world.grid.getValue(pos.x, pos.y);
     }
 
     return MovingObject;

@@ -38,8 +38,8 @@ define([
                 for (var i = 0; objects[i]; i++) {
                     var object = objects[i],
                         pos = object.getPosition(),
-                        floorX = pos.getX() | 0,
-                        floorY = pos.getY() | 0;
+                        floorX = pos.x | 0,
+                        floorY = pos.y | 0;
 
                     object.update();
 
@@ -95,7 +95,7 @@ define([
         delete this.objectsIdArray[object.id];
 
         var pos = object.getPosition();
-        var obj, objects = this.objectsArray[pos.getX() | 0][pos.getY() | 0];
+        var obj, objects = this.objectsArray[pos.x | 0][pos.y | 0];
 
         for (var i = 0; objects[i]; i++) {
             obj = objects[i];

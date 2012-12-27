@@ -1,4 +1,4 @@
-define(['./grid', './tiles', 'lib/simplex/simplex-noise', './objects', './player', './worldPosition'], function (Grid, Tiles, Simplex, Objects, Player, WorldPosition) {
+define(['./grid', './tiles', 'lib/simplex/simplex-noise', './objects', './player'], function (Grid, Tiles, Simplex, Objects, Player) {
     var World = function () {
         this.waterLevel = 0;
         this.size = new Utils.Math.Vec2(65535, 65535);

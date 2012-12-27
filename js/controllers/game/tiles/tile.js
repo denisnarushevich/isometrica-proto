@@ -39,7 +39,7 @@ define(function () {
         isPointedStatus:false,
 
         update:function () {
-            if (false && this.type == 'land' && Math.random() > 0.5 && this.position.x == 212 && this.position.y == 1027) {
+            if (this.type == 'land' && Math.random() > 0.5 && this.position.x == 212 && this.position.y == 1027) {
                 var a = this.tiles.world.objects.createObject('CarObject', this.position.x, this.position.y);
                 a.setDestination(this.tiles.getTile(212 + Math.round(Math.random() * 80 - 40), 1027 + Math.round(Math.random() * 80 - 40)));
             }
@@ -129,6 +129,12 @@ define(function () {
 
     Tile.prototype.isPointed = function (bool) {
         return  (bool == undefined ? this.isPointedStatus : this.isPointedStatus = bool);
+    }
+
+    var p = Tile.prototype;
+
+    p.getObjects = function(){
+        return this.tiles.world.objects.getObjectsInTile(this.position.x, this.position.y);
     }
 
     return Tile;

@@ -1,13 +1,10 @@
-define(['./viewport'], function (Viewport) {
-//define(['./scene', './renderer', './sprites'], function (Scene, Renderer, Sprites) {
+define(['./viewport', './assets'], function (Viewport, assets) {
 
-    function Graphics(logic, images) {
+    function Graphics(logic) {
         this.logic = logic;
-        this.images = images;
+        this.images = assets.images;
         this.viewports = [];
     }
-
-    ;
 
     Graphics.prototype.logic = null;
     Graphics.prototype.images = null;
