@@ -39,9 +39,9 @@ define(function () {
         isPointedStatus:false,
 
         update:function () {
-            if (false && this.type == 'land' && Math.random() > 0.5 && this.position.x == 212 && this.position.y == 1027) {
+            if (this.type == 'land' && Math.random() > 0.9 && this.position.x == 252 && this.position.y == 1027) {
                 var a = this.tiles.world.objects.createObject('CarObject', this.position.x, this.position.y);
-                a.setDestination(this.tiles.getTile(212 + Math.round(Math.random() * 80 - 40), 1027 + Math.round(Math.random() * 80 - 40)));
+                a.setDestination(this.tiles.getTile(212 + Math.round(Math.random() * -22), 1027 + Math.round(Math.random() * -22)));
             }
             return this;
         },
